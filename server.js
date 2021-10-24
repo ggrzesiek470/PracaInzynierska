@@ -1,10 +1,10 @@
 ﻿const http = require("http");
 const socketio = require('socket.io');
 const mongoose = require("mongoose");
-const express = require('express')
-const Models = require("./database/Models.js")(mongoose)
+const express = require('express');
+const Models = require("./database/Models.js")(mongoose);
 const Operations = require("./database/Operations.js");
-const app = express()
+const app = express();
 const port = 3000;
 const opers = new Operations();
 
@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost/ClassicChess');
 const connectToMongo = () => {
     db = mongoose.connection;
     db.on("error", function (err) {
-        console.log("Mongo ma problem :(");
+        console.log("Wstąpiły błędy prz MongoDB.");
     });
     db.once("open", function () {
         console.log("Mongo jest podłączone i działa!");

@@ -41,6 +41,12 @@
                     window.showWindow("Zalogowano.");
                     main.zalogowano(data.data[0].login);
                     main.setStatistics(data.data[0].wins, data.data[0].draws, data.data[0].losses, data.data[0].points);
+                    const ranking = new Ranking(25, 70);
+                    document.body.appendChild(ranking.getComponent());
+                    setTimeout(() => {
+                        ranking.show();
+                    }, 10)
+
                 } else {
                     window.showWindow("Nieprawidłowe hasło bądź nazwa użytkownika");
                 }
