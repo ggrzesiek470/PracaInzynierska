@@ -47,9 +47,10 @@ public abstract class Move {
         if (this == other)
             return true;
 
-        if (!(other instanceof final Move otherMove))
+        if (!(other instanceof Move))
             return false;
 
+        final Move otherMove = (Move) other;
         return getCurrentCoordinate() == otherMove.getCurrentCoordinate() &&
                 getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
                 getMovedPiece().equals(otherMove.getMovedPiece());

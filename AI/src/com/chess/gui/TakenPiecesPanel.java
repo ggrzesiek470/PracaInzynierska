@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 class TakenPiecesPanel extends JPanel {
-
     private final JPanel northPanel;
     private final JPanel southPanel;
 
