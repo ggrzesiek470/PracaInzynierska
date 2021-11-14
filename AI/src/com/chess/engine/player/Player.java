@@ -6,14 +6,14 @@ import com.chess.engine.board.Move;
 import com.chess.engine.board.MoveTransition;
 import com.chess.engine.pieces.King;
 import com.chess.engine.pieces.Piece;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static com.chess.engine.board.Move.*;
+import static com.chess.engine.board.Move.MoveStatus;
 
 public abstract class Player {
     protected final Board board;
@@ -27,7 +27,8 @@ public abstract class Player {
            final Collection<Move> opponentLegalMoves) {
         this.board = board;
         this.playerKing = establishKing();
-        this.legalMoves = ImmutableList.copyOf(Iterables.concat(legalMoves, calculateKingCastles(legalMoves, opponentLegalMoves)));
+        this.legalMoves = Stream.of(legalMoves, calculateKingCastles(legalMoves, opponentLegalMoves))
+                .flatMap(Collection::stream).collect(Collectors.toList());
         this.isInCheck = !calculateAttacksOnTile(this.playerKing.getPiecePosition(), opponentLegalMoves).isEmpty();
     }
 
@@ -55,6 +56,20 @@ public abstract class Player {
         return !this.isInCheck && !hasEscapeMoves();
     }
 
+//    public boolean isInEndlessCheck() {
+//        final List<Move> lastMoves = BoardUtils.lastNPlayerMoves(this.board, this, 3);
+//
+//        if (lastMoves.size() >= 3) {
+//            final Move lastMove = lastMoves.get(lastMoves.size() - 1);
+//            final Move thirdLastMove = lastMoves.get(0);
+//
+//            if (lastMove == thirdLastMove)
+//                return !this.isInCheck && !hasEscapeMovesOtherThanThisMove(lastMove);
+//        }
+//
+//        return false;
+//    }
+
     public boolean isKingSideCastleCapable() {
         return this.playerKing.isKingSideCastleCapable();
     }
@@ -81,6 +96,7 @@ public abstract class Player {
     private boolean hasEscapeMoves() {
         for (final Move move: this.legalMoves) {
             final MoveTransition transition = makeMove(move);
+
             if (transition.getMoveStatus().isDone())
                 return true;
         }
@@ -88,13 +104,27 @@ public abstract class Player {
         return false;
     }
 
+//    private boolean hasEscapeMovesOtherThanThisMove(final Move move) {
+//        List<Move> legalMovesWithoutThisMove = new ArrayList<>(this.legalMoves);
+//        legalMovesWithoutThisMove.remove(move);
+//
+//        for (final Move m: legalMovesWithoutThisMove) {
+//            final MoveTransition transition = makeMove(m);
+//
+//            if (transition.getMoveStatus().isDone())
+//                return true;
+//        }
+//
+//        return false;
+//    }
+
     protected static Collection<Move> calculateAttacksOnTile(final int piecePosition, final Collection<Move> moves) {
         final List<Move> attackMoves = new ArrayList<>();
         for (final Move move: moves)
             if (piecePosition == move.getDestinationCoordinate())
                 attackMoves.add(move);
 
-        return ImmutableList.copyOf(attackMoves);
+        return attackMoves;
     }
 
     private King establishKing() {

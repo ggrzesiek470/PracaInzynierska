@@ -100,7 +100,7 @@ public class AlphaBetaWithMoveOrdering extends Observable implements MoveStrateg
                 s = "\t" + "(" + this.searchDepth + "), m: (" + moveCounter + "/" + numMoves + ") " + move + ", best: " + bestMove
                         + quiescenceInfo + ", t: " + calculateTimeTaken(candidateMoveSrartTime, System.nanoTime());
             } else
-                s = "\t" + ", m: (" +moveCounter+ "/" +numMoves+ ") " + move + " is illegal, best: " +bestMove;
+                s = "\t" + ", m: (" + moveCounter + "/" + numMoves + ") " + move + " is illegal, best: " + bestMove;
 
             System.out.println(s);
             setChanged();

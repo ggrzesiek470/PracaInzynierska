@@ -61,7 +61,9 @@ public final class Table extends Observable {
         this.gameFrame.setJMenuBar(tableMenuBar);
         this.gameFrame.setLayout(new BorderLayout());
 
-        this.chessBoard = Board.getStandardBoard();
+        Board.Builder builder = new Board.Builder();
+        this.chessBoard = builder.build2();
+        //this.chessBoard = Board.getStandardBoard();
 
         this.boardDirection = BoardDirection.NORMAL;
 

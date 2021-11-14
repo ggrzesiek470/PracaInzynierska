@@ -5,11 +5,12 @@ import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.MoveTransition;
 import com.chess.engine.player.Player;
-import com.google.common.collect.ImmutableList;
 import com.google.common.primitives.Booleans;
 import com.google.common.primitives.Ints;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class MoveOrdering {
     private final BoardEvaluator evaluator;
@@ -51,7 +52,7 @@ public class MoveOrdering {
         for (final MoveOrderEntry entry: moveOrderEntries)
             orderedMoves.add(entry.getMove());
 
-        return ImmutableList.copyOf(orderedMoves);
+        return orderedMoves;
     }
 
     private int calculateAttackBonus(final Player player, final Move move) {

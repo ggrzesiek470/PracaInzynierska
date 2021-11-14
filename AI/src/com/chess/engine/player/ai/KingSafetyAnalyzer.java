@@ -4,7 +4,6 @@ import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.player.Player;
-import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,7 +31,7 @@ public class KingSafetyAnalyzer {
         columns.add(BoardUtils.INSTANCE.SEVENTH_COLUMN);
         columns.add(BoardUtils.INSTANCE.EIGHTH_COLUMN);
 
-        return ImmutableList.copyOf(columns);
+        return columns;
     }
 
     public KingDistance calculateKingTropism(final Player player) {
