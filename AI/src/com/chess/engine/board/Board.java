@@ -5,7 +5,6 @@ import com.chess.engine.pieces.*;
 import com.chess.engine.player.BlackPlayer;
 import com.chess.engine.player.Player;
 import com.chess.engine.player.WhitePlayer;
-import com.google.common.collect.ImmutableList;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -107,10 +106,22 @@ public class Board {
 
     private Collection<Move> calculateLegalMoves(Collection<Piece> pieces) {
         final List<Move> legalMoves = new ArrayList<>();
+
         for (final Piece piece: pieces)
             legalMoves.addAll(piece.calculateLegalMoves(this));
 
-        return ImmutableList.copyOf(legalMoves);
+//        if (legalMoves.size() >= 1) {
+    //        final List<Move> lastMoves = BoardUtils.lastNPlayerMoves(this, currentPlayer(), 4);
+    //        if (lastMoves.size() >= 4) {
+    //            final Move secondLastMove = lastMoves.get(1);
+    //            final Move fourthLastMove = lastMoves.get(lastMoves.size() - 3);
+    //
+    //            if (secondLastMove == fourthLastMove)
+    //                legalMoves.remove(secondLastMove);
+    //        }
+//        }
+
+        return legalMoves;
     }
 
     private static Collection<Piece> calculateActivePieces(final Builder builder, final Alliance alliance) {
@@ -196,6 +207,18 @@ public class Board {
         }
 
         public Board build() {
+            return new Board(this);
+        }
+
+        public Board build2() {
+            this.setPiece(new King(Alliance.BLACK, 6, false, false));
+            this.setPiece(new Pawn(Alliance.BLACK, 14));
+            this.setPiece(new Rook(Alliance.BLACK, 33));
+            this.setPiece(new Queen(Alliance.BLACK, 40));
+            this.setPiece(new Bishop(Alliance.BLACK, 43));
+            this.setPiece(new Queen(Alliance.WHITE, 31));
+            this.setPiece(new King(Alliance.WHITE, 30, false, false));
+            this.setMoveMaker(Alliance.WHITE);
             return new Board(this);
         }
 

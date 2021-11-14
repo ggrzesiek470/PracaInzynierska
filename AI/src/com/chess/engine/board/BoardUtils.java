@@ -2,7 +2,7 @@ package com.chess.engine.board;
 
 import com.chess.engine.pieces.King;
 import com.chess.engine.pieces.Piece;
-import com.google.common.collect.ImmutableList;
+import com.chess.engine.player.Player;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.*;
@@ -66,7 +66,7 @@ public enum BoardUtils {
             columnNumber += NUM_TILES_PER_ROW;
         } while (columnNumber < NUM_TILES);
 
-        return ImmutableList.copyOf(column);
+        return List.of(column);
     }
 
     private static List<Boolean> initRow(int rowNumber) {
@@ -78,7 +78,7 @@ public enum BoardUtils {
             rowNumber++;
         } while (rowNumber % NUM_TILES_PER_ROW != 0);
 
-        return ImmutableList.copyOf(row);
+        return List.of(row);
     }
 
     public static boolean isValidTileCoordinate(final int coordinate) {
@@ -135,6 +135,24 @@ public enum BoardUtils {
         }
 
         return Collections.unmodifiableList(moveHistory);
+    }
+
+    public static List<Move> lastNPlayerMoves(final Board board, final Player player, int N) {
+        final List<Move> moveHistory = new ArrayList<>();
+        Move currentMove = board.getTransitionMove();
+        int i = 0;
+
+        while (currentMove != Move.MoveFactory.getNullMove() && i < N) {
+            if (currentMove != null)
+                return Collections.emptyList();
+            else if (currentMove.getMovedPiece().getPieceAlliance() == player.getAlliance()) {
+                moveHistory.add(currentMove);
+                currentMove = currentMove.getBoard().getTransitionMove();
+            }
+            i++;
+        }
+
+        return moveHistory;
     }
 
     public static boolean isEndGame(final Board board) {

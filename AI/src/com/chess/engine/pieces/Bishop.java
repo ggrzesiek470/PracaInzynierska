@@ -4,13 +4,13 @@ import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
-import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.chess.engine.board.Move.*;
+import static com.chess.engine.board.Move.MajorAttackMove;
+import static com.chess.engine.board.Move.MajorMove;
 
 public class Bishop extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-9, -7, 7, 9};
@@ -57,7 +57,7 @@ public class Bishop extends Piece {
                 }
             }
         }
-        return ImmutableList.copyOf(legalMoves);
+        return legalMoves;
     }
 
     @Override

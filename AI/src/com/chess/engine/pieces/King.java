@@ -4,13 +4,13 @@ import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
-import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.chess.engine.board.Move.*;
+import static com.chess.engine.board.Move.MajorAttackMove;
+import static com.chess.engine.board.Move.MajorMove;
 
 
 public class King extends Piece {
@@ -80,7 +80,7 @@ public class King extends Piece {
             }
         }
 
-        return ImmutableList.copyOf(legalMoves);
+        return legalMoves;
     }
 
     @Override
@@ -122,13 +122,13 @@ public class King extends Piece {
         return BoardUtils.FIRST_COLUMN.get(currentCandidate) &&
                (candidateDestinationCoordinate == -9 ||
                 candidateDestinationCoordinate == -1 ||
-                candidateDestinationCoordinate == -7);
+                candidateDestinationCoordinate == 7);
     }
 
     private static boolean isEightColumnExclusion(final int currentCandidate, final int candidateDestinationCoordinate) {
         return BoardUtils.EIGHTH_COLUMN.get(currentCandidate) &&
                 (candidateDestinationCoordinate == -7 ||
                  candidateDestinationCoordinate == 1 ||
-                 candidateDestinationCoordinate == 97);
+                 candidateDestinationCoordinate == 9);
     }
 }

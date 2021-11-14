@@ -6,7 +6,6 @@ import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.pieces.Rook;
-import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -74,7 +73,7 @@ public class WhitePlayer extends Player {
             }
         }
 
-        return ImmutableList.copyOf(kingCastles);
+        return kingCastles;
     }
 
     @Override
