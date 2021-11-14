@@ -5,7 +5,9 @@ import com.chess.engine.board.Move.MoveFactory;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.player.Player;
 import com.chess.engine.player.ai.AlphaBetaWithMoveOrdering;
+import com.chess.engine.player.ai.IterativeDeepening;
 import com.chess.engine.player.ai.StandardBoardEvaluator;
+import com.chess.engine.player.ai.StockAlphaBeta;
 import com.chess.pgn.MySqlGamePersistence;
 import com.google.common.collect.Lists;
 
@@ -61,9 +63,9 @@ public final class Table extends Observable {
         this.gameFrame.setJMenuBar(tableMenuBar);
         this.gameFrame.setLayout(new BorderLayout());
 
-        Board.Builder builder = new Board.Builder();
-        this.chessBoard = builder.build2();
-        //this.chessBoard = Board.getStandardBoard();
+//        Board.Builder builder = new Board.Builder();
+//        this.chessBoard = builder.build2();
+        this.chessBoard = Board.getStandardBoard();
 
         this.boardDirection = BoardDirection.NORMAL;
 
@@ -365,9 +367,9 @@ public final class Table extends Observable {
             if (Table.get().getUseBook() && bookMove != MoveFactory.getNullMove())
                 bestMove = bookMove;
             else {
-                //final StockAlphaBeta strategy = new StockAlphaBeta(Table.get().getGameSetup().getSearchDepth());
-                //final IterativeDeepening strategy = new IterativeDeepening(Table.get().getGameSetup().getSearchDepth());
-                final AlphaBetaWithMoveOrdering strategy = new AlphaBetaWithMoveOrdering(Table.get().getGameSetup().getSearchDepth(),6);
+//                final StockAlphaBeta strategy = new StockAlphaBeta(Table.get().getGameSetup().getSearchDepth());
+                final IterativeDeepening strategy = new IterativeDeepening(Table.get().getGameSetup().getSearchDepth());
+//                final AlphaBetaWithMoveOrdering strategy = new AlphaBetaWithMoveOrdering(Table.get().getGameSetup().getSearchDepth(),6);
                 strategy.addObserver(Table.get().getDebugPanel());
                 bestMove = strategy.execute(Table.get().getGameBoard());
             }
