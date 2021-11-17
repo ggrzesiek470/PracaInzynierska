@@ -28,10 +28,6 @@ public class AIController {
         JSONArray jsonBoard = (JSONArray) jsonObj.get("board");
         Board.Builder builder = new Board.Builder();
         Board board = builder.buildFromJson(jsonBoard, (String)jsonObj.get("computer"));
-
-        Table.get().show();
-        Table.get().setGameBoard(board);
-
         StockAlphaBeta ai = new StockAlphaBeta(((Long)jsonObj.get("depth")).intValue());
 
         return ((Move)ai.execute(board)).toString();

@@ -26,7 +26,7 @@ public abstract class Player {
            final Collection<Move> legalMoves,
            final Collection<Move> opponentLegalMoves) {
         this.board = board;
-        this.playerKing = establishKing();
+        this.playerKing = this.establishKing();
         this.legalMoves = Stream.of(legalMoves, calculateKingCastles(legalMoves, opponentLegalMoves))
                 .flatMap(Collection::stream).collect(Collectors.toList());
         this.isInCheck = !calculateAttacksOnTile(this.playerKing.getPiecePosition(), opponentLegalMoves).isEmpty();
@@ -115,9 +115,9 @@ public abstract class Player {
 
     private King establishKing() {
         for (final Piece piece: getActivePieces()) {
-            if (piece.getPieceType() == Piece.PieceType.KING)
-                System.out.print((piece.getPieceType() == Piece.PieceType.KING) + ": ");
-            System.out.println(piece.getPieceAlliance().toString().charAt(0) + piece.getPieceType().toString() + piece.getPiecePosition());
+//            if (piece.getPieceType() == Piece.PieceType.KING)
+//                System.out.print((piece.getPieceType() == Piece.PieceType.KING) + ": ");
+//            System.out.println(piece.getPieceAlliance().toString().charAt(0) + piece.getPieceType().toString() + piece.getPiecePosition());
 
             if (piece.getPieceType() == Piece.PieceType.KING) {
                 System.out.println("outta here");

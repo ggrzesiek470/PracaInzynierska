@@ -9,8 +9,7 @@ import java.util.Collections;
 public class ServerApplication {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(ServerApplication.class);
-		app.setDefaultProperties(Collections
-				.singletonMap("server.port", "3001"));
+		app.setDefaultProperties(Collections.singletonMap("server.port", "3001"));
 		app.run(args);;
 	}
 }

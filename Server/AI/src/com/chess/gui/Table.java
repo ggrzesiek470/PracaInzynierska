@@ -64,7 +64,7 @@ public final class Table extends Observable {
 //        Board.Builder builder = new Board.Builder();
 //        this.chessBoard = builder.build2();
 
-        this.chessBoard = Board.getStandardBoard();
+        this.chessBoard = null;
 
         this.boardDirection = BoardDirection.NORMAL;
 

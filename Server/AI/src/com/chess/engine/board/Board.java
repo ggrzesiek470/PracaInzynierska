@@ -27,8 +27,6 @@ public class Board {
     private final Pawn enPassantPawn;
     private final Move transitionMove;
 
-    private static final Board STANDARD_BOARD = createStandardBoard();
-
 
     private Board(Builder builder) {
         this.boardConfig = Collections.unmodifiableMap(builder.boardConfig);
@@ -43,7 +41,7 @@ public class Board {
 
         this.whitePlayer = new WhitePlayer(this, whiteStandardMoves, blackStandardMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardMoves, blackStandardMoves);
-        //this.currentPlayer = builder.nextMoveMaker.choosePlayerByAlliance(this.whitePlayer, this.blackPlayer);
+        this.currentPlayer = builder.nextMoveMaker.choosePlayerByAlliance(this.whitePlayer, this.blackPlayer);
 
         this.transitionMove = builder.transitionMove != null ? builder.transitionMove : MoveFactory.getNullMove();
     }
@@ -119,17 +117,6 @@ public class Board {
         for (final Piece piece: pieces)
             legalMoves.addAll(piece.calculateLegalMoves(this));
 
-//        if (legalMoves.size() >= 1) {
-    //        final List<Move> lastMoves = BoardUtils.lastNPlayerMoves(this, currentPlayer(), 4);
-    //        if (lastMoves.size() >= 4) {
-    //            final Move secondLastMove = lastMoves.get(1);
-    //            final Move fourthLastMove = lastMoves.get(lastMoves.size() - 3);
-    //
-    //            if (secondLastMove == fourthLastMove)
-    //                legalMoves.remove(secondLastMove);
-    //        }
-//        }
-
         return legalMoves;
     }
 
@@ -139,54 +126,54 @@ public class Board {
                 .collect(Collectors.toList());
     }
 
-    public static Board getStandardBoard() {
-        return STANDARD_BOARD;
-    }
+//    public static Board getStandardBoard() {
+//        return STANDARD_BOARD;
+//    }
 
-    private static Board createStandardBoard() {
-        final Builder builder = new Builder();
-
-        //black layout
-        builder.setPiece(new Rook(Alliance.BLACK, 0));
-        builder.setPiece(new Knight(Alliance.BLACK, 1));
-        builder.setPiece(new Bishop(Alliance.BLACK, 2));
-        builder.setPiece(new Queen(Alliance.BLACK, 3));
-        builder.setPiece(new King(Alliance.BLACK, 4, true, true));
-        builder.setPiece(new Bishop(Alliance.BLACK, 5));
-        builder.setPiece(new Knight(Alliance.BLACK, 6));
-        builder.setPiece(new Rook(Alliance.BLACK, 7));
-        builder.setPiece(new Pawn(Alliance.BLACK, 8));
-        builder.setPiece(new Pawn(Alliance.BLACK, 9));
-        builder.setPiece(new Pawn(Alliance.BLACK, 10));
-        builder.setPiece(new Pawn(Alliance.BLACK, 11));
-        builder.setPiece(new Pawn(Alliance.BLACK, 12));
-        builder.setPiece(new Pawn(Alliance.BLACK, 13));
-        builder.setPiece(new Pawn(Alliance.BLACK, 14));
-        builder.setPiece(new Pawn(Alliance.BLACK, 15));
-
-        //white layout
-        builder.setPiece(new Pawn(Alliance.WHITE, 48));
-        builder.setPiece(new Pawn(Alliance.WHITE, 49));
-        builder.setPiece(new Pawn(Alliance.WHITE, 50));
-        builder.setPiece(new Pawn(Alliance.WHITE, 51));
-        builder.setPiece(new Pawn(Alliance.WHITE, 52));
-        builder.setPiece(new Pawn(Alliance.WHITE, 53));
-        builder.setPiece(new Pawn(Alliance.WHITE, 54));
-        builder.setPiece(new Pawn(Alliance.WHITE, 55));
-        builder.setPiece(new Rook(Alliance.WHITE, 56));
-        builder.setPiece(new Knight(Alliance.WHITE, 57));
-        builder.setPiece(new Bishop(Alliance.WHITE, 58));
-        builder.setPiece(new King(Alliance.WHITE, 59, true, true));
-        builder.setPiece(new Queen(Alliance.WHITE, 60));
-        builder.setPiece(new Bishop(Alliance.WHITE, 61));
-        builder.setPiece(new Knight(Alliance.WHITE, 62));
-        builder.setPiece(new Rook(Alliance.WHITE, 63));
-
-        //white to move
-        builder.setMoveMaker(Alliance.WHITE);
-
-        return builder.build();
-    }
+//    private static Board createStandardBoard() {
+//        final Builder builder = new Builder();
+//
+//        //black layout
+//        builder.setPiece(new Rook(Alliance.BLACK, 0));
+//        builder.setPiece(new Knight(Alliance.BLACK, 1));
+//        builder.setPiece(new Bishop(Alliance.BLACK, 2));
+//        builder.setPiece(new Queen(Alliance.BLACK, 3));
+//        builder.setPiece(new King(Alliance.BLACK, 4, true, true));
+//        builder.setPiece(new Bishop(Alliance.BLACK, 5));
+//        builder.setPiece(new Knight(Alliance.BLACK, 6));
+//        builder.setPiece(new Rook(Alliance.BLACK, 7));
+//        builder.setPiece(new Pawn(Alliance.BLACK, 8));
+//        builder.setPiece(new Pawn(Alliance.BLACK, 9));
+//        builder.setPiece(new Pawn(Alliance.BLACK, 10));
+//        builder.setPiece(new Pawn(Alliance.BLACK, 11));
+//        builder.setPiece(new Pawn(Alliance.BLACK, 12));
+//        builder.setPiece(new Pawn(Alliance.BLACK, 13));
+//        builder.setPiece(new Pawn(Alliance.BLACK, 14));
+//        builder.setPiece(new Pawn(Alliance.BLACK, 15));
+//
+//        //white layout
+//        builder.setPiece(new Pawn(Alliance.WHITE, 48));
+//        builder.setPiece(new Pawn(Alliance.WHITE, 49));
+//        builder.setPiece(new Pawn(Alliance.WHITE, 50));
+//        builder.setPiece(new Pawn(Alliance.WHITE, 51));
+//        builder.setPiece(new Pawn(Alliance.WHITE, 52));
+//        builder.setPiece(new Pawn(Alliance.WHITE, 53));
+//        builder.setPiece(new Pawn(Alliance.WHITE, 54));
+//        builder.setPiece(new Pawn(Alliance.WHITE, 55));
+//        builder.setPiece(new Rook(Alliance.WHITE, 56));
+//        builder.setPiece(new Knight(Alliance.WHITE, 57));
+//        builder.setPiece(new Bishop(Alliance.WHITE, 58));
+//        builder.setPiece(new King(Alliance.WHITE, 59, true, true));
+//        builder.setPiece(new Queen(Alliance.WHITE, 60));
+//        builder.setPiece(new Bishop(Alliance.WHITE, 61));
+//        builder.setPiece(new Knight(Alliance.WHITE, 62));
+//        builder.setPiece(new Rook(Alliance.WHITE, 63));
+//
+//        //white to move
+//        builder.setMoveMaker(Alliance.WHITE);
+//
+//        return builder.build();
+//    }
 
     public Iterable<Move> getAllLegalMoves() {
         return Stream.concat(this.whitePlayer.getLegalMoves().stream(), this.blackPlayer.getLegalMoves().stream())
@@ -246,13 +233,63 @@ public class Board {
                 for (int j = 0; j < 8; j++) {
                     if (row.get(j) != "") {
                         JSONObject piece = (JSONObject) row.get(j);
-                        parsePiece(piece);
+                        if (piece.isEmpty()) continue;
+
+                        String pieceType = (String) piece.get("type");
+                        String pieceAlliance = (String) piece.get("color");
+                        Alliance alliance = parseAlliance(pieceAlliance);
+                        boolean firstMove = (boolean) piece.get("firstMove");
+                        JSONObject position = (JSONObject) piece.get("position");
+                        Long x = (Long) position.get("x");
+                        Long y = (Long) position.get("y") - 1;
+                        int coordinate = calculateCoordinate(x, y);
+                        Piece newPiece;
+
+                        switch (pieceType) {
+                            case "Pawn" -> {
+                                newPiece = new Pawn(alliance, coordinate, firstMove);
+                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
+                                this.setPiece(newPiece);
+                            }
+                            case "Rook" -> {
+                                newPiece = new Rook(alliance, coordinate, firstMove);
+                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
+                                this.setPiece(newPiece);
+                            }
+                            case "Knight" -> {
+                                newPiece = new Knight(alliance, coordinate, firstMove);
+                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
+                                this.setPiece(newPiece);
+                            }
+                            case "Bishop" -> {
+                                newPiece = new Bishop(alliance, coordinate, firstMove);
+                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
+                                this.setPiece(newPiece);
+                            }
+                            case "King" -> {
+                                boolean kingSideCastleCapable = (boolean) piece.get("kingSideCastlePossible");
+                                boolean queenSideCastleCapable = (boolean) piece.get("queenSideCastlePossible");
+                                newPiece = new King(alliance, coordinate, firstMove, false, kingSideCastleCapable, queenSideCastleCapable);
+                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
+                                this.setPiece(newPiece);
+                            }
+                            case "Queen" -> {
+                                newPiece = new Queen(alliance, coordinate, firstMove);
+                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
+                                this.setPiece(newPiece);
+                            }
+                            default -> {}
+                        }
                     }
                 }
             }
-            this.setMoveMaker(parseAlliance(computerAlliance));
 
-            return new Board(this);
+            this.setMoveMaker(parseAlliance(computerAlliance));
+            Board newBoard = new Board(this);
+            System.out.println(boardConfig.toString());
+            System.out.println(this.nextMoveMaker.toString());
+            System.out.println(newBoard.currentPlayer());
+            return newBoard;
         }
 
         private void parsePiece(JSONObject piece) {
@@ -263,28 +300,52 @@ public class Board {
             Alliance alliance = parseAlliance(pieceAlliance);
             boolean firstMove = (boolean) piece.get("firstMove");
             JSONObject position = (JSONObject) piece.get("position");
-            Long x = (Long) position.get("x") - 1;
-            Long y = (Long) position.get("y") - 1;
+            Long x = (Long) position.get("x");
+            Long y = (Long) position.get("y");
             int coordinate = calculateCoordinate(x, y);
+            Piece newPiece;
 
             switch (pieceType) {
-                case "Pawn" -> this.setPiece(new Pawn(alliance, coordinate, firstMove));
-                case "Rook" -> this.setPiece(new Rook(alliance, coordinate, firstMove));
-                case "Knight" -> this.setPiece(new Knight(alliance, coordinate, firstMove));
-                case "Bishop" -> this.setPiece(new Bishop(alliance, coordinate, firstMove));
+                case "Pawn" -> {
+                    newPiece = new Pawn(alliance, coordinate, firstMove);
+                    System.out.println(newPiece);
+                    this.setPiece(newPiece);
+                }
+                case "Rook" -> {
+                    newPiece = new Rook(alliance, coordinate, firstMove);
+                    System.out.println(newPiece);
+                    this.setPiece(newPiece);
+                }
+                case "Knight" -> {
+                    newPiece = new Knight(alliance, coordinate, firstMove);
+                    System.out.println(newPiece);
+                    this.setPiece(newPiece);
+                }
+                case "Bishop" -> {
+                    newPiece = new Bishop(alliance, coordinate, firstMove);
+                    System.out.println(newPiece);
+                    this.setPiece(newPiece);
+                }
                 case "King" -> {
                     boolean kingSideCastleCapable = (boolean) piece.get("kingSideCastlePossible");
                     boolean queenSideCastleCapable = (boolean) piece.get("queenSideCastlePossible");
-                    this.setPiece(new King(alliance, coordinate, firstMove, false, kingSideCastleCapable, queenSideCastleCapable));
+                    newPiece = new King(alliance, coordinate, firstMove, false, kingSideCastleCapable, queenSideCastleCapable);
+                    System.out.println(newPiece);
+                    this.setPiece(newPiece);
                 }
-                case "Queen" -> this.setPiece(new Queen(alliance, coordinate, firstMove));
+                case "Queen" -> {
+                    newPiece = new Queen(alliance, coordinate, firstMove);
+                    System.out.println(newPiece);
+                    this.setPiece(newPiece);
+                }
                 default -> {}
             }
         }
 
         private static int calculateCoordinate(final Long x, final Long y) {
-            return 63 - (int)(x*y + y);
+            return 64 - (y.intValue() * BoardUtils.NUM_TILES_PER_ROW + x.intValue());
         }
+
 
         private static Alliance parseAlliance(final String alliance) {
             return switch (alliance) {
