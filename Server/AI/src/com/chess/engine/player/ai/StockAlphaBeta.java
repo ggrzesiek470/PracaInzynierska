@@ -80,6 +80,8 @@ public class StockAlphaBeta extends Observable implements MoveStrategy {
         int numMoves = board.currentPlayer().getLegalMoves().size();
 
         for (final Move move: MoveSorter.EXPENSIVE.sort(board.currentPlayer().getLegalMoves())) {
+            move.getMovedPiece().setOldPosition(move.getCurrentCoordinate());
+
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
             this.quiescenceCount = 0;
             final String s;
@@ -126,6 +128,7 @@ public class StockAlphaBeta extends Observable implements MoveStrategy {
         setChanged();
         notifyObservers(result);
 
+        //return new Move[] {bestMove, ;
         return bestMove;
     }
 

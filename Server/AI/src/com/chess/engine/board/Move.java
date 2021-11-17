@@ -177,10 +177,9 @@ public abstract class Move {
             if (this == other)
                 return true;
 
-            if (!(other instanceof AttackMove))
+            if (!(other instanceof final AttackMove otherAttackMove))
                 return false;
 
-            final AttackMove otherAttackMove = (AttackMove) other;
             return super.equals(otherAttackMove) && getAttackedPiece().equals(otherAttackMove.getAttackedPiece());
         }
 
@@ -446,10 +445,9 @@ public abstract class Move {
             if (this == other)
                 return true;
 
-            if (!(other instanceof CastleMove))
+            if (!(other instanceof final CastleMove otherCastleMove))
                 return false;
 
-            final CastleMove otherCastleMove = (CastleMove) other;
             return super.equals(otherCastleMove) && this.castleRook.equals(otherCastleMove.getCastleRook());
         }
     }
@@ -470,10 +468,9 @@ public abstract class Move {
             if (this == other)
                 return true;
 
-            if (!(other instanceof KingSideCastleMove))
+            if (!(other instanceof final KingSideCastleMove otherKingSideCastleMove))
                 return false;
 
-            final KingSideCastleMove otherKingSideCastleMove = (KingSideCastleMove) other;
             return super.equals(otherKingSideCastleMove) &&
                    this.castleRook.equals(otherKingSideCastleMove.getCastleRook());
         }
@@ -500,10 +497,9 @@ public abstract class Move {
             if (this == other)
                 return true;
 
-            if (!(other instanceof QueenSideCastleMove))
+            if (!(other instanceof final QueenSideCastleMove otherQueenSideCastleMove))
                 return false;
 
-            final QueenSideCastleMove otherQueenSideCastleMove = (QueenSideCastleMove) other;
             return super.equals(otherQueenSideCastleMove) &&
                     this.castleRook.equals(otherQueenSideCastleMove.getCastleRook());
         }

@@ -2,14 +2,17 @@ package com.chess.engine.pieces;
 
 import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
+import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 
 import java.util.Collection;
+import java.util.Vector;
 
 
 public abstract class Piece {
     final PieceType pieceType;
     final int piecePosition;
+    int oldPosition;
     final Alliance pieceAlliance;
     private final boolean isFirstMove;
     private final int cachedHashCode;
@@ -26,8 +29,30 @@ public abstract class Piece {
         this.cachedHashCode = computeHashCode();
     }
 
+    public int[] getPiecePositionXY(int piecePosition) {
+        int row = 0, col = 0;
+
+        for (int i = 0; i < BoardUtils.NUM_TILES_PER_ROW; i++)
+            for (int j = 0; j < BoardUtils.NUM_TILES_PER_ROW; j++)
+                if (j * BoardUtils.NUM_TILES_PER_ROW + i == piecePosition) {
+                    col = i;
+                    row = j;
+                    break;
+                }
+
+        return new int[]{row+1, col+1};
+    }
+
     public int getPiecePosition() {
         return this.piecePosition;
+    }
+
+    public int getOldPosition() {
+        return this.oldPosition;
+    }
+
+    public void setOldPosition(final int position) {
+        this.oldPosition = position;
     }
 
     public Alliance getPieceAlliance() {
@@ -71,10 +96,9 @@ public abstract class Piece {
         if (this == other)
             return true;
 
-        if (!(other instanceof Piece))
+        if (!(other instanceof final Piece otherPiece))
             return false;
 
-        final Piece otherPiece = (Piece) other;
         return this.piecePosition == otherPiece.piecePosition && this.pieceType == otherPiece.pieceType &&
                 this.pieceAlliance == otherPiece.pieceAlliance && this.isFirstMove == otherPiece.isFirstMove;
     }
