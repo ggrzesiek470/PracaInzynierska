@@ -233,63 +233,13 @@ public class Board {
                 for (int j = 0; j < 8; j++) {
                     if (row.get(j) != "") {
                         JSONObject piece = (JSONObject) row.get(j);
-                        if (piece.isEmpty()) continue;
-
-                        String pieceType = (String) piece.get("type");
-                        String pieceAlliance = (String) piece.get("color");
-                        Alliance alliance = parseAlliance(pieceAlliance);
-                        boolean firstMove = (boolean) piece.get("firstMove");
-                        JSONObject position = (JSONObject) piece.get("position");
-                        Long x = (Long) position.get("x");
-                        Long y = (Long) position.get("y") - 1;
-                        int coordinate = calculateCoordinate(x, y);
-                        Piece newPiece;
-
-                        switch (pieceType) {
-                            case "Pawn" -> {
-                                newPiece = new Pawn(alliance, coordinate, firstMove);
-                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
-                                this.setPiece(newPiece);
-                            }
-                            case "Rook" -> {
-                                newPiece = new Rook(alliance, coordinate, firstMove);
-                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
-                                this.setPiece(newPiece);
-                            }
-                            case "Knight" -> {
-                                newPiece = new Knight(alliance, coordinate, firstMove);
-                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
-                                this.setPiece(newPiece);
-                            }
-                            case "Bishop" -> {
-                                newPiece = new Bishop(alliance, coordinate, firstMove);
-                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
-                                this.setPiece(newPiece);
-                            }
-                            case "King" -> {
-                                boolean kingSideCastleCapable = (boolean) piece.get("kingSideCastlePossible");
-                                boolean queenSideCastleCapable = (boolean) piece.get("queenSideCastlePossible");
-                                newPiece = new King(alliance, coordinate, firstMove, false, kingSideCastleCapable, queenSideCastleCapable);
-                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
-                                this.setPiece(newPiece);
-                            }
-                            case "Queen" -> {
-                                newPiece = new Queen(alliance, coordinate, firstMove);
-                                System.out.println(newPiece.getPieceAlliance().toString().substring(0, 1) + newPiece.getPieceType() + newPiece.getPiecePosition());
-                                this.setPiece(newPiece);
-                            }
-                            default -> {}
-                        }
+                        parsePiece(piece);
                     }
                 }
             }
-
             this.setMoveMaker(parseAlliance(computerAlliance));
-            Board newBoard = new Board(this);
-            System.out.println(boardConfig.toString());
-            System.out.println(this.nextMoveMaker.toString());
-            System.out.println(newBoard.currentPlayer());
-            return newBoard;
+
+            return new Board(this);
         }
 
         private void parsePiece(JSONObject piece) {
@@ -301,41 +251,35 @@ public class Board {
             boolean firstMove = (boolean) piece.get("firstMove");
             JSONObject position = (JSONObject) piece.get("position");
             Long x = (Long) position.get("x");
-            Long y = (Long) position.get("y");
+            Long y = (Long) position.get("y") - 1;
             int coordinate = calculateCoordinate(x, y);
             Piece newPiece;
 
             switch (pieceType) {
                 case "Pawn" -> {
                     newPiece = new Pawn(alliance, coordinate, firstMove);
-                    System.out.println(newPiece);
                     this.setPiece(newPiece);
                 }
                 case "Rook" -> {
                     newPiece = new Rook(alliance, coordinate, firstMove);
-                    System.out.println(newPiece);
                     this.setPiece(newPiece);
                 }
                 case "Knight" -> {
                     newPiece = new Knight(alliance, coordinate, firstMove);
-                    System.out.println(newPiece);
                     this.setPiece(newPiece);
                 }
                 case "Bishop" -> {
                     newPiece = new Bishop(alliance, coordinate, firstMove);
-                    System.out.println(newPiece);
                     this.setPiece(newPiece);
                 }
                 case "King" -> {
                     boolean kingSideCastleCapable = (boolean) piece.get("kingSideCastlePossible");
                     boolean queenSideCastleCapable = (boolean) piece.get("queenSideCastlePossible");
                     newPiece = new King(alliance, coordinate, firstMove, false, kingSideCastleCapable, queenSideCastleCapable);
-                    System.out.println(newPiece);
                     this.setPiece(newPiece);
                 }
                 case "Queen" -> {
                     newPiece = new Queen(alliance, coordinate, firstMove);
-                    System.out.println(newPiece);
                     this.setPiece(newPiece);
                 }
                 default -> {}

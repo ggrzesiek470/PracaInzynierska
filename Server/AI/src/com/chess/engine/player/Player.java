@@ -56,20 +56,6 @@ public abstract class Player {
         return !this.isInCheck && !hasEscapeMoves();
     }
 
-//    public boolean isInEndlessCheck() {
-//        final List<Move> lastMoves = BoardUtils.lastNPlayerMoves(this.board, this, 3);
-//
-//        if (lastMoves.size() >= 3) {
-//            final Move lastMove = lastMoves.get(lastMoves.size() - 1);
-//            final Move thirdLastMove = lastMoves.get(0);
-//
-//            if (lastMove == thirdLastMove)
-//                return !this.isInCheck && !hasEscapeMovesOtherThanThisMove(lastMove);
-//        }
-//
-//        return false;
-//    }
-
     public boolean isKingSideCastleCapable() {
         return this.playerKing.isKingSideCastleCapable();
     }
@@ -114,16 +100,9 @@ public abstract class Player {
     }
 
     private King establishKing() {
-        for (final Piece piece: getActivePieces()) {
-//            if (piece.getPieceType() == Piece.PieceType.KING)
-//                System.out.print((piece.getPieceType() == Piece.PieceType.KING) + ": ");
-//            System.out.println(piece.getPieceAlliance().toString().charAt(0) + piece.getPieceType().toString() + piece.getPiecePosition());
-
-            if (piece.getPieceType() == Piece.PieceType.KING) {
-                System.out.println("outta here");
+        for (final Piece piece: getActivePieces())
+            if (piece.getPieceType() == Piece.PieceType.KING)
                 return (King) piece;
-            }
-        }
 
         throw new RuntimeException("Should not reach here! Not a valid board!");
     }

@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34a34bf1-bea3-44fc-afff-6271cb318cbb" name="Changes" comment="Najnowsza wersja">
+    <list default="true" id="34a34bf1-bea3-44fc-afff-6271cb318cbb" name="Changes" comment="Działająca wersja - dostajemy ruch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/AI/src/com/chess/JChess.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/AI/src/com/chess/JChess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/AI/src/com/chess/engine/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/AI/src/com/chess/engine/board/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/AI/src/com/chess/engine/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/AI/src/com/chess/engine/player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/AI/src/com/chess/gui/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/AI/src/com/chess/gui/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/board.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/board.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/server/AIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/server/AIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/server/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/server/ServerApplication.java" afterDir="false" />
     </list>
-    <list id="3d8c97a6-373e-4de1-b290-d443447c48dc" name="Changes by Grzegorz" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637165411812</updated>
       <workItem from="1637165413494" duration="26000" />
-      <workItem from="1637165453119" duration="15643000" />
+      <workItem from="1637165453119" duration="17078000" />
     </task>
     <task id="LOCAL-00001" summary="Najnowsza wersja">
       <created>1637174284014</created>
@@ -101,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637174284015</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Działająca wersja - dostajemy ruch">
+      <created>1637182853637</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1637182853637</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,30 +136,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Najnowsza wersja" />
-    <option name="LAST_COMMIT_MESSAGE" value="Najnowsza wersja" />
+    <MESSAGE value="Działająca wersja - dostajemy ruch" />
+    <option name="LAST_COMMIT_MESSAGE" value="Działająca wersja - dostajemy ruch" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Server/AI/src/com/chess/JChess.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Server/AI/src/com/chess/engine/board/Board.java</url>
-          <line>287</line>
+          <line>240</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Server/AI/src/com/chess/engine/board/Board.java</url>
           <line>200</line>
           <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Server/AI/src/com/chess/engine/board/Board.java</url>
-          <line>289</line>
-          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
