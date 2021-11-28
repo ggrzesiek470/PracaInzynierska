@@ -34,13 +34,13 @@ public abstract class Piece {
 
         for (int i = 0; i < BoardUtils.NUM_TILES_PER_ROW; i++)
             for (int j = 0; j < BoardUtils.NUM_TILES_PER_ROW; j++)
-                if (j * BoardUtils.NUM_TILES_PER_ROW + i == piecePosition) {
+                if (i * BoardUtils.NUM_TILES_PER_ROW + j == piecePosition) {
                     col = j;
                     row = i;
                     break;
                 }
 
-        return new int[]{row, col};
+        return new int[]{row, col + 1};
     }
 
     public int getPiecePosition() {
