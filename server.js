@@ -1,16 +1,17 @@
-﻿const http = require("http");
-const socketio = require('socket.io');
-const mongoose = require("mongoose");
-const express = require('express');
-const Models = require("./database/Models.js")(mongoose);
-const Operations = require("./database/Operations.js");
-const app = express();
-const port = 3000;
-const opers = new Operations();
+﻿import { createServer } from 'http';
+import socketio from 'socket.io';
+import mongoose from 'mongoose';
+import express from 'express';
+import Models from './database/Models.js';
+import Operations from "./database/Operations.js";
 
+const port = 3000;
+const models = Models(mongoose);
+const opers = new Operations();
+const app = express();
 app.use(express.static('staticDir'))
 
-const server = http.createServer(app);
+const server = createServer(app);
 server.listen(port, () => {
     console.log("Classic Chess");
 })
@@ -18,7 +19,7 @@ server.listen(port, () => {
 const io = socketio.listen(server);
 let db;
 
-mongoose.connect('mongodb://localhost/ClassicChess');
+mongoose.connect('mongodb://localhost/ClassicChess', { useUnifiedTopology: true });
 const connectToMongo = () => {
     db = mongoose.connection;
     db.on("error", function (err) {
@@ -26,8 +27,8 @@ const connectToMongo = () => {
     });
     db.once("open", function () {
         console.log("Mongo jest podłączone i działa!");
-        opers.DeleteAll(Models.FreeGame);
-        opers.DeleteAll(Models.Game);
+        opers.DeleteAll(models.FreeGame);
+        opers.DeleteAll(models.Game);
     });
     db.once("close", function () {
         console.log("Mongo zostało zamknięte.");
@@ -52,7 +53,7 @@ io.sockets.on("connection", function (client) {
         }
 
         if (waitingPlayer != undefined) {
-            opers.DeleteByWaitingPlayer(Models.FreeGame, waitingPlayer);
+            opers.DeleteByWaitingPlayer(models.FreeGame, waitingPlayer);
         }
 
         for (var i = 0; i < zalogowani.length; i++) {
@@ -63,7 +64,7 @@ io.sockets.on("connection", function (client) {
     })    
 	client.on("signup", function (data) {
         console.log("REJESTRACJA")
-        var user = new Models.User({
+        var user = new models.User({
             login: data.login,
             password: data.password,
             wins: 0,
@@ -94,7 +95,7 @@ io.sockets.on("connection", function (client) {
                 id: client.id
             }
 
-            opers.SelectByLogin(Models.User, data.login, data.password, 1, function (data) {
+            opers.SelectByLogin(models.User, data.login, data.password, 1, function (data) {
                 if (data.data.length > 0) zalogowani.push(dane);
                 io.sockets.to(client.id).emit("login", data);
             })
@@ -108,17 +109,17 @@ io.sockets.on("connection", function (client) {
     })
     client.on("read", function (data) {
         console.log("emit to " + client.id)
-        opers.SelectAll(Models.User, function (data) {
+        opers.SelectAll(models.User, function (data) {
             io.sockets.to(client.id).emit("read", data);
         })
     })
     client.on("searchForGames", function (data) {
-        opers.SelectAndLimit(Models.FreeGame, 1, function (data) {
+        opers.SelectAndLimit(models.FreeGame, 1, function (data) {
             io.sockets.to(client.id).emit("searchForGames", data);
         })
     })
     client.on("addFreeGame", function (data) {
-        var freegame = new Models.FreeGame({
+        var freegame = new models.FreeGame({
             waitingPlayer: data.login
         });
 
@@ -126,7 +127,7 @@ io.sockets.on("connection", function (client) {
     })
     client.on("joinGame", function (data) {
         var me = data.login;
-        opers.SelectAndLimit(Models.FreeGame, 1, function (data) {
+        opers.SelectAndLimit(models.FreeGame, 1, function (data) {
             console.log(data.data[0].waitingPlayer);
             var whitePlayer, blackPlayer;
             var color = Math.round(Math.random());
@@ -161,13 +162,13 @@ io.sockets.on("connection", function (client) {
 
             io.sockets.to(opponentsId).emit("joinGame", dane);
 
-            var game = new Models.Game({
+            var game = new models.Game({
                 gameId: gameId,
                 whitePlayer: whitePlayer,
                 blackPlayer: blackPlayer,
             });
 
-            opers.DeleteFirst(Models.FreeGame);
+            opers.DeleteFirst(models.FreeGame);
             opers.InsertOne(game);
         })
     })
@@ -180,7 +181,7 @@ io.sockets.on("connection", function (client) {
             }
         }
         var priorData = data;
-        opers.SelectByGameId(Models.Game, data.gameId, 1, function (data) {
+        opers.SelectByGameId(models.Game, data.gameId, 1, function (data) {
             console.log(data);
             if (priorData.color == "white") {
                 console.log("white wykonal swoj ruch");
@@ -207,12 +208,12 @@ io.sockets.on("connection", function (client) {
         })
     })
     client.on("getForRegister", function (data) {
-        opers.SelectAll(Models.User, function (data) {
+        opers.SelectAll(models.User, function (data) {
             io.sockets.to(client.id).emit("getForRegister", data);
         })
     })
     client.on("setStatisticsForUser", function (data) {
         console.log("STATYSTYKI UPDATE");
-        opers.UpdateStatistics(Models.User, data.user, data.wins, data.draws, data.losses, data.points);
+        opers.UpdateStatistics(models.User, data.user, data.wins, data.draws, data.losses, data.points);
     })
 })
