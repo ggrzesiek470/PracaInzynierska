@@ -35,12 +35,12 @@ public abstract class Piece {
         for (int i = 0; i < BoardUtils.NUM_TILES_PER_ROW; i++)
             for (int j = 0; j < BoardUtils.NUM_TILES_PER_ROW; j++)
                 if (j * BoardUtils.NUM_TILES_PER_ROW + i == piecePosition) {
-                    col = i;
-                    row = j;
+                    col = j;
+                    row = i;
                     break;
                 }
 
-        return new int[]{row+1, col+1};
+        return new int[]{row, col};
     }
 
     public int getPiecePosition() {
