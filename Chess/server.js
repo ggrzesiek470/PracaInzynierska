@@ -186,15 +186,17 @@ io.sockets.on("connection", function (client) {
                 xDes: response.to.x,
                 yDes: response.to.y,
                 enPassant: response.enpassant,
-                casting: response.casting
-            }
-    
+                casting: response.casting,
+                from_ai: true
+            }    
             io.sockets.to(client.id).emit("turn", dataToSend);
         });
 
     });
 
     client.on("turn", function (data) {
+        console.log("co dostał: ");
+        console.log(data)
         var me;
         for (var i = 0; i < zalogowani.length; i++) {
             if (zalogowani[i].id == client.id) {
@@ -217,6 +219,8 @@ io.sockets.on("connection", function (client) {
                     enPassant: response.enpassant,
                     casting: response.casting
                 }
+                console.log("co zwrócił:")
+                console.log(dataToSend)
         
                 io.sockets.to(client.id).emit("turn", dataToSend);
             });

@@ -240,10 +240,14 @@
                 localTable[pawn.position.y - 1][pawn.position.x - 1 + 1].position.x = xDes - 1;
             }
         }
+        var temp = localTable[pawn.position.y - 1][pawn.position.x - 1];
         localTable[pawn.position.y - 1][pawn.position.x - 1] = "";
-        localTable[yDes - 1][xDes - 1] = pawn;
-        localTable[yDes - 1][xDes - 1].position.x = xDes;
-        localTable[yDes - 1][xDes - 1].position.y = yDes;
+        localTable[yDes - 1][xDes - 1] = temp;
+        localTable[yDes - 1][xDes - 1].position = {
+            x: xDes,
+            y: yDes
+        };
+        localTable[yDes - 1][xDes - 1].firstMove = true;
 		if (pawn.type == "Pawn") {
             if (pawn.color == "white" && yDes == 8) { pawn.type = "Queen"; main.changeModel(pawn.position.x, pawn.position.y, "Queen"); }
             if (pawn.color == "black" && yDes == 1) { pawn.type = "Queen"; main.changeModel(pawn.position.x, pawn.position.y, "Queen"); }
