@@ -13,8 +13,8 @@
     var kingCheck = false;
     var kingColorCheck = "";
     var howManyTurns = 0;
-    var ai_playing = false;
-    
+
+    this.ai_playing = false;
     this.loadingFigures = 0; // out of 32
 
     this.turnTheGameOn = function () {
@@ -106,9 +106,15 @@
                                 for (var i = 0; i < whereCanCast.length; i++) if (whereCanCast[i] == this) { isPossible = true; Casting = true; }
                                 if (isPossible == true) {
                                     clearColors();
-                                    net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
+                                    if (ai_playing == false) {
+                                        net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
+                                    }
                                     movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
-                                    
+                                    if (ai_playing == true) {
+                                        var depth = 5;
+                                        net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable, depth);
+                                    }
+                                    chosenPawn = undefined;
                                     var string;
                                     if (game.getYourColor() == "white") string = "białymi.<br/>Ruch przeciwnika.";
                                     if (game.getYourColor() == "black") string = "czarnymi.<br/>Ruch przeciwnika.";
@@ -244,7 +250,6 @@
         }
         if (enPassant == true) { if (pawn.color == "white") { main.deletePawn(pawn.position.x, pawn.position.y - 1); localTable[pawn.position.y - 1 - 1][pawn.position.x - 1] = ""; } else if (pawn.color == "black") { main.deletePawn(pawn.position.x, pawn.position.y + 1); localTable[pawn.position.y - 1 + 1][pawn.position.x - 1] = ""; } }
         pawn.firstMove = true;
-        chosenPawn = undefined;
         if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
     }
 

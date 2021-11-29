@@ -395,6 +395,7 @@
 
         $(".vs_computer").on("click", () => {
             $(".choose_game_mode").toggleClass("display_none");
+            game.ai_playing = true;
             game.playAIGame();
         })
     }

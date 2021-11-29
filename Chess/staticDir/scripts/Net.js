@@ -143,7 +143,7 @@
         client.emit("sendDataToAI", obj)
     }
 
-    this.turn = function (pawn, xDes, yDes, enPassant, casting, color, gmid, localTable) {
+    this.turn = function (pawn, xDes, yDes, enPassant, casting, color, gmid, localTable, depth) {
         client.emit("turn", {
             pawn: pawn,
             xDes: xDes,
@@ -152,7 +152,10 @@
             casting: casting,
             color: color,
             gameId: gmid,
-            localTable: localTable
+            localTable: localTable,
+            computer: (game.getYourColor() == "white") ? "black" : "white",
+            depth: depth,
+            ai_playing: game.ai_playing
         });
     }
 
