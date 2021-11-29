@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import express from 'express';
 import Models from './database/Models.js';
 import Operations from "./database/Operations.js";
+import AICommunication from "./server_files/AICommunication.js";
 
 const port = 3000;
 const models = Models(mongoose);
@@ -128,7 +129,6 @@ io.sockets.on("connection", function (client) {
     client.on("joinGame", function (data) {
         var me = data.login;
         opers.SelectAndLimit(models.FreeGame, 1, function (data) {
-            console.log(data.data[0].waitingPlayer);
             var whitePlayer, blackPlayer;
             var color = Math.round(Math.random());
             var gameId = newGameId;
@@ -172,6 +172,27 @@ io.sockets.on("connection", function (client) {
             opers.InsertOne(game);
         })
     })
+    
+    client.on("sendDataToAI", function (data) {
+        AICommunication.sendDataToAIServer(data.localTable, data.depth, data.computer, function (response) {
+            var dataToSend = {
+                pawn: {
+                    position: {
+                        x: response.from.x,
+                        y: response.from.y
+                    },
+                    type: response.type
+                },
+                xDes: response.to.x,
+                yDes: response.to.y,
+                enPassant: response.enpassant,
+                casting: response.casting
+            }
+    
+            io.sockets.to(client.id).emit("turn", dataToSend);
+        });
+
+    });
 
     client.on("turn", function (data) {
         var me;
@@ -181,6 +202,7 @@ io.sockets.on("connection", function (client) {
             }
         }
         var priorData = data;
+        console.log(priorData);
         opers.SelectByGameId(models.Game, data.gameId, 1, function (data) {
             console.log(data);
             if (priorData.color == "white") {
@@ -196,7 +218,6 @@ io.sockets.on("connection", function (client) {
                 io.sockets.to(opponentsId).emit("turn", priorData);
             } else if (priorData.color == "black") {
                 var opponentsId;
-                console.log(data.data[0].whitePlayer);
                 for (var i = 0; i < zalogowani.length; i++) {
                     console.log(zalogowani[i]);
                     if (zalogowani[i].login == data.data[0].whitePlayer) {

@@ -78,6 +78,11 @@
             document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
         })
         client.on("turn", function (data) {
+            console.log(data.pawn)
+            console.log("pawn.position.x: " + data.pawn.position.x)
+            console.log("pawn.position.y: " + data.pawn.position.y)
+            console.log("xDes: " + data.xDes)
+            console.log("yDes: " + data.yDes)
             game.opponentMove(data.pawn, data.xDes, data.yDes, data.enPassant, data.casting);
             if (game.isGameEnabled() == true) {
                 var string;
@@ -129,7 +134,16 @@
         });
     }
 
-    this.turn = function (pawn, xDes, yDes, enPassant, casting, color, gmid) {
+    this.sendDataToAI = function (depth, localTable) {
+        var obj = {
+            depth: depth,
+            computer: (game.getYourColor() == "white") ? "black" : "white",
+            localTable: localTable
+        };
+        client.emit("sendDataToAI", obj)
+    }
+
+    this.turn = function (pawn, xDes, yDes, enPassant, casting, color, gmid, localTable) {
         client.emit("turn", {
             pawn: pawn,
             xDes: xDes,
@@ -138,6 +152,7 @@
             casting: casting,
             color: color,
             gameId: gmid,
+            localTable: localTable
         });
     }
 

@@ -33,7 +33,6 @@ public class AIController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public @ResponseBody String ReturnMove (@RequestBody Map<String, Object> payload) throws ParseException {
-
         Integer depth = (Integer)payload.get("depth");
         String computer = (String)payload.get("computer");
 
@@ -41,7 +40,7 @@ public class AIController {
         String json = new Gson().toJson(boardArrayList);
         JSONParser jsonParser = new JSONParser();
         Object object = jsonParser.parse(json);
-        JSONArray arrayObj=(JSONArray) object;
+        JSONArray arrayObj = (JSONArray) object;
 
         Board.Builder builder = new Board.Builder();
 
@@ -51,16 +50,15 @@ public class AIController {
         Move bestMove = (Move) ai.execute(board);
 
         int[] oldPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getMovedPiece().getOldPosition());
-        //int[] newPosition = bestMove.getMovedPiece().getPiecePositionXY(BoardUtils.INSTANCE.getCoordinateAtPosition(bestMove.toString().substring(1)));
         int[] newPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getDestinationCoordinate());
 
         return new StringBuilder().append(bestMove).append("<br>")
                 .append(bestMove.getMovedPiece().getPieceAlliance().toString().charAt(0))
                 .append(bestMove.getMovedPiece().getPieceType()).append(":")
                 .append("(").append(8 - oldPosition[0]).append(",")
-                .append(8 - oldPosition[1]).append(")").append("->")
+                .append(oldPosition[1]).append(")").append("->")
                 .append("(").append(8 - newPosition[0]).append(",")
-                .append(8 - newPosition[1]).append(")").toString();
+                .append(newPosition[1]).append(")").toString();
     }
 
     private static JSONObject readJSON() {
