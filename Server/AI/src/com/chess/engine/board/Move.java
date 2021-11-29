@@ -292,6 +292,11 @@ public abstract class Move {
 
             return builder.build();
         }
+
+        @Override
+        public String toString() {
+            return super.toString() + ";ep";
+        }
     }
 
 

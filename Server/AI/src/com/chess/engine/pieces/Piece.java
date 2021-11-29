@@ -40,7 +40,7 @@ public abstract class Piece {
                     break;
                 }
 
-        return new int[]{row, col + 1};
+        return new int[]{row, col+1};
     }
 
     public int getPiecePosition() {
