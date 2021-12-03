@@ -57,7 +57,7 @@ public class Board {
                 builder.append("\n");
         }
 
-        return builder.toString();
+        return builder.reverse().toString();
     }
 
     private static String prettyPrint(final Piece piece) {
@@ -239,7 +239,9 @@ public class Board {
             }
             this.setMoveMaker(parseAlliance(computerAlliance));
 
-            return new Board(this);
+            Board newBoard = new Board(this);
+            System.out.println(newBoard);
+            return newBoard;
         }
 
         private void parsePiece(JSONObject piece) {
@@ -248,11 +250,11 @@ public class Board {
             String pieceType = (String) piece.get("type");
             String pieceAlliance = (String) piece.get("color");
             Alliance alliance = parseAlliance(pieceAlliance);
-            boolean firstMove = !(boolean) piece.get("firstMove");
+            boolean firstMove = (boolean) piece.get("firstMove");
             JSONObject position = (JSONObject) piece.get("position");
             Long x = (Long) position.get("x");
-            Long y = (Long) position.get("y") - 1;
-            int coordinate = calculateCoordinate(x, y);
+            Long y = (Long) position.get("y");
+            int coordinate = calculateCoordinate(8-x, y-1);
             Piece newPiece;
 
             switch (pieceType) {
@@ -287,9 +289,8 @@ public class Board {
         }
 
         private static int calculateCoordinate(final Long x, final Long y) {
-            return 64 - (y.intValue() * BoardUtils.NUM_TILES_PER_ROW + x.intValue());
+            return 63 - (y.intValue() * BoardUtils.NUM_TILES_PER_ROW + x.intValue());
         }
-
 
         private static Alliance parseAlliance(final String alliance) {
             return switch (alliance) {

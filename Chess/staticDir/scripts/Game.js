@@ -13,6 +13,9 @@
     var kingCheck = false;
     var kingColorCheck = "";
     var howManyTurns = 0;
+    var ai_playing = false;
+    
+    this.loadingFigures = 0; // out of 32
 
     this.turnTheGameOn = function () {
         gameEnabled = true;
@@ -103,8 +106,9 @@
                                 for (var i = 0; i < whereCanCast.length; i++) if (whereCanCast[i] == this) { isPossible = true; Casting = true; }
                                 if (isPossible == true) {
                                     clearColors();
-                                    net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId);
+                                    net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
                                     movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
+                                    
                                     var string;
                                     if (game.getYourColor() == "white") string = "białymi.<br/>Ruch przeciwnika.";
                                     if (game.getYourColor() == "black") string = "czarnymi.<br/>Ruch przeciwnika.";
@@ -610,16 +614,6 @@
                 localTable[pawn.position.y - 1][pawn.position.x - 1].kingSideCastlePossible = false;
                 localTable[pawn.position.y - 1][pawn.position.x - 1].queenSideCastlePossible = false;
             }
-            console.log({
-                depth: 5,
-                board: localTable,
-                computer: "black"
-            })
-            console.log(JSON.stringify({
-                depth: 5,
-                board: localTable,
-                computer: "black"
-            }))
         }
     }
 
@@ -774,6 +768,37 @@
 
         if (howManyTurns == 0) return true;
         else return false;
+    }
+
+    this.playAIGame = function () {
+        var yourColor = "black";
+        ai_playing = true;
+
+        game.setGameId("with_computer");
+        game.setYourColor(yourColor);
+        game.turnTheGameOn();
+        main.createPawns();
+        $("#bariera").css("display", "none");
+        $("#checkChecker").css("display", "initial");
+        var string;
+        if (yourColor == "white") {
+            string = "białymi.<br/>Twój ruch.";
+            main.setCameraPosition(-600, 600, 0);
+        }
+        if (yourColor == "black") {
+            string = "czarnymi.<br/>Ruch przeciwnika.";
+            main.setCameraPosition(600, 600, 0);
+            var depth = 5;
+            var intervalToRemove = setInterval(() => {
+                if (game.loadingFigures >= 32) {
+                    net.sendDataToAI(depth, localTable);
+                    clearInterval(intervalToRemove);
+                }
+            }, 500);
+        }
+        net.window.onlyHalfly();
+        net.window.showWindow("Grasz "+string);
+        $("#checkText").html($("#check").html());
     }
 
     function init() {

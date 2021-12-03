@@ -10,11 +10,10 @@ import com.google.common.collect.Ordering;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Observable;
 
 import static com.chess.engine.board.BoardUtils.mvvlva;
 
-public class StockAlphaBeta extends Observable implements MoveStrategy {
+public class StockAlphaBeta implements MoveStrategy {
     private final BoardEvaluator evaluator;
     private final int searchDepth;
     private long boardsEvaluated;
@@ -113,22 +112,14 @@ public class StockAlphaBeta extends Observable implements MoveStrategy {
                 s = "\t" + "(" + this.searchDepth + ")" + ", m: (" + moveCounter + "/" + numMoves + ") " + move + " is illegal! best: " + bestMove;
 
             System.out.println(s);
-            setChanged();
-            notifyObservers(s);
             moveCounter++;
         }
 
         final long executionTime = System.currentTimeMillis() - startTime;
-        final String result = board.currentPlayer() + " SELECTS " + bestMove + " [#boards evaluated = " + this.boardsEvaluated +
-                " time taken = " + executionTime / 1000 + " rate = " + (1000 * ((double)this.boardsEvaluated / executionTime));
 
         System.out.printf("%s SELECTS %s [#boards evaluated = %d, time taken = %d ms, rate = %.1f\n", board.currentPlayer(),
                 bestMove, this.boardsEvaluated, executionTime, (1000 * ((double)this.boardsEvaluated / executionTime)));
 
-        setChanged();
-        notifyObservers(result);
-
-        //return new Move[] {bestMove, ;
         return bestMove;
     }
 

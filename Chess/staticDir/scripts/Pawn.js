@@ -34,6 +34,8 @@
                 break;
             case "King":
                 pawn.src = "models/King.xml";
+                pawn.kingSideCastlePossible = false;
+                pawn.queenSideCastlePossible = false;
                 break;
         }
 

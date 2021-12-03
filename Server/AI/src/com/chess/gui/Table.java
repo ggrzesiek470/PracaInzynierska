@@ -377,21 +377,9 @@ public final class Table extends Observable {
         @Override
         public Move doInBackground() {
             final Move bestMove;
-//            final Move bookMove = Table.get().getUseBook() ?
-//                    MySqlGamePersistence.get().getNextBestMove(Table.get().getGameBoard(), Table.get().getGameBoard().currentPlayer(),
-//                        Table.get().getMoveLog().getMoves().toString().replaceAll("\\[", "").replaceAll("]", "")) :
-//                    MoveFactory.getNullMove();
-//
-//            if (Table.get().getUseBook() && bookMove != MoveFactory.getNullMove())
-//                bestMove = bookMove;
-//            else {
-                final StockAlphaBeta strategy = new StockAlphaBeta(this.depth);
-//                final IterativeDeepening strategy = new IterativeDeepening(Table.get().getGameSetup().getSearchDepth());
-//                final AlphaBetaWithMoveOrdering strategy = new AlphaBetaWithMoveOrdering(Table.get().getGameSetup().getSearchDepth(),6);
-                strategy.addObserver(Table.get().getDebugPanel());
-                serverBoard.setCurrentPlayer(Table.get().getGameBoard().currentPlayer().getAlliance());
-                bestMove = strategy.execute(serverBoard);
-//            }
+            final StockAlphaBeta strategy = new StockAlphaBeta(this.depth);
+            serverBoard.setCurrentPlayer(Table.get().getGameBoard().currentPlayer().getAlliance());
+            bestMove = strategy.execute(serverBoard);
 
             return bestMove;
         }

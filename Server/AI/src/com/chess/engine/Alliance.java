@@ -9,12 +9,12 @@ public enum Alliance {
     WHITE {
         @Override
         public int getDirection() {
-            return 1;
+            return UP_DIRECTION;
         }
 
         @Override
         public int getOppositeDirection() {
-            return -1;
+            return DOWN_DIRECTION;
         }
 
         @Override
@@ -71,12 +71,12 @@ public enum Alliance {
     BLACK {
         @Override
         public int getDirection() {
-            return -1;
+            return DOWN_DIRECTION;
         }
 
         @Override
         public int getOppositeDirection() {
-            return 1;
+            return UP_DIRECTION;
         }
 
         @Override
