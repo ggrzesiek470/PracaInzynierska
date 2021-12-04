@@ -1,8 +1,8 @@
 package com.server;
 
-import com.chess.engine.board.Board;
-import com.chess.engine.board.Move;
-import com.chess.engine.player.ai.StockAlphaBeta;
+import com.chess.board.Board;
+import com.chess.board.Move;
+import com.chess.player.ai.StockAlphaBeta;
 import com.google.gson.Gson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
