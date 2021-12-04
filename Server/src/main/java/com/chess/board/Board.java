@@ -155,6 +155,38 @@ public class Board {
             this.transitionMove = transitionMove;
         }
 
+        public Board errorBoard() {
+            this.setPiece(new Rook(Alliance.WHITE, 63));
+            this.setPiece(new Rook(Alliance.WHITE, 56));
+            this.setPiece(new Pawn(Alliance.WHITE, 54));
+            this.setPiece(new Pawn(Alliance.WHITE, 53));
+            this.setPiece(new King(Alliance.WHITE, 52, false, false, false, false));
+            this.setPiece(new Pawn(Alliance.WHITE, 50));
+            this.setPiece(new Pawn(Alliance.WHITE, 49));
+            this.setPiece(new Pawn(Alliance.WHITE, 48));
+            this.setPiece(new Queen(Alliance.WHITE, 42, false));
+            this.setPiece(new Pawn(Alliance.WHITE, 39, false));
+            this.setPiece(new Bishop(Alliance.WHITE, 38, false));
+            this.setPiece(new Pawn(Alliance.WHITE, 36, false));
+            this.setPiece(new Pawn(Alliance.WHITE, 35, false));
+
+            this.setPiece(new Knight(Alliance.BLACK, 32, false));
+            this.setPiece(new Pawn(Alliance.BLACK, 22, false));
+            this.setPiece(new Pawn(Alliance.BLACK, 20, false));
+            this.setPiece(new Pawn(Alliance.BLACK, 19, false));
+            this.setPiece(new Pawn(Alliance.BLACK, 18, false));
+            this.setPiece(new Pawn(Alliance.BLACK, 13));
+            this.setPiece(new Bishop(Alliance.BLACK, 12, false));
+            this.setPiece(new Pawn(Alliance.BLACK, 10));
+            this.setPiece(new Pawn(Alliance.BLACK, 8));
+            this.setPiece(new Queen(Alliance.BLACK, 4));
+            this.setPiece(new Rook(Alliance.BLACK, 3, false));
+            this.setPiece(new King(Alliance.BLACK, 1, false, true, false, false));
+
+            this.setMoveMaker(Alliance.WHITE);
+            return new Board(this);
+        }
+
         public Board buildFromJson(JSONArray board, String computerAlliance) {
             for (int i = 0; i < 8; i++) {
                 JSONArray row = (JSONArray) board.get(i);
