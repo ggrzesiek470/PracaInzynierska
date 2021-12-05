@@ -13,6 +13,9 @@
     var kingCheck = false;
     var kingColorCheck = "";
     var howManyTurns = 0;
+    var ai_playing = false;
+    
+    this.loadingFigures = 0; // out of 32
 
     this.ai_playing = false;
     this.loadingFigures = 0; // out of 32
@@ -115,6 +118,7 @@
                                         net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable, depth);
                                     }
                                     chosenPawn = undefined;
+                                    
                                     var string;
                                     if (game.getYourColor() == "white") string = "białymi.<br/>Ruch przeciwnika.";
                                     if (game.getYourColor() == "black") string = "czarnymi.<br/>Ruch przeciwnika.";
