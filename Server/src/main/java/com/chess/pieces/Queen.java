@@ -7,7 +7,10 @@ import com.chess.board.Move;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import static com.chess.board.Move.*;
 
 public class Queen extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-9, -8, -7, -1, 1, 7, 8, 9};
@@ -44,20 +47,21 @@ public class Queen extends Piece {
                     final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
 
                     if (pieceAtDestination == null)
-                        legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
+                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                     else {
                         final Alliance pieceAtDestinationAlliance = pieceAtDestination.getPieceAlliance();
 
                         if (this.pieceAlliance != pieceAtDestinationAlliance)
-                            legalMoves.add(new Move.MajorAttackMove(board, this, candidateDestinationCoordinate,
-                                                               pieceAtDestination));
+                            legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate,
+                                    pieceAtDestination));
 
                         break;
                     }
                 }
             }
         }
-        return legalMoves;
+
+        return Collections.unmodifiableList(legalMoves);
     }
 
     @Override
@@ -82,6 +86,6 @@ public class Queen extends Piece {
 
     private static boolean isEighthColumnExclusion(final int currentPosition, final int candidatePosition) {
         return BoardUtils.EIGHTH_COLUMN.get(candidatePosition) &&
-                (currentPosition == -7 || currentPosition == 1 || currentPosition == 9);
+               (currentPosition == -7 || currentPosition == 1 || currentPosition == 9);
     }
 }

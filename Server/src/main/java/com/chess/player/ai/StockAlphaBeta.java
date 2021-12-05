@@ -93,14 +93,12 @@ public class StockAlphaBeta implements MoveStrategy {
                     highestSeenValue = currentValue;
                     bestMove = move;
 
-                    if (moveTransition.getToBoard().blackPlayer().isInCheckMate())
-                        break;
+                    if (moveTransition.getToBoard().blackPlayer().isInCheckMate()) break;
                 } else if (currentPlayer.getAlliance().isBlack() && currentValue < lowestSeenValue) {
                     lowestSeenValue = currentValue;
                     bestMove = move;
 
-                    if (moveTransition.getToBoard().whitePlayer().isInCheckMate())
-                        break;
+                    if (moveTransition.getToBoard().whitePlayer().isInCheckMate()) break;
                 }
 
                 final String quiescenceInfo = " " + score(currentPlayer, highestSeenValue, lowestSeenValue) + " q:" + this.quiescenceCount;
@@ -122,10 +120,8 @@ public class StockAlphaBeta implements MoveStrategy {
     }
 
     private static String score(final Player currentPlayer, final int highestSeenValue, final int lowestSeenValue) {
-        if (currentPlayer.getAlliance().isWhite())
-            return "[score: " + highestSeenValue + "]";
-        else if (currentPlayer.getAlliance().isBlack())
-            return "[score: " + lowestSeenValue + "]";
+        if (currentPlayer.getAlliance().isWhite()) return "[score: " + highestSeenValue + "]";
+        else if (currentPlayer.getAlliance().isBlack()) return "[score: " + lowestSeenValue + "]";
 
         throw new RuntimeException("how?");
     }
@@ -139,14 +135,11 @@ public class StockAlphaBeta implements MoveStrategy {
         int currentHighest = highest;
         for (final Move move: MoveSorter.STANDARD.sort(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
-
             if (moveTransition.getMoveStatus().isDone()) {
                 final Board toBoard = moveTransition.getToBoard();
                 currentHighest = Math.max(currentHighest, min(toBoard, calculateQuiescenceDepth(toBoard, depth),
                                                               currentHighest, lowest));
-
-                if (currentHighest >= lowest)
-                    return lowest;
+                if (currentHighest >= lowest) return lowest;
             }
         }
 
@@ -162,15 +155,11 @@ public class StockAlphaBeta implements MoveStrategy {
         int currentLowest = lowest;
         for (final Move move: MoveSorter.STANDARD.sort(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
-
             if (moveTransition.getMoveStatus().isDone()) {
                 final Board toBoard = moveTransition.getToBoard();
                 currentLowest = Math.min(currentLowest, max(toBoard, calculateQuiescenceDepth(toBoard, depth),
                                                             highest, currentLowest));
-
-                if (currentLowest <= highest) {
-                    return highest;
-                }
+                if (currentLowest <= highest)return highest;
             }
         }
 
@@ -185,8 +174,7 @@ public class StockAlphaBeta implements MoveStrategy {
                 activityMeasure++;
 
             for (final Move move: BoardUtils.lastNMoves(toBoard, 2))
-                if (move.isAttack())
-                    activityMeasure++;
+                if (move.isAttack()) activityMeasure++;
 
             if (activityMeasure >= 2) {
                 this.quiescenceCount++;

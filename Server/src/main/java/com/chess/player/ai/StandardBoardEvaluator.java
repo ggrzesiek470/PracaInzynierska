@@ -62,8 +62,7 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
                 final Piece movedPiece = move.getMovedPiece();
                 final Piece attackedPiece = move.getAttackedPiece();
 
-                if(movedPiece.getPieceValue() <= attackedPiece.getPieceValue())
-                    attackScore++;
+                if (movedPiece.getPieceValue() <= attackedPiece.getPieceValue()) attackScore++;
             }
         }
 
@@ -77,8 +76,7 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
         for (final Piece piece: player.getActivePieces()) {
             pieceValuationScore += piece.getPieceValue() + piece.locationBonus();
 
-            if (piece.getPieceType() == Piece.PieceType.BISHOP)
-                numBishops++;
+            if (piece.getPieceType() == Piece.PieceType.BISHOP) numBishops++;
         }
 
         return pieceValuationScore + (numBishops == 2 ? TWO_BISHOPS_BONUS : 0);

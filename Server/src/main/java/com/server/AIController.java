@@ -2,6 +2,7 @@ package com.server;
 
 import com.chess.board.Board;
 import com.chess.board.Move;
+import com.chess.player.ai.AlphaBetaWithMoveOrdering;
 import com.chess.player.ai.StockAlphaBeta;
 import com.google.gson.Gson;
 import org.json.simple.JSONArray;
@@ -35,10 +36,11 @@ public class AIController {
         Board.Builder builder = new Board.Builder();
         Board board = builder.buildFromJson(arrayObj, computer);
 
-        StockAlphaBeta ai = new StockAlphaBeta(depth);
+        //StockAlphaBeta ai = new StockAlphaBeta(depth); // slower
+        AlphaBetaWithMoveOrdering ai = new AlphaBetaWithMoveOrdering(depth); // faster
         Move bestMove = (Move) ai.execute(board);
 
-        int[] oldPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getMovedPiece().getOldPosition());
+        int[] oldPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getCurrentCoordinate());
         int[] newPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getDestinationCoordinate());
 
         StringBuilder bestMoveString = new StringBuilder();
@@ -54,14 +56,14 @@ public class AIController {
         return bestMoveString.toString();
     }
 
-    //bug fixed, Pawn class code changed
+    // bug fixed, Pawn class code changed
     @GetMapping("/error/{depth}")
     public String errorTest(@PathVariable int depth) {
         Board.Builder builder = new Board.Builder();
         Board board = builder.errorBoard();
         StockAlphaBeta ai = new StockAlphaBeta(depth);
         Move bestMove = (Move) ai.execute(board);
-        int[] oldPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getMovedPiece().getOldPosition());
+        int[] oldPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getCurrentCoordinate());
         int[] newPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getDestinationCoordinate());
 
         StringBuilder bestMoveString = new StringBuilder();

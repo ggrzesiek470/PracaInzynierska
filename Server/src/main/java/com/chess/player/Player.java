@@ -80,7 +80,6 @@ public abstract class Player {
     private boolean hasEscapeMoves() {
         for (final Move move: this.legalMoves) {
             final MoveTransition transition = makeMove(move);
-
             if (transition.getMoveStatus().isDone())
                 return true;
         }
@@ -90,6 +89,7 @@ public abstract class Player {
 
     protected static Collection<Move> calculateAttacksOnTile(final int piecePosition, final Collection<Move> moves) {
         final List<Move> attackMoves = new ArrayList<>();
+
         for (final Move move: moves)
             if (piecePosition == move.getDestinationCoordinate())
                 attackMoves.add(move);

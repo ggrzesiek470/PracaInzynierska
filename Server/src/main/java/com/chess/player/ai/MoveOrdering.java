@@ -68,18 +68,14 @@ public class MoveOrdering {
     }
 
     public int min(final Board board, final int depth) {
-        if (depth == 0 || BoardUtils.isEndGame(board))
-            return this.evaluator.evaluate(board, depth);
+        if (depth == 0 || BoardUtils.isEndGame(board)) return this.evaluator.evaluate(board, depth);
 
         int lowestSeenValue = Integer.MAX_VALUE;
         for (final Move move: calculateSimpleMoveOrder(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
-
             if (moveTransition.getMoveStatus().isDone()) {
                 final int currentValue = max(moveTransition.getToBoard(), depth - 1);
-
-                if (currentValue <= lowestSeenValue)
-                    lowestSeenValue = currentValue;
+                if (currentValue <= lowestSeenValue) lowestSeenValue = currentValue;
             }
         }
 
@@ -93,12 +89,9 @@ public class MoveOrdering {
         int highestSeenValue = Integer.MIN_VALUE;
         for (final Move move: calculateSimpleMoveOrder(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
-
             if (moveTransition.getMoveStatus().isDone()) {
                 final int currentValue = min(moveTransition.getToBoard(), depth - 1);
-
-                if (currentValue >= highestSeenValue)
-                    highestSeenValue = currentValue;
+                if (currentValue >= highestSeenValue) highestSeenValue = currentValue;
             }
         }
 
