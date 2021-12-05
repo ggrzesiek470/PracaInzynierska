@@ -1,2 +1,36 @@
 # ignore node_modules
-node_modules/
+Chess/node_modules/
+
+Server/HELP.md
+Server/target/
+Server/!.mvn/wrapper/maven-wrapper.jar
+Server/!**/src/main/**/target/
+Server/!**/src/test/**/target/
+
+### STS ###
+Server/.apt_generated
+Server/.classpath
+Server/.factorypath
+Server/.project
+Server/.settings
+Server/.springBeans
+Server/.sts4-cache
+
+### IntelliJ IDEA ###
+Server/.idea
+Server/*.iws
+Server/*.iml
+Server/*.ipr
+
+### NetBeans ###
+Server//nbproject/private/
+Server//nbbuild/
+Server//dist/
+Server//nbdist/
+Server//.nb-gradle/
+Server/build/
+Server/!**/src/main/**/build/
+Server/!**/src/test/**/build/
+
+### VS Code ###
+Server/.vscode/
