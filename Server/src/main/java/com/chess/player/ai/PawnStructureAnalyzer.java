@@ -32,8 +32,7 @@ public class PawnStructureAnalyzer {
         int pawnStackPenalty = 0;
 
         for (final int pawnStack: pawnsOnColumnTable)
-            if (pawnStack > 1)
-                pawnStackPenalty += pawnStack;
+            if (pawnStack > 1) pawnStackPenalty += pawnStack;
 
         return pawnStackPenalty *DOUBLE_PAWN_PENALTY;
     }

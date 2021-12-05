@@ -68,8 +68,7 @@ public final class MiniMax implements MoveStrategy {
                     lowestSeenValue = currentValue;
                     bestMove = move;
                 }
-            } else
-                System.out.println("\t" + this + " can't execute move (" +moveCounter+ "/" +numMoves+ ") " + move);
+            } else System.out.println("\t" + this + " can't execute move (" +moveCounter+ "/" +numMoves+ ") " + move);
 
             moveCounter++;
         }
@@ -79,13 +78,10 @@ public final class MiniMax implements MoveStrategy {
                 bestMove, this.boardsEvaluated, executionTime, (1000 * ((double)this.boardsEvaluated/ executionTime)));
 
         long total = 0;
-        for (final FreqTableRow row: this.freqTable) {
-            if (row != null)
-                total += row.getCount();
-        }
+        for (final FreqTableRow row: this.freqTable)
+            if (row != null) total += row.getCount();
 
-        if (this.boardsEvaluated != total)
-            System.out.println("somethings wrong with the # of boards evaluated!");
+        if (this.boardsEvaluated != total) System.out.println("somethings wrong with the # of boards evaluated!");
 
         return bestMove;
     }
@@ -97,17 +93,14 @@ public final class MiniMax implements MoveStrategy {
             return this.evaluator.evaluate(board, depth);
         }
 
-        if(isEndGameScenario(board))
-            return this.evaluator.evaluate(board, depth);
+        if (isEndGameScenario(board)) return this.evaluator.evaluate(board, depth);
 
         int lowestSeenValue = Integer.MAX_VALUE;
         for (final Move move: board.currentPlayer().getLegalMoves()) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
             if (moveTransition.getMoveStatus().isDone()) {
                 final int currentValue = max(moveTransition.getToBoard(), depth - 1);
-
-                if (currentValue <= lowestSeenValue)
-                    lowestSeenValue = currentValue;
+                if (currentValue <= lowestSeenValue) lowestSeenValue = currentValue;
             }
         }
 
@@ -122,17 +115,14 @@ public final class MiniMax implements MoveStrategy {
             return this.evaluator.evaluate(board, depth);
         }
 
-        if(isEndGameScenario(board))
-            return this.evaluator.evaluate(board, depth);
+        if (isEndGameScenario(board)) return this.evaluator.evaluate(board, depth);
 
         int highestSeenValue = Integer.MIN_VALUE;
         for (final Move move: board.currentPlayer().getLegalMoves()) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
             if (moveTransition.getMoveStatus().isDone()) {
                 final int currentValue = min(moveTransition.getToBoard(), depth - 1);
-
-                if (currentValue >= highestSeenValue)
-                    highestSeenValue = currentValue;
+                if (currentValue >= highestSeenValue) highestSeenValue = currentValue;
             }
         }
 
@@ -166,7 +156,7 @@ public final class MiniMax implements MoveStrategy {
         public String toString() {
             return BoardUtils.INSTANCE.getPositionAtCoordinate(this.move.getCurrentCoordinate()) +
                    BoardUtils.INSTANCE.getPositionAtCoordinate(this.move.getDestinationCoordinate()) +
-                    " : " + this.count;
+                   " : " + this.count;
         }
     }
 

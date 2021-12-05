@@ -39,7 +39,7 @@ public enum PieceUtils {
         final ImmutableTable.Builder<Alliance, Integer, Pawn> pieces = ImmutableTable.builder();
 
         for (final Alliance alliance: Alliance.values())
-            for(int i = 0; i < BoardUtils.NUM_TILES; i++)
+            for (int i = 0; i < BoardUtils.NUM_TILES; i++)
                 pieces.put(alliance, i, new Pawn(alliance, i, false));
 
         return pieces.build();
@@ -49,7 +49,7 @@ public enum PieceUtils {
         final ImmutableTable.Builder<Alliance, Integer, Knight> pieces = ImmutableTable.builder();
 
         for (final Alliance alliance: Alliance.values())
-            for(int i = 0; i < BoardUtils.NUM_TILES; i++)
+            for (int i = 0; i < BoardUtils.NUM_TILES; i++)
                 pieces.put(alliance, i, new Knight(alliance, i, false));
 
         return pieces.build();
@@ -59,7 +59,7 @@ public enum PieceUtils {
         final ImmutableTable.Builder<Alliance, Integer, Bishop> pieces = ImmutableTable.builder();
 
         for (final Alliance alliance: Alliance.values())
-            for(int i = 0; i < BoardUtils.NUM_TILES; i++)
+            for (int i = 0; i < BoardUtils.NUM_TILES; i++)
                 pieces.put(alliance, i, new Bishop(alliance, i, false));
 
         return pieces.build();
@@ -68,8 +68,8 @@ public enum PieceUtils {
     private static Table<Alliance, Integer, Rook> createAllPossibleMovedRooks() {
         final ImmutableTable.Builder<Alliance, Integer, Rook> pieces = ImmutableTable.builder();
 
-        for(final Alliance alliance: Alliance.values())
-            for(int i = 0; i < BoardUtils.NUM_TILES; i++)
+        for (final Alliance alliance: Alliance.values())
+            for (int i = 0; i < BoardUtils.NUM_TILES; i++)
                 pieces.put(alliance, i, new Rook(alliance, i, false));
 
         return pieces.build();
@@ -78,8 +78,8 @@ public enum PieceUtils {
     private static Table<Alliance, Integer, Queen> createAllPossibleMovedQueens() {
         final ImmutableTable.Builder<Alliance, Integer, Queen> pieces = ImmutableTable.builder();
 
-        for(final Alliance alliance: Alliance.values())
-            for(int i = 0; i < BoardUtils.NUM_TILES; i++)
+        for (final Alliance alliance: Alliance.values())
+            for (int i = 0; i < BoardUtils.NUM_TILES; i++)
                 pieces.put(alliance, i, new Queen(alliance, i, false));
 
         return pieces.build();

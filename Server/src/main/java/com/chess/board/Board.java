@@ -99,7 +99,7 @@ public class Board {
 
     public Collection<Piece> getAllPieces() {
         return Stream.concat(this.whitePieces.stream(), this.blackPieces.stream())
-                .collect(Collectors.toList());
+                     .collect(Collectors.toList());
     }
 
     private Collection<Move> calculateLegalMoves(Collection<Piece> pieces) {
@@ -112,14 +112,13 @@ public class Board {
     }
 
     private static Collection<Piece> calculateActivePieces(final Builder builder, final Alliance alliance) {
-        return builder.boardConfig.values().stream()
-                .filter(piece -> piece.getPieceAlliance() == alliance)
-                .collect(Collectors.toList());
+        return builder.boardConfig.values().stream().filter(piece -> piece.getPieceAlliance() == alliance)
+                                                    .collect(Collectors.toList());
     }
 
     public Iterable<Move> getAllLegalMoves() {
         return Stream.concat(this.whitePlayer.getLegalMoves().stream(), this.blackPlayer.getLegalMoves().stream())
-                .collect(Collectors.toList());
+                     .collect(Collectors.toList());
     }
 
 
@@ -155,6 +154,7 @@ public class Board {
             this.transitionMove = transitionMove;
         }
 
+        // for already fixed bug
         public Board errorBoard() {
             this.setPiece(new Rook(Alliance.WHITE, 63));
             this.setPiece(new Rook(Alliance.WHITE, 56));

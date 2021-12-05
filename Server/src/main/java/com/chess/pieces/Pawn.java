@@ -30,6 +30,7 @@ public class Pawn extends Piece {
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
+
         for (final int currentCandidateOffset: CANDIDATE_MOVE_COORDINATES) {
             int candidateDestinationCoordinate = this.piecePosition +
                     (this.pieceAlliance.getDirection() * currentCandidateOffset);
@@ -86,7 +87,7 @@ public class Pawn extends Piece {
             } else if (currentCandidateOffset == 9 &&
                        !((BoardUtils.FIRST_COLUMN.get(this.piecePosition) && this.pieceAlliance.isWhite()) ||
                          (BoardUtils.EIGHTH_COLUMN.get(this.piecePosition) && this.pieceAlliance.isBlack()))) {
-                if(board.getPiece(candidateDestinationCoordinate) != null) {
+                if (board.getPiece(candidateDestinationCoordinate) != null) {
                     if (this.pieceAlliance != board.getPiece(candidateDestinationCoordinate).getPieceAlliance()) {
                         if (this.pieceAlliance.isPawnPromotionSquare(candidateDestinationCoordinate)) {
                             legalMoves.add(new PawnPromotion(new PawnAttackMove(board, this, candidateDestinationCoordinate,
@@ -101,8 +102,7 @@ public class Pawn extends Piece {
 //                            legalMoves.add(new PawnPromotion(
 //                                    new PawnAttackMove(board, this, candidateDestinationCoordinate,
 //                                            board.getPiece(candidateDestinationCoordinate)), PieceUtils.INSTANCE.getMovedKnight(this.pieceAlliance, candidateDestinationCoordinate)));
-                        } else
-                            legalMoves.add(new PawnAttackMove(board, this, candidateDestinationCoordinate,
+                        } else legalMoves.add(new PawnAttackMove(board, this, candidateDestinationCoordinate,
                                             board.getPiece(candidateDestinationCoordinate)));
                     }
                 } else if (board.getEnPassantPawn() != null && board.getEnPassantPawn().getPiecePosition() ==

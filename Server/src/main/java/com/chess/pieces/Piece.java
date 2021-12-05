@@ -39,15 +39,11 @@ public abstract class Piece {
                     break;
                 }
 
-        return new int[]{row, col + 1};
+        return new int[]{row, col+1};
     }
 
     public int getPiecePosition() {
         return this.piecePosition;
-    }
-
-    public int getOldPosition() {
-        return this.oldPosition;
     }
 
     public void setOldPosition(final int position) {

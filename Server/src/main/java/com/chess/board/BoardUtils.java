@@ -105,8 +105,8 @@ public enum BoardUtils {
     public static boolean isKingPawnTrap(final Board board, final King king, final int frontTile) {
         final Piece piece = board.getPiece(frontTile);
         return piece != null &&
-                piece.getPieceType() == Piece.PieceType.PAWN &&
-                piece.getPieceAlliance() != king.getPieceAlliance();
+               piece.getPieceType() == Piece.PieceType.PAWN &&
+               piece.getPieceAlliance() != king.getPieceAlliance();
     }
 
     public static int mvvlva(final Move move) {

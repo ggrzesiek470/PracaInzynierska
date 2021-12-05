@@ -36,8 +36,7 @@ public class BlackPlayer extends Player {
 
     @Override
     protected Collection<Move> calculateKingCastles(final Collection<Move> playerLegals, final Collection<Move> opponentLegals) {
-        if (!hasCastleOpportunities())
-            return Collections.emptyList();
+        if (!hasCastleOpportunities()) return Collections.emptyList();
 
         final List<Move> kingCastles = new ArrayList<>();
 

@@ -7,7 +7,10 @@ import com.chess.board.Move;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import static com.chess.board.Move.*;
 
 public class Rook extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-8, -1, 1, 8};
@@ -32,7 +35,7 @@ public class Rook extends Piece {
             int candidateDestinationCoordinate = this.piecePosition;
 
             while (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
-                if (isColumnColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate))
+                if (isColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate))
                     break;
 
                 candidateDestinationCoordinate += currentCandidateOffset;
@@ -41,20 +44,21 @@ public class Rook extends Piece {
                     final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
 
                     if (pieceAtDestination == null)
-                        legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
+                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                     else {
                         final Alliance pieceAtDestinationAlliance = pieceAtDestination.getPieceAlliance();
 
                         if (this.pieceAlliance != pieceAtDestinationAlliance)
-                            legalMoves.add(new Move.MajorAttackMove(board, this, candidateDestinationCoordinate,
-                                                               pieceAtDestination));
+                            legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate,
+                                    pieceAtDestination));
 
                         break;
                     }
                 }
             }
         }
-        return legalMoves;
+
+        return Collections.unmodifiableList(legalMoves);
     }
 
     @Override
@@ -72,7 +76,7 @@ public class Rook extends Piece {
         return this.pieceType.toString();
     }
 
-    private static boolean isColumnColumnExclusion(final int currentCandidate, final int candidateDestinationCoordinate) {
+    private static boolean isColumnExclusion(final int currentCandidate, final int candidateDestinationCoordinate) {
         return (BoardUtils.FIRST_COLUMN.get(candidateDestinationCoordinate) && currentCandidate == -1) ||
                (BoardUtils.EIGHTH_COLUMN.get(candidateDestinationCoordinate) && currentCandidate == 1);
     }

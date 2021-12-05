@@ -48,21 +48,21 @@ public class WhitePlayer extends Player {
 
                 if (kingSideRook != null && kingSideRook.isFirstMove())
                     if (calculateAttacksOnTile(61, opponentLegals).isEmpty() &&
-                            calculateAttacksOnTile(62, opponentLegals).isEmpty() &&
-                            kingSideRook.getPieceType() == Piece.PieceType.ROOK)
-                        if(!BoardUtils.isKingPawnTrap(this.board, this.playerKing, 52))
+                        calculateAttacksOnTile(62, opponentLegals).isEmpty() &&
+                        kingSideRook.getPieceType() == Piece.PieceType.ROOK)
+                        if (!BoardUtils.isKingPawnTrap(this.board, this.playerKing, 52))
                             kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing, 62, (Rook) kingSideRook,
                                     kingSideRook.getPiecePosition(), 61));
             }
             //whites queen side castle
             if (this.board.getPiece(59) == null && this.board.getPiece(58) == null &&
-                    this.board.getPiece(57) == null) {
+                this.board.getPiece(57) == null) {
                 final Piece queenSideRook = this.board.getPiece(56);
 
                 if (queenSideRook != null && queenSideRook.isFirstMove())
                     if (calculateAttacksOnTile(58, opponentLegals).isEmpty() &&
-                            calculateAttacksOnTile(59, opponentLegals).isEmpty() &&
-                            queenSideRook.getPieceType() == Piece.PieceType.ROOK)
+                        calculateAttacksOnTile(59, opponentLegals).isEmpty() &&
+                        queenSideRook.getPieceType() == Piece.PieceType.ROOK)
                         if (!BoardUtils.isKingPawnTrap(this.board, this.playerKing, 52))
                             kingCastles.add(new Move.QueenSideCastleMove(this.board, this.playerKing, 58, (Rook) queenSideRook,
                                     queenSideRook.getPiecePosition(), 59));

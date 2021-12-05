@@ -7,7 +7,10 @@ import com.chess.board.Move;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import static com.chess.board.Move.*;
 
 
 public class King extends Piece {
@@ -53,12 +56,12 @@ public class King extends Piece {
     }
 
     @Override
-    public Collection<Move> calculateLegalMoves(Board board) {
+    public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
 
         for (final int currentCandidateOffset: CANDIDATE_MOVE_COORDINATES) {
             if (isFirstColumnExclusion(this.piecePosition, currentCandidateOffset) ||
-                    isEightColumnExclusion(this.piecePosition, currentCandidateOffset))
+                isEighthColumnExclusion(this.piecePosition, currentCandidateOffset))
                 continue;
 
             final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
@@ -67,17 +70,18 @@ public class King extends Piece {
                 final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
 
                 if (pieceAtDestination == null)
-                    legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
+                    legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                 else {
                     final Alliance pieceAtDestinationAlliance = pieceAtDestination.getPieceAlliance();
 
                     if (this.pieceAlliance != pieceAtDestinationAlliance)
-                        legalMoves.add(new Move.MajorAttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
+                        legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate,
+                                pieceAtDestination));
                 }
             }
         }
 
-        return legalMoves;
+        return Collections.unmodifiableList(legalMoves);
     }
 
     @Override
@@ -121,10 +125,10 @@ public class King extends Piece {
                 candidateDestinationCoordinate == 7);
     }
 
-    private static boolean isEightColumnExclusion(final int currentCandidate, final int candidateDestinationCoordinate) {
+    private static boolean isEighthColumnExclusion(final int currentCandidate, final int candidateDestinationCoordinate) {
         return BoardUtils.EIGHTH_COLUMN.get(currentCandidate) &&
-                (candidateDestinationCoordinate == -7 ||
-                 candidateDestinationCoordinate == 1 ||
-                 candidateDestinationCoordinate == 9);
+               (candidateDestinationCoordinate == -7 ||
+                candidateDestinationCoordinate == 1 ||
+                candidateDestinationCoordinate == 9);
     }
 }

@@ -51,8 +51,8 @@ public abstract class Move {
             return false;
 
         return getCurrentCoordinate() == otherMove.getCurrentCoordinate() &&
-                getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
-                getMovedPiece().equals(otherMove.getMovedPiece());
+               getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
+               getMovedPiece().equals(otherMove.getMovedPiece());
     }
 
     public Board getBoard() {
@@ -105,7 +105,7 @@ public abstract class Move {
     String disambiguationFile() {
         for (final Move move: this.board.currentPlayer().getLegalMoves())
             if (move.getDestinationCoordinate() == this.destinationCoordinate && !this.equals(move) &&
-            this.movedPiece.getPieceType().equals(getMovedPiece().getPieceType()))
+                this.movedPiece.getPieceType().equals(getMovedPiece().getPieceType()))
                 return BoardUtils.INSTANCE.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).substring(0, 1);
 
         return "";

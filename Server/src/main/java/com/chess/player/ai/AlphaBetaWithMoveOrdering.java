@@ -41,8 +41,7 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
         abstract Collection<Move> sort(Collection<Move> moves);
     }
 
-    public AlphaBetaWithMoveOrdering(final int searchDepth,
-                                     final int quiescenceFactor) {
+    public AlphaBetaWithMoveOrdering(final int searchDepth) {
         this.evaluator = StandardBoardEvaluator.get();
         this.searchDepth = searchDepth;
         this.moveSorter = MoveSorter.SORT;
@@ -98,8 +97,7 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
                 final String quiescenceInfo = " [h: " + highestSeenValue + " l:" + lowestSeenValue + "] q:" + this.quiescenceCount;
                 s = "\t" + "(" + this.searchDepth + "), m: (" + moveCounter + "/" + numMoves + ") " + move + ", best: " + bestMove
                         + quiescenceInfo + ", t: " + calculateTimeTaken(candidateMoveStartTime, System.nanoTime());
-            } else
-                s = "\t" + ", m: (" + moveCounter + "/" + numMoves + ") " + move + " is illegal, best: " + bestMove;
+            } else s = "\t" + ", m: (" + moveCounter + "/" + numMoves + ") " + move + " is illegal, best: " + bestMove;
 
             System.out.println(s);
 
@@ -147,7 +145,6 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
         int currentLowest = lowest;
         for (final Move move: this.moveSorter.sort(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
-
             if (moveTransition.getMoveStatus().isDone()) {
                 currentLowest = Math.min(currentLowest, max(moveTransition.getToBoard(),
                                                             calculateQuiescenceDepth(board, move, depth),
