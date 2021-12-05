@@ -23,11 +23,11 @@ Server/*.iml
 Server/*.ipr
 
 ### NetBeans ###
-Server//nbproject/private/
-Server//nbbuild/
-Server//dist/
-Server//nbdist/
-Server//.nb-gradle/
+Server/nbproject/private/
+Server/nbbuild/
+Server/dist/
+Server/nbdist/
+Server/.nb-gradle/
 Server/build/
 Server/!**/src/main/**/build/
 Server/!**/src/test/**/build/
