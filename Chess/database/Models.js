@@ -1,4 +1,4 @@
-﻿module.exports = function (mongoose) {
+﻿export default function (mongoose) {
     var Schema = mongoose.Schema;
 
     var userSchema = new Schema(

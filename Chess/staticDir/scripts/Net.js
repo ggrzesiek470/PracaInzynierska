@@ -41,6 +41,12 @@
                     window.showWindow("Zalogowano.");
                     main.zalogowano(data.data[0].login);
                     main.setStatistics(data.data[0].wins, data.data[0].draws, data.data[0].losses, data.data[0].points);
+                    const ranking = new Ranking(25, 70);
+                    document.body.appendChild(ranking.getComponent());
+                    setTimeout(() => {
+                        ranking.show();
+                    }, 10)
+
                 } else {
                     window.showWindow("Nieprawidłowe hasło bądź nazwa użytkownika");
                 }
@@ -72,6 +78,11 @@
             document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
         })
         client.on("turn", function (data) {
+            console.log(data.pawn)
+            console.log("pawn.position.x: " + data.pawn.position.x)
+            console.log("pawn.position.y: " + data.pawn.position.y)
+            console.log("xDes: " + data.xDes)
+            console.log("yDes: " + data.yDes)
             game.opponentMove(data.pawn, data.xDes, data.yDes, data.enPassant, data.casting);
             if (game.isGameEnabled() == true) {
                 var string;
@@ -123,7 +134,16 @@
         });
     }
 
-    this.turn = function (pawn, xDes, yDes, enPassant, casting, color, gmid) {
+    this.sendDataToAI = function (depth, localTable) {
+        var obj = {
+            depth: depth,
+            computer: (game.getYourColor() == "white") ? "black" : "white",
+            localTable: localTable
+        };
+        client.emit("sendDataToAI", obj)
+    }
+
+    this.turn = function (pawn, xDes, yDes, enPassant, casting, color, gmid, localTable) {
         client.emit("turn", {
             pawn: pawn,
             xDes: xDes,
@@ -132,6 +152,7 @@
             casting: casting,
             color: color,
             gameId: gmid,
+            localTable: localTable
         });
     }
 

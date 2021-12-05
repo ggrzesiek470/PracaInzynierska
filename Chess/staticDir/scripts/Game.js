@@ -13,6 +13,9 @@
     var kingCheck = false;
     var kingColorCheck = "";
     var howManyTurns = 0;
+    var ai_playing = false;
+    
+    this.loadingFigures = 0; // out of 32
 
     this.turnTheGameOn = function () {
         gameEnabled = true;
@@ -103,8 +106,9 @@
                                 for (var i = 0; i < whereCanCast.length; i++) if (whereCanCast[i] == this) { isPossible = true; Casting = true; }
                                 if (isPossible == true) {
                                     clearColors();
-                                    net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId);
+                                    net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
                                     movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
+                                    
                                     var string;
                                     if (game.getYourColor() == "white") string = "białymi.<br/>Ruch przeciwnika.";
                                     if (game.getYourColor() == "black") string = "czarnymi.<br/>Ruch przeciwnika.";
@@ -242,7 +246,6 @@
         pawn.firstMove = true;
         chosenPawn = undefined;
         if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
-        console.log(localTable);
     }
 
     function clearColors() {
@@ -492,7 +495,9 @@
                                         }
                                     }
                                 }
-                                if (ch == true) wherecancast.push(document.getElementById("x" + (pawn.position.x + 2) + "_y" + (pawn.position.y)));
+                                if (ch == true) {
+                                    wherecancast.push(document.getElementById("x" + (pawn.position.x + 2) + "_y" + (pawn.position.y)));
+                                }
                             }
                         }
                     }
@@ -511,7 +516,9 @@
                                         }
                                     }
                                 }
-                                if (ch == true) wherecancast.push(document.getElementById("x" + (pawn.position.x - 2) + "_y" + (pawn.position.y)));
+                                if (ch == true) {
+                                    wherecancast.push(document.getElementById("x" + (pawn.position.x - 2) + "_y" + (pawn.position.y)));
+                                }
                             }
                         }
                     }
@@ -552,12 +559,40 @@
         if (pawn.color == chosenColor) {
             howManyTurns += whereCanGo.length + whereCanAttack.length + whereCanEnPassant.length + whereCanCast.length;
         }
-
+        var queenOrKingSide = "";
         if (check == undefined) {
-            for (var i = 0; i < whereCanGo.length; i++) { whereCanGo[i].style.backgroundColor = "lightgreen"; var x = parseInt(whereCanGo[i].id[1])-1; var y = parseInt(whereCanGo[i].id[4])-1; main.changeColorOfPlace(x, y, "green");  }
-            for (var i = 0; i < whereCanAttack.length; i++) { whereCanAttack[i].style.backgroundColor = "red"; var x = parseInt(whereCanAttack[i].id[1]) - 1; var y = parseInt(whereCanAttack[i].id[4]) - 1; main.changeColorOfPlace(x, y, "red"); }
-            for (var i = 0; i < whereCanEnPassant.length; i++) { whereCanEnPassant[i].style.backgroundColor = "purple"; var x = parseInt(whereCanEnPassant[i].id[1]) - 1; var y = parseInt(whereCanEnPassant[i].id[4]) - 1; main.changeColorOfPlace(x, y, "purple"); }
-            for (var i = 0; i < whereCanCast.length; i++) { whereCanCast[i].style.backgroundColor = "purple"; var x = parseInt(whereCanCast[i].id[1]) - 1; var y = parseInt(whereCanCast[i].id[4]) - 1; main.changeColorOfPlace(x, y, "purple"); }
+            for (var i = 0; i < whereCanGo.length; i++) {
+                whereCanGo[i].style.backgroundColor = "lightgreen";
+                var x = parseInt(whereCanGo[i].id[1])-1;
+                var y = parseInt(whereCanGo[i].id[4])-1;
+                main.changeColorOfPlace(x, y, "green"); 
+            }
+            for (var i = 0; i < whereCanAttack.length; i++) {
+                whereCanAttack[i].style.backgroundColor = "red";
+                var x = parseInt(whereCanAttack[i].id[1]) - 1;
+                var y = parseInt(whereCanAttack[i].id[4]) - 1;
+                main.changeColorOfPlace(x, y, "red");
+            }
+            for (var i = 0; i < whereCanEnPassant.length; i++) {
+                whereCanEnPassant[i].style.backgroundColor = "purple";
+                var x = parseInt(whereCanEnPassant[i].id[1]) - 1;
+                var y = parseInt(whereCanEnPassant[i].id[4]) - 1;
+                main.changeColorOfPlace(x, y, "purple");
+            }
+            for (var i = 0; i < whereCanCast.length; i++) { 
+                whereCanCast[i].style.backgroundColor = "purple";
+                var x = parseInt(whereCanCast[i].id[1]) - 1;
+                var y = parseInt(whereCanCast[i].id[4]) - 1;
+                main.changeColorOfPlace(x, y, "purple");
+
+                if (x > 4) {
+                    localTable[y][x - 2].queenSideCastlePossible = true;
+                    queenOrKingSide = "queen";
+                } else {
+                    localTable[y][x + 2].kingSideCastlePossible = true;
+                    queenOrKingSide = "king";
+                }
+            }
         } else if (check == true) {
             for (var i = 0; i < whereCanAttack.length; i++) {
                 var x = parseInt(whereCanAttack[i].id[1]);
@@ -567,9 +602,19 @@
                     kingColorCheck = localTable[y - 1][x - 1].color;
                 }
             }
-            // console.log(whereCanAttack);
         }
-        // console.log(whereCanGo);
+        
+        if (pawn.type == "King") {
+            if (whereCanCast.length == 2) queenOrKingSide = "both";
+            if (queenOrKingSide == "queen") {
+                localTable[pawn.position.y - 1][pawn.position.x - 1].kingSideCastlePossible = false;
+            } else if (queenOrKingSide == "king") {
+                localTable[pawn.position.y - 1][pawn.position.x - 1].queenSideCastlePossible = false;
+            } else if (queenOrKingSide == "") {
+                localTable[pawn.position.y - 1][pawn.position.x - 1].kingSideCastlePossible = false;
+                localTable[pawn.position.y - 1][pawn.position.x - 1].queenSideCastlePossible = false;
+            }
+        }
     }
 
     function checkIfMoveIsPossible(pawn, xDes, yDes) {
@@ -642,7 +687,9 @@
                 if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
                 for (var i = 0; i < localTable.length; i++) {
                     for (var j = 0; j < localTable[0].length; j++) {
-                        typeWhereToGo(localTable[i][j], true);
+                        if (localTable[i][j] != "") {
+                            typeWhereToGo(localTable[i][j], true);
+                        }
                     }
                 }
             }
@@ -712,7 +759,7 @@
         howManyTurns = 0;
         for (var i = 0; i < localTable.length; i++) {
             for (var j = 0; j < localTable[0].length; j++) {
-                if (localTable[i][j] != undefined) {
+                if (localTable[i][j] != undefined && localTable[i][j] != "") {
                     typeWhereToGo(localTable[i][j], false);
                 }
             }
@@ -721,6 +768,37 @@
 
         if (howManyTurns == 0) return true;
         else return false;
+    }
+
+    this.playAIGame = function () {
+        var yourColor = "black";
+        ai_playing = true;
+
+        game.setGameId("with_computer");
+        game.setYourColor(yourColor);
+        game.turnTheGameOn();
+        main.createPawns();
+        $("#bariera").css("display", "none");
+        $("#checkChecker").css("display", "initial");
+        var string;
+        if (yourColor == "white") {
+            string = "białymi.<br/>Twój ruch.";
+            main.setCameraPosition(-600, 600, 0);
+        }
+        if (yourColor == "black") {
+            string = "czarnymi.<br/>Ruch przeciwnika.";
+            main.setCameraPosition(600, 600, 0);
+            var depth = 5;
+            var intervalToRemove = setInterval(() => {
+                if (game.loadingFigures >= 32) {
+                    net.sendDataToAI(depth, localTable);
+                    clearInterval(intervalToRemove);
+                }
+            }, 500);
+        }
+        net.window.onlyHalfly();
+        net.window.showWindow("Grasz "+string);
+        $("#checkText").html($("#check").html());
     }
 
     function init() {

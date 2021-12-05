@@ -146,6 +146,7 @@
             var x = -350;
             for (var j = 0; j < 8; j++) {
                 var geometry = new THREE.BoxGeometry(100, 100, 20);
+
                 if (szachownica[w][k] == 1) {
                     var material = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide, color: "#180000", shininess: 60, });
                     var nazwa = 'sc' + i + j + '';
@@ -200,7 +201,7 @@
                             }
                             modelData.position.set(pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.x, 10, pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.z);
                             scene.add(modelData);
-
+                            game.loadingFigures += 1;
                         })
                         // console.log('Dodano czarnego o nazwie: ' + model.name)
                     }
@@ -230,6 +231,7 @@
                             }
                             modelData.position.set(pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.x, 10, pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.z);
                             scene.add(modelData);
+                            game.loadingFigures += 1;
                         })
                         // console.log('Dodano białego o nazwie: ' + model.name)
                     }
@@ -367,24 +369,34 @@
 
     this.zalogowano = function (nick) {
         nickLogged = nick;
-        document.getElementById("pass_log").style.display = "none";
-        document.getElementById("user_log").style.display = "none";
-        document.getElementById("pass_reg").style.display = "none";
-        document.getElementById("user_reg").style.display = "none";
-        document.getElementById("loguj").style.display = "none";
-        document.getElementById("rejestruj").style.display = "none";
-        document.getElementById("szukajGracza").style.display = "initial";
-        // document.getElementById("bariera").style.display = "none";
+        $("#pass_log").css("display", "none");
+        $("#user_log").css("display", "none");
+        $("#pass_reg").css("display", "none");
+        $("#user_reg").css("display", "none");
+        $("#loguj").css("display", "none");
+        $("#rejestruj").css("display", "none");
+        $("#szukajGracza").css("display", "initial");
 
         canvas = new Canvas(0, 0);
         document.body.appendChild(canvas.canvas());
 
-        document.getElementById("szukajGracza").addEventListener("click", function () {
-            document.getElementById("szukajGracza").style.display = "none";
-            document.getElementById("close").style.display = "none";
+        $("#szukajGracza").on("click", () => {
+            $(".choose_game_mode").toggleClass("display_none");
+            $("#szukajGracza").css("display", "none");
+        });
+
+        $(".vs_player").on("click", () => {
+            $("#szukajGracza").css("display", "none");
+            $("#close").css("display", "none");
+            $(".choose_game_mode").toggleClass("display_none");
             net.window.showWindow("Czekaj na gracza...");
             net.searchForGames();
-        });
+        })
+
+        $(".vs_computer").on("click", () => {
+            $(".choose_game_mode").toggleClass("display_none");
+            game.playAIGame();
+        })
     }
 
     init();
