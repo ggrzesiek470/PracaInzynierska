@@ -23,6 +23,7 @@ public class AIController {
             method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+
     public @ResponseBody String returnMove(@RequestBody Map<String, Object> game) throws ParseException {
         Integer depth = (Integer) game.get("depth");
         String computer = (String) game.get("computer");

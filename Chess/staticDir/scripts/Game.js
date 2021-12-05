@@ -17,6 +17,9 @@
     
     this.loadingFigures = 0; // out of 32
 
+    this.ai_playing = false;
+    this.loadingFigures = 0; // out of 32
+
     this.turnTheGameOn = function () {
         gameEnabled = true;
     }
@@ -106,8 +109,15 @@
                                 for (var i = 0; i < whereCanCast.length; i++) if (whereCanCast[i] == this) { isPossible = true; Casting = true; }
                                 if (isPossible == true) {
                                     clearColors();
-                                    net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
+                                    if (ai_playing == false) {
+                                        net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
+                                    }
                                     movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
+                                    if (ai_playing == true) {
+                                        var depth = 5;
+                                        net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable, depth);
+                                    }
+                                    chosenPawn = undefined;
                                     
                                     var string;
                                     if (game.getYourColor() == "white") string = "białymi.<br/>Ruch przeciwnika.";
@@ -234,17 +244,20 @@
                 localTable[pawn.position.y - 1][pawn.position.x - 1 + 1].position.x = xDes - 1;
             }
         }
+        var temp = localTable[pawn.position.y - 1][pawn.position.x - 1];
         localTable[pawn.position.y - 1][pawn.position.x - 1] = "";
-        localTable[yDes - 1][xDes - 1] = pawn;
-        localTable[yDes - 1][xDes - 1].position.x = xDes;
-        localTable[yDes - 1][xDes - 1].position.y = yDes;
+        localTable[yDes - 1][xDes - 1] = temp;
+        localTable[yDes - 1][xDes - 1].position = {
+            x: xDes,
+            y: yDes
+        };
+        localTable[yDes - 1][xDes - 1].firstMove = true;
 		if (pawn.type == "Pawn") {
             if (pawn.color == "white" && yDes == 8) { pawn.type = "Queen"; main.changeModel(pawn.position.x, pawn.position.y, "Queen"); }
             if (pawn.color == "black" && yDes == 1) { pawn.type = "Queen"; main.changeModel(pawn.position.x, pawn.position.y, "Queen"); }
         }
         if (enPassant == true) { if (pawn.color == "white") { main.deletePawn(pawn.position.x, pawn.position.y - 1); localTable[pawn.position.y - 1 - 1][pawn.position.x - 1] = ""; } else if (pawn.color == "black") { main.deletePawn(pawn.position.x, pawn.position.y + 1); localTable[pawn.position.y - 1 + 1][pawn.position.x - 1] = ""; } }
         pawn.firstMove = true;
-        chosenPawn = undefined;
         if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
     }
 
