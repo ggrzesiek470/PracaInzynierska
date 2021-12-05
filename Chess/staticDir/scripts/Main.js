@@ -61,7 +61,7 @@
         for (var w = 0; w < szachownica.length; w++) {
             for (var k = 0; k < szachownica[0].length; k++) {
                 if (szachownica[w][k] == 1) {
-                    pola_tab[w][k].material = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide, color: "#180000", shininess: 60, });
+                    pola_tab[w][k].material = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide, color: "#624a2e", shininess: 60, });
                 }
                 else {
                     pola_tab[w][k].material = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide, color: 0xffffff, shininess: 60, });
@@ -148,7 +148,7 @@
                 var geometry = new THREE.BoxGeometry(100, 100, 20);
 
                 if (szachownica[w][k] == 1) {
-                    var material = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide, color: "#180000", shininess: 60, });
+                    var material = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide, color: "#624a2e", shininess: 60, });
                     var nazwa = 'sc' + i + j + '';
                 }
                 else {
@@ -187,9 +187,9 @@
                             modelData.children[0].children[0].geometry.computeVertexNormals();
 
                             modelData.children[0].children[0].material = new THREE.MeshPhongMaterial({
-                                color: "#180000",
-                                specular: 0x101010,
-                                shininess: 60,
+                                color: "#322a1e",
+                                specular: 0x303030,
+                                shininess: 10,
                                 polygonOffset: true,
                                 polygonOffsetUnits: 1,
                                 polygonOffsetFactor: 1,
@@ -216,9 +216,9 @@
                             modelData.children[0].children[0].geometry.computeVertexNormals();
 
                             modelData.children[0].children[0].material = new THREE.MeshPhongMaterial({
-                                color: 0xFFFFFF,
-                                specular: 0x101010,
-                                shininess: 60,
+                                color: 0xEEEEEE,
+                                specular: 0x303030,
+                                shininess: 10,
                                 polygonOffset: true,
                                 polygonOffsetUnits: 1,
                                 polygonOffsetFactor: 1,
@@ -265,7 +265,7 @@
         var s = window.getComputedStyle(document.getElementById("view"));
         var h = parseInt(s.getPropertyValue("height"));
         var w = parseInt(s.getPropertyValue("width"));
-        renderer.setClearColor(0x000000);
+        renderer.setClearColor(0x002244);
         renderer.setSize(w, h);
         document.getElementById("view").appendChild(renderer.domElement);
 
