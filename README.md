@@ -22,7 +22,8 @@ lib/guava-23.0 (right clik) Add as Librrary<br>
 PracaInzynierska\Server\src\main\java\com\server\ServerApplication.java<br>
 (right clik) Run serverAplication.main.java (ctrl +shift F10)<br>
 
-port 3001 is port for witch AI module is exposed.
+port 3000 is port where chess application is exposed.<br>
+port 3001 is port for which AI module is exposed.
 
 
 
