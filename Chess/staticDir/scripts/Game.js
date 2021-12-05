@@ -784,7 +784,7 @@
     }
 
     this.playAIGame = function () {
-        var yourColor = "black";
+        var yourColor = Math.floor(Math.random() * 2) == 0 ? "black" : "white";
         ai_playing = true;
 
         game.setGameId("with_computer");
