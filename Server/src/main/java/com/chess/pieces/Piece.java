@@ -39,11 +39,7 @@ public abstract class Piece {
                     break;
                 }
 
-<<<<<<< HEAD:Server/AI/src/com/chess/engine/pieces/Piece.java
-        return new int[]{row, col + 1};
-=======
         return new int[]{row, col+1};
->>>>>>> 21bb94fdd117c6a13b5514887765f7a2f3e5be3b:Server/src/main/java/com/chess/pieces/Piece.java
     }
 
     public int getPiecePosition() {
