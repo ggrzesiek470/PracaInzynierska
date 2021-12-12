@@ -12,7 +12,7 @@
                 }
             }
             if (!check) {
-                net.signup("admin", "admin");
+                net.register("admin", "admin");
             }
         })
         client.on("getForRegister", function (data) {
@@ -26,11 +26,11 @@
                 if (check == true) {
                     window.showWindow("Taki użytkownik już istnieje!");
                 } else {
-                    net.signup(document.getElementById("user_reg").value, document.getElementById("pass_reg").value);
+                    net.register(document.getElementById("user_reg").value, document.getElementById("pass_reg").value);
                 }
             }
         })
-        client.on("signup", function (data) {
+        client.on("register", function (data) {
             if (data != undefined) {
                 window.showWindow(data.user + " " + data.status);
             }
@@ -98,8 +98,8 @@
         client.emit("getForRegister", {})
     }
 
-    this.signup = function (user, pass) {
-        client.emit("signup", {
+    this.register = function (user, pass) {
+        client.emit("register", {
             login: user,
             password: pass,
         })

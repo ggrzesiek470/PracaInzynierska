@@ -3,8 +3,6 @@ import axios from 'axios';
 export default class AICommunication {
     static AI_URL = "http://localhost:3001/ai_module";
 
-    AICommunication () {}
-
     static sendDataToAIServer (board, depth, computer, callback) {
         axios.post(this.AI_URL, this.toJSON(board, depth, computer))
           .then((response) => {

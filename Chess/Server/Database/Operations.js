@@ -4,7 +4,7 @@
         InsertOne: function (data) {
             data.save(function (error, data) {
                 if (error) console.log("error: " + error);
-                console.log(new Date() + "Pomyślnie dodano użytkownika o nazwie " + data.login + ".");
+                // console.log(new Date() + "Pomyślnie dodano użytkownika o nazwie " + data.login + ".");
             })
         },
 
