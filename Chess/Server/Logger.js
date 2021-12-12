@@ -15,9 +15,7 @@ export default class Logger {
 
         if (this.error_occured != true) {
             let date = new Date();
-            let message = validity + ": " + event + " --- ";
-            message += date.toISOString() + " --- " + text;
-        
+            let message = date.toISOString() + " --- " + validity + ": " + event + " --- " + text;
             console.log(message);
 
             let fileName = date.getFullYear() + "_" + (date.getMonth()+1) + "_" + date.getDate() + "_logs.txt";

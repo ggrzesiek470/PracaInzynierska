@@ -100,7 +100,7 @@ input:focus {
     background-color:rgba(255, 216, 0, 0.7);
     border-bottom-left-radius:6vw;
     border-bottom-right-radius:6vw;
-    z-index:11;
+    z-index:1100;
     transition-duration:1s;
 }
 #window {
@@ -176,10 +176,11 @@ input:focus {
     height:10%;
     transition-duration:0.8s;
 }
+
 .choose_game_mode {
     position:absolute;
     width:60vw;
-    height:40vh;
+    height:80vh;
     background-color: rgba(230, 216, 25, 0.504);
     left:50%;
     top:50%;
@@ -189,31 +190,60 @@ input:focus {
     font-family:Tahoma;
     text-shadow: 0px 0px 6px rgba(95, 95, 95, 0.604);
     border-radius:10px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .choose_game_mode_header {
-    width:100%;
-    text-align:center;
-    margin:10px 0px;
-    font-size:24px;
+    grid-column: 1 / span 3;
+    grid-row: 1 / span 1;
+    text-align: center;
+    font-size:min(24px, 6vw);
 }
 .choose_game_mode_buttons {
-    position:relative;
-    height:100%;
+    grid-column: 1 / span 3;
+    grid-row: 2 / span 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-left:15px;
+    margin-right:15px;
 }
-.display_none {
-    display: none;
+.difficulty_header {
+    grid-column: 1 / span 3;
+    grid-row: 3 / span 1;
+    text-align: center;
+    margin-top:10px;
+}
+.vs_player {
+    grid-column: 1 / span 1;
+}
+.vs_computer {
+    grid-column: 2 / span 1;
 }
 .vs_player, .vs_computer {
-    width:48%;
-    display:inline-block;
-    float:left;
-    height:70%;
-    border-radius:15px;
-    margin-left:1%;
-    margin-right:1%;
     cursor:pointer;
     transition-duration:0.8s;
     background-color:rgba(50, 50, 50, 0.2);
+    border-radius:15px;
+    position:relative;
+}
+.vs_player > div > img, .vs_computer > div > img {
+    position:relative;
+    left:50%;
+    transform: translateX(-50%);
+    width:100%;
+    height:100%;
+    max-width:64px;
+}
+
+.vs_player > span, .vs_computer > span {
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%); 
+    display: inline-block;
+    font-size:min(5vw, 16px);
 }
 .vs_player:hover, .vs_computer:hover {
     background-color:rgba(244, 81, 30, 0.7);
@@ -221,22 +251,126 @@ input:focus {
     box-shadow:0px 0px 5px black;
 }
 .vs_player > div, .vs_computer > div {
-    margin: 10px;
-    width: 100%;
-    height: 60%;
+    margin: 10px 0px;
 }
-.vs_player > div > img, .vs_computer > div > img {
-    position:relative;
-    left:50%;
-    transform: translateX(-50%);
-    height:100%;
+
+.choose_game_mode_buttons > div.clicked {
+    background-color:rgba(235, 32, 17, 0.7) !important;
 }
-.vs_player > span, .vs_computer > span {
-    position:relative;
-    left:50%;
-     transform:translateX(-50%); 
+.choose_your_difficulty {
+    grid-column: 1 / span 3;
+    grid-row: 4 / span 1;
+    text-align: center;
+}
+.choose_your_difficulty > div {
+    background-color: black;
+    width: max(15px, 3vw);
+    height: max(15px, 3vw);
     display: inline-block;
-    margin:0px 10px;
-    
-    font-size:20px;
+    border-radius:20px;
+    transition-duration:0.5s;
+    cursor: pointer;
+}
+.choose_your_difficulty > div:after {
+    content: ' ';
+    background-color: rgba(255, 255, 255, 1);
+    width: max(12px, 2.4vw);
+    height: max(12px, 2.4vw);
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+}
+.choose_your_difficulty > div:hover:after {
+    background-color: rgba(244, 81, 30, 0.7) !important;
+}
+.choose_your_difficulty > div.filled:after {
+    background-color: black;
+}
+.display_none {
+    display: none;
+}
+.color_header {
+    grid-column: 1 / span 3;
+    grid-row: 5 / span 1;
+    text-align: center;
+}
+.choose_your_color {
+    grid-column: 1 / span 3;
+    grid-row: 6 / span 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.choose_your_color > div.white {
+    grid-column: 1 / span 1;
+}
+.choose_your_color > div.mixed {
+    grid-column: 2 / span 1;
+}
+.choose_your_color > div.black {
+    grid-column: 3 / span 1;
+}
+.choose_your_color > div {
+    text-align: center;
+    background-color: rgba(50, 50, 50, 0.2);
+    text-shadow: 0px 0px 6px rgba(95, 95, 95, 0.604);
+    border-radius:15px;
+    cursor:pointer;
+    margin: 0 10px;
+    transition-duration:0.5s;
+}
+.choose_your_color > div > img {
+    width:max(25px, 28%);
+}
+.choose_your_color > div:hover {
+    background-color:rgba(244, 81, 30, 0.7);
+    transition-duration:1.0s;
+    box-shadow:0px 0px 5px black;
+}
+.choose_your_color > div.clicked {
+    background-color:rgba(235, 32, 17, 0.7) !important;
+}
+.finalButton {
+    width:100px;
+    text-align:center;
+    cursor:pointer;
+    color:white;
+    outline:none;
+    background-color:#f4511e;
+    border:none;
+    border-radius:2vmin;
+    box-shadow: 0 0.5vmin #555;
+    z-index:10;
+    transition-duration:0.3s;
+    margin:0 auto;
+    grid-column: 2 / span 1;
+    margin-top:15px;
+}
+.finalButton:hover {
+    background-color:#cc2604;
+    transition-duration:0.5s;
+}
+.curtain {
+    position:absolute;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    display: grid;
+    background-color: rgba(0, 0, 0, 0);
+    pointer-events: none;
+}
+.strikethrough {
+    grid-row: 4 / span 4;
+    grid-column: 1 / span 3;
+    margin-top:10px;
+}
+.strikethrough > img {
+    width:100%;
+    height:100%;
+    pointer-events: initial;
 }

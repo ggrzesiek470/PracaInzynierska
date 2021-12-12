@@ -385,19 +385,87 @@
             $("#szukajGracza").css("display", "none");
         });
 
+        let params = {
+            versus: "none",
+            difficulty: 0,
+            color: "none",
+        };
+
         $(".vs_player").on("click", () => {
-            $("#szukajGracza").css("display", "none");
-            $("#close").css("display", "none");
-            $(".choose_game_mode").toggleClass("display_none");
-            net.window.showWindow("Czekaj na gracza...");
-            net.searchForGames();
+            $(".choose_game_mode_buttons > div").removeClass("clicked");
+            $(".vs_player").addClass("clicked");
+            $(".strikethrough").css("display", "initial");
+            params.versus = "player";
         })
 
         $(".vs_computer").on("click", () => {
-            $(".choose_game_mode").toggleClass("display_none");
-            game.ai_playing = true;
-            game.playAIGame();
+            $(".choose_game_mode_buttons > div").removeClass("clicked");
+            $(".vs_computer").addClass("clicked");
+            $(".strikethrough").css("display", "none");
+
+            params.versus = "computer";
         })
+
+        $(".choose_your_difficulty > div").on("click", (e) => {
+            $(".choose_your_difficulty > div").removeClass("filled");
+
+            var arr = Array.prototype.slice.call( e.target.parentElement.children )
+            let difficulty = arr.indexOf(e.target) + 1;
+            params.difficulty = difficulty;
+
+            for (let i = 0; i < arr.length; i++) {
+                let arrElement = arr[i];
+                $(arrElement).addClass("filled");
+                if (arrElement == e.target) break;
+            }
+        })
+
+        $(".choose_your_color > .white").on("click", (e) => {
+            $(".choose_your_color > div").removeClass("clicked");
+            $(".white").addClass("clicked");
+
+            params.color = "white";
+        });
+
+        $(".choose_your_color > .mixed").on("click", (e) => {
+            $(".choose_your_color > div").removeClass("clicked");
+            $(".mixed").addClass("clicked");
+
+            params.color = Math.floor(Math.random() * 2) == 0 ? "black" : "white";
+        });
+
+        $(".choose_your_color > .black").on("click", (e) => {
+            $(".choose_your_color > div").removeClass("clicked");
+            $(".black").addClass("clicked");
+
+            params.color = "black";
+        });
+
+        $(".finalButton").on("click", () => {
+            if (params.versus == "player") {
+                $("#szukajGracza").css("display", "none");
+                $("#close").css("display", "none");
+                $(".choose_game_mode").toggleClass("display_none");
+                net.window.showWindow("Czekaj na gracza...");
+                net.searchForGames();
+            } else if (params.versus == "computer") {
+                if (params.difficulty != 0) {
+                    if (params.color != "none") {
+                        $(".choose_game_mode").toggleClass("display_none");
+                        game.ai_playing = true;
+                        game.playAIGame(params);
+                        $("#close").css("display", "none");
+                    } else {
+                        net.window.showWindow("Wybierz kolor swoich pionków!");
+                    }
+                } else {
+                    net.window.showWindow("Wybierz poziom trudności z graczem AI!");
+                }
+            } else {
+                net.window.showWindow("Wybierz opcję przeciwko komu grasz!");
+            }
+        })
+
     }
 
     init();

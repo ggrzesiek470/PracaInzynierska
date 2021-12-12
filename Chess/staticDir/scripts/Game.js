@@ -16,9 +16,9 @@
     var ai_playing = false;
     
     this.loadingFigures = 0; // out of 32
+    this.depth = 5;
 
     this.ai_playing = false;
-    this.loadingFigures = 0; // out of 32
 
     this.turnTheGameOn = function () {
         gameEnabled = true;
@@ -114,8 +114,7 @@
                                     }
                                     movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
                                     if (ai_playing == true) {
-                                        var depth = 5;
-                                        net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable, depth);
+                                        net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable, game.depth);
                                     }
                                     chosenPawn = undefined;
                                     
@@ -783,12 +782,11 @@
         else return false;
     }
 
-    this.playAIGame = function () {
-        var yourColor = Math.floor(Math.random() * 2) == 0 ? "black" : "white";
+    this.playAIGame = function (params) {
         ai_playing = true;
 
         game.setGameId("with_computer");
-        game.setYourColor(yourColor);
+        game.setYourColor(params.color);
         game.turnTheGameOn();
         main.createPawns();
         $("#bariera").css("display", "none");
@@ -801,10 +799,10 @@
         if (yourColor == "black") {
             string = "czarnymi.<br/>Ruch przeciwnika.";
             main.setCameraPosition(600, 600, 0);
-            var depth = 5;
+            game.depth = params.difficulty;
             var intervalToRemove = setInterval(() => {
                 if (game.loadingFigures >= 32) {
-                    net.sendDataToAI(depth, localTable);
+                    net.sendDataToAI(game.depth, localTable);
                     clearInterval(intervalToRemove);
                 }
             }, 500);
