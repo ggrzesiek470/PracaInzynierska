@@ -4,8 +4,7 @@ import Sockets from './Sockets/_socketsCompile.js';
 
 export default class SocketsInit {
     constructor(io, opers, models) {
-        var zalogowani = GlobalData.zalogowani;
-        
+
         io.sockets.on("connection", function (client) {            
             Logger.print("Client of id " + client.id + " pops in to the server!", Logger.type.INFO, "Connect");
 

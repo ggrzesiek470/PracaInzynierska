@@ -9,11 +9,31 @@ export default class Logger {
         CRITICAL: "CRIT_ERR",
     };
 
+    static error_occured = false;
+
     static print (text, validity, event) {
-        let message = validity + ": " + event + " --- ";
-        message += new Date().toISOString() + " --- " + text;
+
+        if (this.error_occured != true) {
+            let date = new Date();
+            let message = validity + ": " + event + " --- ";
+            message += date.toISOString() + " --- " + text;
         
-        console.log(message);
+            console.log(message);
+
+            let fileName = date.getFullYear() + "_" + (date.getMonth()+1) + "_" + date.getDate() + "_logs.txt";
+            let path = "./Logs/";
+
+            if (validity == Logger.type.CRITICAL) {
+                this.error_occured = true;
+            }
+
+            fs.appendFile(path + fileName, message + "\n", function (err) {
+                if (err) throw err;
+                if (validity == Logger.type.CRITICAL) {
+                    process.exit(1);
+                }
+            });
+        }
     }
 }
 

@@ -1,0 +1,19 @@
+INFO: Init --- 2021-12-12T17:30:50.080Z --- App initialization: Classic Chess starts!
+INFO: Init --- 2021-12-12T17:30:50.100Z --- App initialization: MongoDB has been connected and it's working!
+INFO: Connect --- 2021-12-12T17:31:03.844Z --- Client of id 5HsTTPs84lqzPC4ZAAAA pops in to the server!
+INFO: Init --- 2021-12-12T17:35:21.882Z --- App initialization: Classic Chess starts!
+INFO: Init --- 2021-12-12T17:35:21.901Z --- App initialization: MongoDB has been connected and it's working!
+INFO: Connect --- 2021-12-12T17:35:24.124Z --- Client of id nQpD4B-nEkKD3XAyAAAA pops in to the server!
+INFO: Init --- 2021-12-12T17:37:18.061Z --- App initialization: Classic Chess starts!
+INFO: Init --- 2021-12-12T17:37:18.079Z --- App initialization: MongoDB has been connected and it's working!
+CRIT_ERR: Critical Error --- 2021-12-12T17:40:36.055Z --- ReferenceError: MongoCommuanication is not defined
+    at file:///D:/PracaInzynierska/Chess/server.js:38:10
+    at ModuleJob.run (node:internal/modules/esm/module_job:185:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:281:24)
+    at async loadESM (node:internal/process/esm_loader:88:5)
+    at async handleMainPromise (node:internal/modules/run_main:65:12)
+INFO: Init --- 2021-12-12T17:40:41.045Z --- App initialization: Classic Chess starts!
+INFO: Init --- 2021-12-12T17:40:41.063Z --- App initialization: MongoDB has been connected and it's working!
+INFO: Connect --- 2021-12-12T17:40:41.295Z --- Client of id RmsKvfNadmQPGnolAAAA pops in to the server!
+INFO: Disconnect --- 2021-12-12T17:40:58.237Z --- Client of id RmsKvfNadmQPGnolAAAA leaves the server.

@@ -25,6 +25,14 @@ server.listen(port, () => {
     Logger.print(message, Logger.type.INFO, "Init");
 })
 
+// Exception handling writing error to file
+process.on('uncaughtException', function (err) {
+    if (err) {
+        // console.log("caughtException but no error msg" + err.stack);
+        Logger.print(err.stack, Logger.type.CRITICAL, "Critical Error");
+    }
+});
+
 // MongoDB initialization
 MongoCommunication.init(mongoose, opers, models);
 let db = MongoCommunication.getDB();
