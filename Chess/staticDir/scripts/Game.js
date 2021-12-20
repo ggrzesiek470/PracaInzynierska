@@ -46,6 +46,10 @@
         gameId = newGameId;
     }
 
+    this.getGameId = function () {
+        return gameId;
+    }
+
     this.setYourColor = function (newYourColor) {
         yourColor = newYourColor;
     }
@@ -814,14 +818,14 @@
 
     function init() {
         localTable = [
-            ["Ww", "Hw", "Gw", "Kw", "Qw", "Gw", "Hw", "Ww"],
+            ["Ww", "Hw", "Gw", "Qw", "Kw", "Gw", "Hw", "Ww"],
             ["Pw", "Pw", "Pw", "Pw", "Pw", "Pw", "Pw", "Pw"],
             ["", "", "", "", "", "", "", ""],
             ["", "", "", "", "", "", "", ""],
             ["", "", "", "", "", "", "", ""],
             ["", "", "", "", "", "", "", ""],
             ["Pb", "Pb", "Pb", "Pb", "Pb", "Pb", "Pb", "Pb"],
-            ["Wb", "Hb", "Gb", "Kb", "Qb", "Gb", "Hb", "Wb"]
+            ["Wb", "Hb", "Gb", "Qb", "Kb", "Gb", "Hb", "Wb"]
         ];
 
         for (var i = 0; i < localTable.length; i++) {

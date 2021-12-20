@@ -22,6 +22,7 @@ export default class SocketsInit {
             Sockets.sendDataToAI(tools);
             Sockets.turn(tools);
             Sockets.getForRegister(tools);
+            Sockets.sendMessageByChat(tools);
             
         })
     }

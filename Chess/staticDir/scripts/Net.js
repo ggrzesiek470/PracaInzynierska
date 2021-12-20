@@ -76,6 +76,8 @@
             window.onlyHalfly();
             window.showWindow("Grasz "+string);
             document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
+            var chat = new Chat();
+            client.on("getMessageByChat", chat.getMessage);
         })
         client.on("turn", function (data) {
             if (data.from_ai) {
@@ -166,5 +168,14 @@
             losses: losses,
             points: points,
         });
+    }
+
+    this.sendMessage = function (message, nick) {
+        client.emit("sendMessageByChat", {
+            message: message,
+            nick: nick,
+            color: game.getYourColor(),
+            gameId: game.getGameId()
+        })
     }
 }

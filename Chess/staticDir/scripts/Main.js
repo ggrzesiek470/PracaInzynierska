@@ -25,7 +25,6 @@
 
     var szachownica =
     [
-    [0, 1, 0, 1, 0, 1, 0, 1],
     [1, 0, 1, 0, 1, 0, 1, 0],
     [0, 1, 0, 1, 0, 1, 0, 1],
     [1, 0, 1, 0, 1, 0, 1, 0],
@@ -33,6 +32,7 @@
     [1, 0, 1, 0, 1, 0, 1, 0],
     [0, 1, 0, 1, 0, 1, 0, 1],
     [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1],
     ];
     var pola_tab = [];
     for (let i = 0; i < 8; i++) { // generates 8x8 array
@@ -173,6 +173,8 @@
     this.createPawns = function () { createPawns(); }
 
     function createPawns() {
+        loadCorners();
+        var loadingScreen = new LoadingScreen(32);
         for (var i = 0; i < 8; i++) {
             for (var j = 0; j < 8; j++) {
                 if (game.getLocalTable()[i][j] == 0) { } else {
@@ -202,6 +204,7 @@
                             modelData.position.set(pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.x, 10, pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.z);
                             scene.add(modelData);
                             game.loadingFigures += 1;
+                            loadingScreen.addOneToVal();
                         })
                         // console.log('Dodano czarnego o nazwie: ' + model.name)
                     }
@@ -232,12 +235,54 @@
                             modelData.position.set(pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.x, 10, pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.z);
                             scene.add(modelData);
                             game.loadingFigures += 1;
+                            loadingScreen.addOneToVal();
                         })
                         // console.log('Dodano białego o nazwie: ' + model.name)
                     }
                 };
             }
         }
+    }
+
+    function loadCorners () {
+        var letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
+        const loader = new THREE.FontLoader();
+
+        var x = -370;
+        var z = -460;
+
+        letters.forEach(letter => {
+            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "white");
+            x += 100;
+        });
+
+        x = -470;
+        z = -360;
+
+        ["1", "2", "3", "4", "5", "6", "7", "8"].forEach(letter => {
+            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "white");
+            z += 100;
+        });
+
+        x = 350;
+        z = 460;
+
+        letters.sort(function(a, b){return b-a});
+
+        letters.forEach(letter => {
+            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "black");
+            x -= 100;
+        });
+
+        x = 450;
+        z = 360;
+
+        ["8", "7", "6", "5", "4", "3", "2", "1"].forEach(letter => {
+            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "black");
+            z -= 100;
+        });
+
+        
     }
 
     this.setCameraPosition = function (x, y, z) {
@@ -310,7 +355,7 @@
 
         document.addEventListener("mousedown", onMouseDown, false);
         function onMouseDown(e) {
-            if (game.isGameEnabled()) {
+            if (e.target.tagName == "CANVAS" && game.isGameEnabled()) {
 				if (e.button == 0) {
 					var raycaster = new THREE.Raycaster();
 					var mouseVector = new THREE.Vector2();

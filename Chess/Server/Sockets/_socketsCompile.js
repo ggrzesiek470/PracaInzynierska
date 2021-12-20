@@ -9,6 +9,7 @@ import sendDataToAI from './sendDataToAI.js';
 import turn from './turn.js';
 import getForRegister from './getForRegister.js';
 import setStatisticsForUser from './setStatisticsForUser.js';
+import sendMessageByChat from './sendMessageByChat.js';
 
 var Sockets = {
     disconnect: disconnect,
@@ -21,7 +22,8 @@ var Sockets = {
     sendDataToAI: sendDataToAI,
     turn: turn,
     getForRegister: getForRegister,
-    setStatisticsForUser: setStatisticsForUser
+    setStatisticsForUser: setStatisticsForUser,
+    sendMessageByChat: sendMessageByChat
 }
 
 export default Sockets;
