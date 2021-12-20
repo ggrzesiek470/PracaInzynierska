@@ -1,0 +1,74 @@
+19.12.2021, 22:22:35 --- INFO: Init --- App initialization: Classic Chess starts!
+19.12.2021, 22:22:35 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+19.12.2021, 22:41:44 --- INFO: Connect --- Client of id OKWo98ZlUrjUOD0BAAAA pops in to the server!
+19.12.2021, 22:43:19 --- INFO: Disconnect --- Client of id OKWo98ZlUrjUOD0BAAAA leaves the server.
+19.12.2021, 22:43:20 --- INFO: Connect --- Client of id gis7FtkfonkS_kVbAAAB pops in to the server!
+19.12.2021, 22:44:06 --- INFO: Disconnect --- Client of id gis7FtkfonkS_kVbAAAB leaves the server.
+19.12.2021, 22:44:06 --- INFO: Connect --- Client of id OsyAi6SNbFEUyaOPAAAC pops in to the server!
+19.12.2021, 22:44:08 --- INFO: Connect --- Client of id B7UczFFiaJLTZE4KAAAD pops in to the server!
+19.12.2021, 22:44:18 --- INFO: Disconnect --- Client of id B7UczFFiaJLTZE4KAAAD leaves the server.
+19.12.2021, 22:44:19 --- INFO: Connect --- Client of id _PCr6eA8gCTbTJnzAAAE pops in to the server!
+19.12.2021, 22:44:19 --- INFO: Disconnect --- Client of id OsyAi6SNbFEUyaOPAAAC leaves the server.
+19.12.2021, 22:44:20 --- INFO: Connect --- Client of id YCXmfdevWqATuvaOAAAF pops in to the server!
+19.12.2021, 22:45:39 --- INFO: Disconnect --- Client of id YCXmfdevWqATuvaOAAAF leaves the server.
+19.12.2021, 22:45:39 --- INFO: Disconnect --- Client of id _PCr6eA8gCTbTJnzAAAE leaves the server.
+19.12.2021, 22:45:40 --- INFO: Connect --- Client of id lw_UMxLD69cIJ0xHAAAG pops in to the server!
+19.12.2021, 22:45:40 --- INFO: Connect --- Client of id FC9tRV5SWFhUoRm0AAAH pops in to the server!
+19.12.2021, 22:46:55 --- INFO: Disconnect --- Client of id lw_UMxLD69cIJ0xHAAAG leaves the server.
+19.12.2021, 22:46:56 --- INFO: Connect --- Client of id hs4RMCXzxbzfNcDPAAAI pops in to the server!
+19.12.2021, 22:46:56 --- INFO: Disconnect --- Client of id FC9tRV5SWFhUoRm0AAAH leaves the server.
+19.12.2021, 22:46:57 --- INFO: Connect --- Client of id IqLkRlMMQcoZAclaAAAJ pops in to the server!
+19.12.2021, 22:48:48 --- INFO: Disconnect --- Client of id hs4RMCXzxbzfNcDPAAAI leaves the server.
+19.12.2021, 22:48:49 --- INFO: Connect --- Client of id fP85t94XCGbLAi5HAAAK pops in to the server!
+19.12.2021, 22:48:49 --- INFO: Disconnect --- Client of id IqLkRlMMQcoZAclaAAAJ leaves the server.
+19.12.2021, 22:48:50 --- INFO: Connect --- Client of id UT_fNafROZsPdu6gAAAL pops in to the server!
+19.12.2021, 23:07:31 --- INFO: Disconnect --- Client of id UT_fNafROZsPdu6gAAAL leaves the server.
+19.12.2021, 23:07:32 --- INFO: Connect --- Client of id bc3-XffGPeCmYVZaAAAM pops in to the server!
+19.12.2021, 23:07:33 --- INFO: Disconnect --- Client of id fP85t94XCGbLAi5HAAAK leaves the server.
+19.12.2021, 23:07:34 --- INFO: Connect --- Client of id WewCzN6GYR28FqgJAAAN pops in to the server!
+19.12.2021, 23:10:49 --- INFO: Disconnect --- Client of id WewCzN6GYR28FqgJAAAN leaves the server.
+19.12.2021, 23:10:49 --- INFO: Connect --- Client of id KFklot2OWAlhbVWBAAAO pops in to the server!
+19.12.2021, 23:10:50 --- INFO: Disconnect --- Client of id bc3-XffGPeCmYVZaAAAM leaves the server.
+19.12.2021, 23:10:50 --- INFO: Connect --- Client of id qhKxGyFIF_3uEfywAAAP pops in to the server!
+19.12.2021, 23:13:46 --- INFO: Disconnect --- Client of id KFklot2OWAlhbVWBAAAO leaves the server.
+19.12.2021, 23:13:47 --- INFO: Disconnect --- Client of id qhKxGyFIF_3uEfywAAAP leaves the server.
+19.12.2021, 23:13:47 --- INFO: Connect --- Client of id O-K_hfUkh2BP7VL8AAAQ pops in to the server!
+19.12.2021, 23:13:47 --- INFO: Connect --- Client of id rbQ0RZ0j9CspL8w-AAAR pops in to the server!
+19.12.2021, 23:14:38 --- INFO: Disconnect --- Client of id O-K_hfUkh2BP7VL8AAAQ leaves the server.
+19.12.2021, 23:14:38 --- INFO: Disconnect --- Client of id rbQ0RZ0j9CspL8w-AAAR leaves the server.
+19.12.2021, 23:14:39 --- INFO: Connect --- Client of id UiqpiEhVGunc7ZQFAAAS pops in to the server!
+19.12.2021, 23:14:40 --- INFO: Connect --- Client of id X5_GP6cRXluaw-y7AAAT pops in to the server!
+19.12.2021, 23:23:07 --- INFO: Disconnect --- Client of id X5_GP6cRXluaw-y7AAAT leaves the server.
+19.12.2021, 23:23:07 --- INFO: Connect --- Client of id wcwSlMfGtukEI5DFAAAU pops in to the server!
+19.12.2021, 23:23:13 --- INFO: Disconnect --- Client of id UiqpiEhVGunc7ZQFAAAS leaves the server.
+19.12.2021, 23:23:14 --- INFO: Connect --- Client of id 64Iv5qzgQuNOB_CiAAAV pops in to the server!
+19.12.2021, 23:23:44 --- INFO: Disconnect --- Client of id 64Iv5qzgQuNOB_CiAAAV leaves the server.
+19.12.2021, 23:23:45 --- INFO: Connect --- Client of id oBBlbXwSRgiacHbfAAAW pops in to the server!
+19.12.2021, 23:23:59 --- INFO: Disconnect --- Client of id wcwSlMfGtukEI5DFAAAU leaves the server.
+19.12.2021, 23:24:00 --- INFO: Connect --- Client of id -YuYBfzBYF7aoHRJAAAX pops in to the server!
+19.12.2021, 23:24:04 --- INFO: Disconnect --- Client of id -YuYBfzBYF7aoHRJAAAX leaves the server.
+19.12.2021, 23:24:05 --- INFO: Connect --- Client of id bztyes9XOx8qLekbAAAY pops in to the server!
+19.12.2021, 23:24:17 --- INFO: Connect --- Client of id fLdyemheaaJVJoqbAAAZ pops in to the server!
+19.12.2021, 23:24:34 --- INFO: Disconnect --- Client of id oBBlbXwSRgiacHbfAAAW leaves the server.
+19.12.2021, 23:29:11 --- INFO: Disconnect --- Client of id fLdyemheaaJVJoqbAAAZ leaves the server.
+19.12.2021, 23:29:12 --- INFO: Connect --- Client of id Ot9YvW-mIs2P29qMAAAa pops in to the server!
+19.12.2021, 23:29:13 --- INFO: Disconnect --- Client of id bztyes9XOx8qLekbAAAY leaves the server.
+19.12.2021, 23:29:14 --- INFO: Connect --- Client of id bDzeV8jdVw0PFO6FAAAb pops in to the server!
+19.12.2021, 23:36:42 --- INFO: Disconnect --- Client of id bDzeV8jdVw0PFO6FAAAb leaves the server.
+19.12.2021, 23:36:42 --- INFO: Connect --- Client of id XSDE3jKvFL2OPcy5AAAc pops in to the server!
+19.12.2021, 23:36:43 --- INFO: Disconnect --- Client of id XSDE3jKvFL2OPcy5AAAc leaves the server.
+19.12.2021, 23:36:44 --- INFO: Connect --- Client of id kl2ytjSbnalBtcuCAAAd pops in to the server!
+19.12.2021, 23:37:38 --- INFO: Disconnect --- Client of id Ot9YvW-mIs2P29qMAAAa leaves the server.
+19.12.2021, 23:37:38 --- INFO: Connect --- Client of id XI2ZJkBPb42P5b_oAAAe pops in to the server!
+19.12.2021, 23:41:57 --- INFO: Disconnect --- Client of id kl2ytjSbnalBtcuCAAAd leaves the server.
+19.12.2021, 23:41:57 --- INFO: Disconnect --- Client of id XI2ZJkBPb42P5b_oAAAe leaves the server.
+19.12.2021, 23:41:58 --- INFO: Connect --- Client of id bgZ82MRiK6yUY6y2AAAf pops in to the server!
+19.12.2021, 23:41:58 --- INFO: Connect --- Client of id h5WHAAx8VBFNRyNrAAAg pops in to the server!
+19.12.2021, 23:48:27 --- INFO: Disconnect --- Client of id h5WHAAx8VBFNRyNrAAAg leaves the server.
+19.12.2021, 23:48:28 --- INFO: Connect --- Client of id 3QqEu4FPABcMf68OAAAh pops in to the server!
+19.12.2021, 23:48:28 --- INFO: Disconnect --- Client of id bgZ82MRiK6yUY6y2AAAf leaves the server.
+19.12.2021, 23:48:29 --- INFO: Connect --- Client of id pLhHv-zr4TZoWvIVAAAi pops in to the server!
+19.12.2021, 23:50:40 --- INFO: Disconnect --- Client of id pLhHv-zr4TZoWvIVAAAi leaves the server.
+19.12.2021, 23:50:40 --- INFO: Connect --- Client of id qj4_PeBsZfpOGJq0AAAj pops in to the server!
+19.12.2021, 23:50:41 --- INFO: Disconnect --- Client of id 3QqEu4FPABcMf68OAAAh leaves the server.
+19.12.2021, 23:50:42 --- INFO: Connect --- Client of id mu1xInAHwrPvpXc5AAAk pops in to the server!
