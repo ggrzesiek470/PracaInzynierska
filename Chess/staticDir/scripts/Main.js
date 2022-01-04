@@ -113,9 +113,9 @@
 						modelData.children[0].children[0].geometry.computeVertexNormals();
 							
                         modelData.children[0].children[0].material = new THREE.MeshPhongMaterial({
-                            color: 0xFFFFFF,
-							specular: 0x101010,
-                            shininess: 60,
+                            color: game.getLocalTable()[y - 1][x - 1].color == "black" ? "#322a1e" : 0xEEEEEE,
+							specular: 0x303030,
+                            shininess: 10,
 							polygonOffset: true,  
 							polygonOffsetUnits: 1,
 							polygonOffsetFactor: 1,
@@ -246,40 +246,41 @@
 
     function loadCorners () {
         var letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
+        var numbers = ["1", "2", "3", "4", "5", "6", "7", "8"];
         const loader = new THREE.FontLoader();
 
         var x = -370;
         var z = -460;
 
-        letters.forEach(letter => {
-            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "white");
+        numbers.forEach(n => {
+            new PositionText(loader, scene, n, { x: x, y: 0, z: z }, "white");
             x += 100;
         });
 
         x = -470;
         z = -360;
 
-        ["1", "2", "3", "4", "5", "6", "7", "8"].forEach(letter => {
-            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "white");
+        letters.forEach(l => {
+            new PositionText(loader, scene, l, { x: x, y: 0, z: z }, "white");
             z += 100;
         });
 
         x = 350;
         z = 460;
 
-        letters.sort(function(a, b){return b-a});
+        numbers.sort(function(a, b){return b-a});
 
-        letters.forEach(letter => {
-            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "black");
+        numbers.forEach(n => {
+            new PositionText(loader, scene, n, { x: x, y: 0, z: z }, "black");
             x -= 100;
         });
 
-        x = 450;
-        z = 360;
+        x = 460;
+        z = -330;
 
-        ["8", "7", "6", "5", "4", "3", "2", "1"].forEach(letter => {
-            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "black");
-            z -= 100;
+        letters.forEach(l => {
+            new PositionText(loader, scene, l, { x: x, y: 0, z: z }, "black");
+            z += 100;
         });
 
         

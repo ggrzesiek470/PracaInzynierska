@@ -23,7 +23,7 @@ export default class SocketsInit {
             Sockets.turn(tools);
             Sockets.getForRegister(tools);
             Sockets.sendMessageByChat(tools);
-            
+            Sockets.setStatisticsForUser(tools);
         })
     }
 }

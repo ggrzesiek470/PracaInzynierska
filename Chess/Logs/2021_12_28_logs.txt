@@ -1,0 +1,33 @@
+28.12.2021, 17:52:14 --- INFO: Init --- App initialization: Classic Chess starts!
+28.12.2021, 17:52:14 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+28.12.2021, 17:52:15 --- INFO: Connect --- Client of id Dgb97jEPSOtvuJTBAAAA pops in to the server!
+28.12.2021, 17:52:56 --- INFO: Init --- App initialization: Classic Chess starts!
+28.12.2021, 17:52:56 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+28.12.2021, 17:52:56 --- INFO: Connect --- Client of id uQCNHor7fjLdgw8eAAAA pops in to the server!
+28.12.2021, 17:52:57 --- INFO: Disconnect --- Client of id uQCNHor7fjLdgw8eAAAA leaves the server.
+28.12.2021, 17:52:57 --- INFO: Connect --- Client of id kZ-iXomiQEu1kHszAAAB pops in to the server!
+28.12.2021, 17:54:47 --- INFO: Init --- App initialization: Classic Chess starts!
+28.12.2021, 17:54:47 --- INFO: Connect --- Client of id XSnNYGblcrd98jPdAAAA pops in to the server!
+28.12.2021, 17:54:47 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+28.12.2021, 17:54:48 --- INFO: Disconnect --- Client of id XSnNYGblcrd98jPdAAAA leaves the server.
+28.12.2021, 17:54:48 --- INFO: Connect --- Client of id 6K0K4D4cQWSocBAUAAAB pops in to the server!
+28.12.2021, 17:55:38 --- INFO: Init --- App initialization: Classic Chess starts!
+28.12.2021, 17:55:38 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+28.12.2021, 17:55:38 --- INFO: Connect --- Client of id 1kgWUd1360xpGdp9AAAA pops in to the server!
+28.12.2021, 17:55:39 --- INFO: Disconnect --- Client of id 1kgWUd1360xpGdp9AAAA leaves the server.
+28.12.2021, 17:55:39 --- INFO: Connect --- Client of id z2XNny27L8I4iLcHAAAB pops in to the server!
+28.12.2021, 17:56:58 --- INFO: Init --- App initialization: Classic Chess starts!
+28.12.2021, 17:56:58 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+28.12.2021, 17:56:58 --- INFO: Connect --- Client of id pqvC4TdMH9jqVDTdAAAA pops in to the server!
+28.12.2021, 17:56:59 --- INFO: Disconnect --- Client of id pqvC4TdMH9jqVDTdAAAA leaves the server.
+28.12.2021, 17:57:00 --- INFO: Connect --- Client of id HM3iXFK-GYBkCFYDAAAB pops in to the server!
+28.12.2021, 17:58:38 --- INFO: Init --- App initialization: Classic Chess starts!
+28.12.2021, 17:58:38 --- INFO: Connect --- Client of id SxId52eeMYg3wFiHAAAA pops in to the server!
+28.12.2021, 17:58:38 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+28.12.2021, 17:58:38 --- INFO: Disconnect --- Client of id SxId52eeMYg3wFiHAAAA leaves the server.
+28.12.2021, 17:58:39 --- INFO: Connect --- Client of id vKROI-XRZ9txP1u1AAAB pops in to the server!
+28.12.2021, 17:59:32 --- INFO: Disconnect --- Client of id vKROI-XRZ9txP1u1AAAB leaves the server.
+28.12.2021, 18:08:22 --- INFO: Init --- App initialization: Classic Chess starts!
+28.12.2021, 18:08:22 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+28.12.2021, 18:08:26 --- INFO: Connect --- Client of id l1wwFyHmXYRu_UslAAAA pops in to the server!
+28.12.2021, 18:08:45 --- CRIT_ERR: AI Connection Attempt --- Error: connect ECONNREFUSED 127.0.0.1:3001

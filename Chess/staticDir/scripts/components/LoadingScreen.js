@@ -1,49 +1,51 @@
-function LoadingScreen (maxValue) {
-    this.loadingValue = 0;
-    this.dots = 0;
-    this.parity = false;
-    this.maxValue = maxValue;
-    this.backgroundCurtain;
-    this.headerText;
-    this.percentageText;
+class LoadingScreen {
+    loadingValue = 0;
+    dots = 0;
+    parity = false;
+    maxValue;
+    backgroundCurtain;
+    headerText;
+    percentageText;
 
-    this.init = () => {
-        this.backgroundCurtain = $("<div>");
-        this.backgroundCurtain.addClass("loading-screen-curtain");
+    constructor (maxValue) {
+        this.maxValue = maxValue;
 
-        var loadingCircle = $("<div>");
-        loadingCircle.addClass("loading-screen-loader");
+        this.backgroundCurtain = $("<div>")
+                            .addClass("loading-screen-curtain");
 
-        this.headerText = $("<div>");
-        this.headerText.addClass("loading-screen-header");
-        this.headerText.html("Loading");
+        var loadingCircle = $("<div>")
+                            .addClass("loading-screen-loader");
+
+        this.headerText = $("<div>")
+                        .addClass("loading-screen-header")
+                        .html("Loading");
         
-        this.percentageText = $("<div>");
-        this.percentageText.addClass("loading-screen-text");
+        this.percentageText = $("<div>")
+                        .addClass("loading-screen-text");
 
-        this.backgroundCurtain.append(this.headerText);
-        this.backgroundCurtain.append(loadingCircle);
-        this.backgroundCurtain.append(this.percentageText);
+        this.backgroundCurtain.append(this.headerText)
+                            .append(loadingCircle)
+                            .append(this.percentageText);
 
         $("body").append(this.backgroundCurtain);
     }
 
-    this.addOneToVal = () => {
+    addOneToVal () {
         this.loadingValue++;
         this.validateIfFullLoaded();
     }
 
-    this.setLoadingValue = (loadingValue) => {
+    setLoadingValue (loadingValue) {
         this.loadingValue = loadingValue;
         this.validateIfFullLoaded();
     }
 
-    this.setMaxValue = (maxValue) => {
+    setMaxValue (maxValue) {
         this.maxValue = maxValue;
         this.validateIfFullLoaded();
     }
 
-    this.validateIfFullLoaded = () => {
+    validateIfFullLoaded () {
         if (this.parity == false) {
             this.parity = true;
         } else {
@@ -60,7 +62,7 @@ function LoadingScreen (maxValue) {
         } else {}
     }
 
-    this.changeLoadingDots = () => {
+    changeLoadingDots () {
         var text = "Loading";
         this.dots++;
         for(var i = 0; i < this.dots; i++) {
@@ -69,7 +71,4 @@ function LoadingScreen (maxValue) {
         this.headerText.html(text)
         if (this.dots >= 3) this.dots = 0;
     }
-
-    this.init();
-    return this;
 }

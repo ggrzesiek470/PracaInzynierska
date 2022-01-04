@@ -9,11 +9,11 @@ export default class Logger {
         CRITICAL: "CRIT_ERR",
     };
 
-    static error_occured = false;
+    static errorOccured = false;
 
     static print (text, validity, event) {
 
-        if (this.error_occured != true) {
+        if (this.errorOccured != true) {
             let date = new Date();
             let message = date.toLocaleString() + " --- " + validity + ": " + event + " --- " + text;
             console.log(message);
@@ -22,7 +22,7 @@ export default class Logger {
             let path = "./Logs/";
 
             if (validity == Logger.type.CRITICAL) {
-                this.error_occured = true;
+                this.errorOccured = true;
             }
 
             fs.appendFile(path + fileName, message + "\n", function (err) {

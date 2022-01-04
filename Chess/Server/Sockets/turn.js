@@ -22,12 +22,14 @@ export default function turn ({ client, opers, models, io }) {
                             x: response.from.x,
                             y: response.from.y
                         },
+                        color: response.color,
                         type: response.type
                     },
                     xDes: response.to.x,
                     yDes: response.to.y,
                     enPassant: response.enpassant,
-                    casting: response.casting
+                    casting: response.casting,
+                    fromAI: true
                 }
         
                 io.sockets.to(client.id).emit(channel, dataToSend);
