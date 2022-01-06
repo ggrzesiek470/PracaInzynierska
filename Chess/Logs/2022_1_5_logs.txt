@@ -1,0 +1,16 @@
+5.01.2022, 14:06:36 --- INFO: Init --- App initialization: Classic Chess starts!
+5.01.2022, 14:06:36 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+5.01.2022, 14:06:39 --- INFO: Connect --- Client of id gJmLExJ2x8ca0rlIAAAA pops in to the server!
+5.01.2022, 14:23:45 --- INFO: Stat change --- Change of statistics of user lukasz. Wins: 2, draws: 0, losses: 0, points: 100
+5.01.2022, 14:26:03 --- INFO: Disconnect --- Client of id gJmLExJ2x8ca0rlIAAAA leaves the server.
+5.01.2022, 14:26:03 --- INFO: Connect --- Client of id wWLoANbfvuH7wionAAAB pops in to the server!
+5.01.2022, 14:27:07 --- INFO: Disconnect --- Client of id wWLoANbfvuH7wionAAAB leaves the server.
+5.01.2022, 14:27:07 --- INFO: Connect --- Client of id Atj0hslOIQl-Adg5AAAC pops in to the server!
+5.01.2022, 14:27:12 --- INFO: Register --- bac register on a server.
+5.01.2022, 14:27:19 --- INFO: Register --- xyz register on a server.
+5.01.2022, 14:29:44 --- INFO: Init --- App initialization: Classic Chess starts!
+5.01.2022, 14:29:44 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+5.01.2022, 14:29:44 --- INFO: Connect --- Client of id bCMB-GlpmsAhRM4YAAAA pops in to the server!
+5.01.2022, 14:29:46 --- INFO: Disconnect --- Client of id bCMB-GlpmsAhRM4YAAAA leaves the server.
+5.01.2022, 14:29:46 --- INFO: Connect --- Client of id XcHy5FEHDQhP8HoEAAAB pops in to the server!
+5.01.2022, 17:19:21 --- INFO: Disconnect --- Client of id XcHy5FEHDQhP8HoEAAAB leaves the server.

@@ -62,13 +62,13 @@
         document.getElementById("x" + x + "_y" + y).click();
     }
 
-    this.opponentMove = function (pawn, xDes, yDes, enPassant, casting) {
-        movePawn(pawn, xDes, yDes, enPassant, casting);
+    this.opponentMove = async function (pawn, xDes, yDes, enPassant, casting) {
+        await movePawn(pawn, xDes, yDes, enPassant, casting);
         checkIfCheck();
         document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
     }
 
-    function createTable() {
+    async function createTable() {
         var div = document.createElement("div");
         div.id = "plansza";
         div.style.width = "432px";
@@ -89,7 +89,7 @@
                 if (j == 0) window.style.borderLeft = "2px solid black";
                 div.appendChild(window);
 
-                window.addEventListener("click", function () {
+                window.addEventListener("click", async function () {
                     if (gameEnabled == true && chosenColor == yourColor) {
                         var x = (parseInt(this.id[1]) - 1);
                         var y = (parseInt(this.id[4]) - 1);
@@ -116,7 +116,7 @@
                                     if (ai_playing == false) {
                                         net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
                                     }
-                                    movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
+                                    await movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
                                     if (ai_playing == true) {
                                         checkIfCheck();
                                         if (gameEnabled == true) {
@@ -220,62 +220,68 @@
         }
     }
 
-    function movePawn(pawn, xDes, yDes, enPassant, casting) {
-        for (var i = 0; i < localTable.length; i++) {
-            for (var j = 0; j < localTable[0].length; j++) {
-                if (localTable[i][j] != undefined) {
-                    if (localTable[i][j].type == "Pawn") {
-                        localTable[i][j].enPassant = false;
+    async function movePawn(pawn, xDes, yDes, enPassant, casting) {
+        return new Promise(async (resolve) => {
+            for (var i = 0; i < localTable.length; i++) {
+                for (var j = 0; j < localTable[0].length; j++) {
+                    if (localTable[i][j] != undefined) {
+                        if (localTable[i][j].type == "Pawn") {
+                            localTable[i][j].enPassant = false;
+                        }
                     }
                 }
             }
-        }
-        main.deletePawn(xDes, yDes);
-        main.movePawn(pawn.position.x, pawn.position.y, xDes, yDes);
-        if (pawn.type == "Pawn") {
-            if (pawn.position.y - yDes == 2 || pawn.position.y - yDes == (-2)) {
-                pawn.enPassant = true;
+            main.deletePawn(xDes, yDes);
+            let result = await main.movePawn(pawn.position.x, pawn.position.y, xDes, yDes);
+            console.log(result);
+            if (pawn.type == "Pawn") {
+                if (pawn.position.y - yDes == 2 || pawn.position.y - yDes == (-2)) {
+                    pawn.enPassant = true;
+                }
             }
-        }
-        if (casting == true) {
-            if (pawn.position.x - xDes < 0) { // -4
-                main.movePawn(pawn.position.x + 3, pawn.position.y, xDes - 1, yDes);
-                localTable[pawn.position.y - 1][pawn.position.x - 1 + 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 + 3];
-                localTable[pawn.position.y - 1][pawn.position.x - 1 + 3] = "";
-                localTable[pawn.position.y - 1][pawn.position.x - 1 + 1].position.x = xDes - 1;
-            } else { // +3
-                main.movePawn(pawn.position.x - 4, pawn.position.y, xDes + 1, yDes);
-                localTable[pawn.position.y - 1][pawn.position.x - 1 - 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 - 4];
-                localTable[pawn.position.y - 1][pawn.position.x - 1 - 4] = "";
-                localTable[pawn.position.y - 1][pawn.position.x - 1 - 1].position.x = xDes + 1;
+            if (casting == true) {
+                if (pawn.position.x - xDes < 0) { // -4
+                    let result = await main.movePawn(pawn.position.x + 3, pawn.position.y, xDes - 1, yDes);
+                    console.log(result);
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 + 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 + 3];
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 + 3] = "";
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 + 1].position.x = xDes - 1;
+                } else { // +3
+                    let result = await main.movePawn(pawn.position.x - 4, pawn.position.y, xDes + 1, yDes);
+                    console.log(result);
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 - 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 - 4];
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 - 4] = "";
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 - 1].position.x = xDes + 1;
+                }
             }
-        }
-        var temp = localTable[pawn.position.y - 1][pawn.position.x - 1];
-        localTable[pawn.position.y - 1][pawn.position.x - 1] = "";
-        localTable[yDes - 1][xDes - 1] = temp;
-        localTable[yDes - 1][xDes - 1].position = {
-            x: xDes,
-            y: yDes
-        };
-        localTable[yDes - 1][xDes - 1].firstMove = true;
-        console.log(pawn.type);
-		if (pawn.type == "Pawn") {
-            console.log(yDes)
-            console.log(pawn.color)
-            if (pawn.color == "white" && yDes == 8) {
-                pawn.type = "Queen";
-                localTable[yDes - 1][xDes - 1].type = "Queen";
-                main.changeModel(xDes, yDes, "Queen");
+            var temp = localTable[pawn.position.y - 1][pawn.position.x - 1];
+            localTable[pawn.position.y - 1][pawn.position.x - 1] = "";
+            localTable[yDes - 1][xDes - 1] = temp;
+            localTable[yDes - 1][xDes - 1].position = {
+                x: xDes,
+                y: yDes
+            };
+            localTable[yDes - 1][xDes - 1].firstMove = true;
+            console.log(pawn.type);
+            if (pawn.type == "Pawn") {
+                console.log(yDes)
+                console.log(pawn.color)
+                if (pawn.color == "white" && yDes == 8) {
+                    pawn.type = "Queen";
+                    localTable[yDes - 1][xDes - 1].type = "Queen";
+                    main.changeModel(xDes, yDes, "Queen");
+                }
+                if (pawn.color == "black" && yDes == 1) {
+                    pawn.type = "Queen";
+                    localTable[yDes - 1][xDes - 1].type = "Queen";
+                    main.changeModel(xDes, yDes, "Queen");
+                }
             }
-            if (pawn.color == "black" && yDes == 1) {
-                pawn.type = "Queen";
-                localTable[yDes - 1][xDes - 1].type = "Queen";
-                main.changeModel(xDes, yDes, "Queen");
-            }
-        }
-        if (enPassant == true) { if (pawn.color == "white") { main.deletePawn(xDes, yDes - 1); localTable[yDes - 1 - 1][xDes - 1] = ""; } else if (pawn.color == "black") { main.deletePawn(pawn.position.x, pawn.position.y + 1); localTable[pawn.position.y - 1 + 1][pawn.position.x - 1] = ""; } }
-        pawn.firstMove = true;
-        if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
+            if (enPassant == true) { if (pawn.color == "white") { main.deletePawn(xDes, yDes - 1); localTable[yDes - 1 - 1][xDes - 1] = ""; } else if (pawn.color == "black") { main.deletePawn(pawn.position.x, pawn.position.y + 1); localTable[pawn.position.y - 1 + 1][pawn.position.x - 1] = ""; } }
+            pawn.firstMove = true;
+            if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
+            resolve();
+        });
     }
 
     function clearColors() {

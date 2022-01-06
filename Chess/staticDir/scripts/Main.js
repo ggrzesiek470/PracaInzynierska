@@ -71,18 +71,43 @@
     }
 
     this.movePawn = function (x, y, xDes, yDes) {
-        for (var i = 0; i < scene.children.length; i++) {
-            if (scene.children[i].pawnData != undefined) {
-                if (scene.children[i].pawnData.position.x == x && scene.children[i].pawnData.position.y == y) {
-                    // console.log("poszed");
-                    scene.children[i].pawnData.position.x = xDes;
-                    scene.children[i].pawnData.position.y = yDes;
-                    scene.children[i].position.set(pola_tab[xDes - 1][yDes - 1].position.x, 10, pola_tab[xDes - 1][yDes - 1].position.z);
-                    game.getLocalTable[y - 1, x - 1];
-                    // console.log(scene.children[i]);
+        return new Promise(resolve => {
+            for (var i = 0; i < scene.children.length; i++) {
+                let pawn3dObject = scene.children[i];
+                if (pawn3dObject.pawnData != undefined) {
+                    if (pawn3dObject.pawnData.position.x == x && pawn3dObject.pawnData.position.y == y) {
+                        // console.log("poszed");
+                        let startTime = new Date();
+                        let time = 500; // 1 sec to move
+                        pawn3dObject.pawnData.position.x = xDes;
+                        pawn3dObject.pawnData.position.y = yDes;
+    
+                        let priorPos = pola_tab[x - 1][y - 1].position;
+                        let priorXPos = priorPos.x;
+                        let priorZPos = priorPos.z;
+    
+                        let nextPos = pola_tab[xDes - 1][yDes - 1].position;
+                        let nextXPos = nextPos.x;
+                        let nextZPos = nextPos.z;
+    
+                        let intervalMove = setInterval(() => {
+                            let currentTime = new Date();
+                            let percentOfMove = Math.min((currentTime - startTime) / time, 1);
+    
+                            let currentXPos = priorXPos + (nextXPos - priorXPos)*percentOfMove;
+                            let currentZPos = priorZPos + (nextZPos - priorZPos)*percentOfMove;
+    
+                            pawn3dObject.position.set(currentXPos, 10, currentZPos);
+    
+                            if (percentOfMove >= 1) {
+                                clearInterval(intervalMove);
+                                resolve('message');
+                            }
+                        }, 20);
+                    }
                 }
             }
-        }
+        });
     }
 
     this.deletePawn = function (x, y) {

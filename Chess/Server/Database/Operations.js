@@ -131,7 +131,7 @@ export default function () {
                     obj.data = data;
                 }
                 callback(obj);
-            }).limit(topCount).sort({ username: -1, losses: 1, draws: -1, wins: -1, rank: -1, points: -1  })
+            }).limit(topCount).sort({  points: -1, rank: -1, wins: -1, losses: 1, draws: -1, username: -1  })
         },
 
         UpdateStatistics: function (Model, login, wins, draws, losses, points) {
