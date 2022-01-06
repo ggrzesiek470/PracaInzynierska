@@ -232,8 +232,8 @@
                 }
             }
             main.deletePawn(xDes, yDes);
-            let result = await main.movePawn(pawn.position.x, pawn.position.y, xDes, yDes);
-            console.log(result);
+            await main.movePawn(pawn.position.x, pawn.position.y, xDes, yDes,
+                                                                            pawn.type == "Knight" ? true : false, true);
             if (pawn.type == "Pawn") {
                 if (pawn.position.y - yDes == 2 || pawn.position.y - yDes == (-2)) {
                     pawn.enPassant = true;
@@ -241,14 +241,12 @@
             }
             if (casting == true) {
                 if (pawn.position.x - xDes < 0) { // -4
-                    let result = await main.movePawn(pawn.position.x + 3, pawn.position.y, xDes - 1, yDes);
-                    console.log(result);
+                    await main.movePawn(pawn.position.x + 3, pawn.position.y, xDes - 1, yDes, true);
                     localTable[pawn.position.y - 1][pawn.position.x - 1 + 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 + 3];
                     localTable[pawn.position.y - 1][pawn.position.x - 1 + 3] = "";
                     localTable[pawn.position.y - 1][pawn.position.x - 1 + 1].position.x = xDes - 1;
                 } else { // +3
-                    let result = await main.movePawn(pawn.position.x - 4, pawn.position.y, xDes + 1, yDes);
-                    console.log(result);
+                    await main.movePawn(pawn.position.x - 4, pawn.position.y, xDes + 1, yDes, true);
                     localTable[pawn.position.y - 1][pawn.position.x - 1 - 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 - 4];
                     localTable[pawn.position.y - 1][pawn.position.x - 1 - 4] = "";
                     localTable[pawn.position.y - 1][pawn.position.x - 1 - 1].position.x = xDes + 1;

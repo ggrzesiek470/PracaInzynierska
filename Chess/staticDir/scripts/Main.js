@@ -5,6 +5,7 @@
     var draws;
     var losses;
     var points;
+    var arrowHelpers = [];
 
     this.setStatistics = function (Wins, Draws, Losses, Points) {
         wins = Wins;
@@ -70,15 +71,14 @@
         }
     }
 
-    this.movePawn = function (x, y, xDes, yDes) {
+    this.movePawn = function (x, y, xDes, yDes, shouldGoUp = true, addArrow = false, time = 500) {
         return new Promise(resolve => {
             for (var i = 0; i < scene.children.length; i++) {
                 let pawn3dObject = scene.children[i];
-                if (pawn3dObject.pawnData != undefined) {
-                    if (pawn3dObject.pawnData.position.x == x && pawn3dObject.pawnData.position.y == y) {
-                        // console.log("poszed");
+                if (pawn3dObject.pawnData != undefined
+                    && pawn3dObject.pawnData.position.x == x
+                    && pawn3dObject.pawnData.position.y == y) {
                         let startTime = new Date();
-                        let time = 500; // 1 sec to move
                         pawn3dObject.pawnData.position.x = xDes;
                         pawn3dObject.pawnData.position.y = yDes;
     
@@ -89,25 +89,80 @@
                         let nextPos = pola_tab[xDes - 1][yDes - 1].position;
                         let nextXPos = nextPos.x;
                         let nextZPos = nextPos.z;
+
+                        let percentOfMove = 0;
+                        let currentXPos = priorXPos;
+                        let currentYPos = 10;
+                        let currentZPos = priorZPos;
+
+                        let up = shouldGoUp;
     
                         let intervalMove = setInterval(() => {
                             let currentTime = new Date();
-                            let percentOfMove = Math.min((currentTime - startTime) / time, 1);
-    
-                            let currentXPos = priorXPos + (nextXPos - priorXPos)*percentOfMove;
-                            let currentZPos = priorZPos + (nextZPos - priorZPos)*percentOfMove;
-    
-                            pawn3dObject.position.set(currentXPos, 10, currentZPos);
-    
-                            if (percentOfMove >= 1) {
-                                clearInterval(intervalMove);
-                                resolve('message');
+                            if (up == true) {
+                                percentOfMove = Math.min((currentTime - startTime) / time, 1);
+                                currentYPos = 10 + 170*percentOfMove;
+
+                                pawn3dObject.position.set(currentXPos, currentYPos, currentZPos);
+
+                                if (percentOfMove >= 1) {
+                                    startTime = new Date();
+                                    up = false;
+                                }
+                            } else if (up == false) {
+                                percentOfMove = Math.min((currentTime - startTime) / time, 1);
+        
+                                currentXPos = priorXPos + (nextXPos - priorXPos)*percentOfMove;
+                                currentYPos = shouldGoUp ? 180 : 10;
+                                currentZPos = priorZPos + (nextZPos - priorZPos)*percentOfMove;
+        
+                                pawn3dObject.position.set(currentXPos, currentYPos, currentZPos);
+        
+                                if (percentOfMove >= 1) {
+                                    if (shouldGoUp == true) {
+                                        percentOfMove = Math.min((currentTime - startTime) / time, 2);
+                                        currentYPos = shouldGoUp ? 180 - 170*(percentOfMove - 1) : 10;
+
+                                        pawn3dObject.position.set(currentXPos, currentYPos, currentZPos);
+                                        if (percentOfMove >= 2) {
+                                            clearInterval(intervalMove);
+                                            main.removeAllArrows();
+                                            main.addArrow(priorXPos, priorZPos, nextXPos, nextZPos);
+                                            resolve();
+                                        }
+                                    } else {
+                                        clearInterval(intervalMove);
+                                        main.removeAllArrows();
+                                        main.addArrow(priorXPos, priorZPos, nextXPos, nextZPos);
+                                        resolve();
+                                    }
+                                }
                             }
                         }, 20);
-                    }
                 }
             }
         });
+    }
+
+    this.removeAllArrows = function () {
+        arrowHelpers.forEach(arrow => {
+            scene.remove(arrow);
+        });
+    }
+
+    this.addArrow = function (x, z, xDes, zDes) {
+        const dir = new THREE.Vector3( xDes-x, 15, zDes-z );
+        const origin = new THREE.Vector3( x, 15, z );
+        dir.normalize();
+
+        const length = Math.sqrt(Math.pow(xDes - x, 2) + Math.pow(zDes - z, 2));
+        const hex = "rgba(244, 81, 30, 0.7)";
+
+        const arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+        scene.add(arrowHelper);
+        arrowHelpers.push(arrowHelper);
+
+        return arrowHelper;
     }
 
     this.deletePawn = function (x, y) {
