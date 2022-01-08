@@ -1,54 +1,75 @@
 class Ranking {
+    static width = 25;
+    static height = 70;
+    table;
 
-    constructor (width, height) {
-        this.ranking = document.createElement("div");
-        this.ranking.style.width = width + "%";
-        this.ranking.style.height = height + "%";
-        this.ranking.style.top = "0";
-        this.ranking.style.right = "-" + width + "%";
-        this.ranking.classList.add("ranking-component");
+    constructor (data) {
+        this.ranking = this.createComponent();
 
-        let table = document.createElement("table");
-
-        let table_data = ["Lp.", "Nick", "W", "R", "P", "Pkt"];
-        let table_row = document.createElement("tr");
-        table.appendChild(table_row);
-        table_data.forEach(text => {
-            let td = document.createElement("td");
-            td.innerHTML = text;
-            table_row.appendChild(td);
-        });
-
-        this.button = document.createElement("img");
-        this.button.classList.add("ranking-button");
-        this.button.setAttribute("src", "/gfx/hamburger-1.png");
-        this.ranking.appendChild(this.button);
-        this.ranking.appendChild(table);
+        this.table = document.createElement("table");
+        this.addRow(["Lp.", "Nick", "W", "R", "P", "Pkt"]);
+        this.ranking.appendChild(this.table);
 
         this.button.onclick = () => {
             this.flag ? this.hide() : this.show();
             this.flag = !this.flag;
         }
 
-        this.width = width;
-        this.flag = true;
+        this.flag = false;
+        this.updateTable(data);
     }
 
-    getComponent () {
-        return this.ranking;
+    updateTable (data) {
+        let lp = 1;
+        data.forEach(rankRow => {
+            this.addRow([lp++, rankRow.username, rankRow.wins, rankRow.draws, rankRow.losses, rankRow.points]);
+        });
+    }
+
+    addRow (table_data) {
+        let table_row = document.createElement("tr");
+        this.table.appendChild(table_row);
+        table_data.forEach(text => {
+            let td = document.createElement("td");
+            td.innerHTML = text;
+            table_row.appendChild(td);
+        });
     }
 
     show () {
-        this.ranking.style.right = "0";
-        this.button.setAttribute("src", "/gfx/hamburger-1.png");
-        this.button.style.right = "10px";
+        this.ranking.style.top = "0";
+        this.button.setAttribute("src", "/gfx/icons/trophy_no_colours.png");
         this.button.style.zIndex = "1201";
     }
 
     hide () {
-        this.ranking.style.right = "-" + this.width + "%";
-        this.button.setAttribute("src", "/gfx/hamburger-2.png");
-        this.button.style.right = "calc(100% + 10px)";
+        this.ranking.style.top = "-" + Ranking.height + "%";
+        this.button.setAttribute("src", "/gfx/icons/trophy.png");
         this.button.style.zIndex = "1199";
+    }
+
+    createComponent () {
+        let ranking = document.createElement("div");
+        ranking.style.width = Ranking.width + "%";
+        ranking.style.height = Ranking.height + "%";
+        ranking.style.top = "-" + Ranking.height + "%";
+        ranking.classList.add("ranking-component");
+
+        this.button = this.createButtonIcon();
+        ranking.appendChild(this.button);
+
+        return ranking;
+    }
+
+    createButtonIcon () {
+        let button = document.createElement("img");
+        button.classList.add("ranking-button");
+        button.setAttribute("src", "/gfx/icons/trophy_no_colours.png");
+
+        return button;
+    }
+
+    getComponent () {
+        return this.ranking;
     }
 }

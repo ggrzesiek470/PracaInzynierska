@@ -1,0 +1,104 @@
+3.01.2022, 19:01:59 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:01:59 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:02:00 --- INFO: Connect --- Client of id DPJuCrj6e73pfHaLAAAA pops in to the server!
+3.01.2022, 19:02:17 --- INFO: Disconnect --- Client of id DPJuCrj6e73pfHaLAAAA leaves the server.
+3.01.2022, 19:02:17 --- INFO: Connect --- Client of id w5l8iKCrrQ3xTrHqAAAB pops in to the server!
+3.01.2022, 19:02:23 --- INFO: Register --- grherh register on a server.
+3.01.2022, 19:15:22 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:15:22 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:15:22 --- INFO: Connect --- Client of id jFXLVu7ulLR7qPd4AAAA pops in to the server!
+3.01.2022, 19:15:29 --- INFO: Connect --- Client of id x0Xx1BfnDtrG9xtYAAAB pops in to the server!
+3.01.2022, 19:15:30 --- INFO: Disconnect --- Client of id jFXLVu7ulLR7qPd4AAAA leaves the server.
+3.01.2022, 19:15:40 --- CRIT_ERR: Critical Error --- TypeError [ERR_INVALID_ARG_TYPE]: The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined
+    at new NodeError (node:internal/errors:371:5)
+    at Function.from (node:buffer:322:9)
+    at Function.into_buffer (D:\PracaInzynierska\Chess\node_modules\sha2\SHA2-Node.js:1555:17)
+    at Object.SHA512_t (D:\PracaInzynierska\Chess\node_modules\sha2\SHA2-Node.js:1617:16)
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/register.js:16:32
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:9:31
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+3.01.2022, 19:17:33 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:17:33 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:17:35 --- INFO: Connect --- Client of id vKk-sbzWTDnWnBsWAAAA pops in to the server!
+3.01.2022, 19:17:37 --- INFO: Register --- abcdefgh register on a server.
+3.01.2022, 19:17:37 --- CRIT_ERR: Database Record INSERT Attempt - InsertOne func --- ValidationError: mutedGames: Cast to Number failed for value "[]" (type Array) at path "mutedGames", rankingId: Cast to Number failed for value "61d33dc171cac0215015fc88" (type ObjectID) at path "rankingId"
+3.01.2022, 19:22:05 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:22:05 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:22:06 --- INFO: Connect --- Client of id FrUuJow75UiOcH2-AAAA pops in to the server!
+3.01.2022, 19:22:08 --- INFO: Register --- abcdefgh register on a server.
+3.01.2022, 19:22:08 --- CRIT_ERR: Database Record INSERT Attempt - InsertOne func --- ValidationError: rankingId: Cast to Number failed for value "61d33ed057273533486b4096" (type ObjectID) at path "rankingId"
+3.01.2022, 19:25:07 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:25:07 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:25:10 --- INFO: Connect --- Client of id uThZK_57XjhPxwrlAAAA pops in to the server!
+3.01.2022, 19:25:12 --- INFO: Register --- abcdefgh register on a server.
+3.01.2022, 19:25:54 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:25:54 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:25:54 --- INFO: Connect --- Client of id qQlA03fRTUeqBdqxAAAA pops in to the server!
+3.01.2022, 19:25:55 --- INFO: Disconnect --- Client of id qQlA03fRTUeqBdqxAAAA leaves the server.
+3.01.2022, 19:25:55 --- INFO: Connect --- Client of id pKwVBcmzHOPQxNYeAAAB pops in to the server!
+3.01.2022, 19:38:40 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:38:40 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:38:40 --- INFO: Connect --- Client of id vDh1KddXKNH09uA5AAAA pops in to the server!
+3.01.2022, 19:38:53 --- INFO: Disconnect --- Client of id vDh1KddXKNH09uA5AAAA leaves the server.
+3.01.2022, 19:38:53 --- INFO: Connect --- Client of id J6fb1IjQH2k8xXAbAAAB pops in to the server!
+3.01.2022, 19:48:54 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:48:54 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:48:55 --- INFO: Connect --- Client of id veYPStrJn7ciS0nfAAAA pops in to the server!
+3.01.2022, 19:49:36 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:49:36 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:49:36 --- INFO: Connect --- Client of id HLr7Nh0YxTwHHT19AAAA pops in to the server!
+3.01.2022, 19:49:36 --- INFO: Disconnect --- Client of id HLr7Nh0YxTwHHT19AAAA leaves the server.
+3.01.2022, 19:49:37 --- INFO: Connect --- Client of id wgim8gFv1ditv-eRAAAB pops in to the server!
+3.01.2022, 19:49:41 --- INFO: Disconnect --- Client of id wgim8gFv1ditv-eRAAAB leaves the server.
+3.01.2022, 19:49:41 --- INFO: Connect --- Client of id Yy7qDNj5UYQXdkd4AAAC pops in to the server!
+3.01.2022, 19:55:26 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:55:26 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:55:26 --- INFO: Connect --- Client of id qWXSuT_yU-7ZYSF1AAAA pops in to the server!
+3.01.2022, 19:55:36 --- INFO: Disconnect --- Client of id qWXSuT_yU-7ZYSF1AAAA leaves the server.
+3.01.2022, 19:55:36 --- INFO: Connect --- Client of id YX70lYV4ZmmOGAR2AAAB pops in to the server!
+3.01.2022, 19:55:51 --- INFO: Disconnect --- Client of id YX70lYV4ZmmOGAR2AAAB leaves the server.
+3.01.2022, 19:55:51 --- INFO: Connect --- Client of id w5W13gfDIUz4XciNAAAC pops in to the server!
+3.01.2022, 19:55:53 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 19:55:54 --- INFO: Connect --- Client of id iucCg_JdvvpM1LOgAAAA pops in to the server!
+3.01.2022, 19:55:54 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 19:55:54 --- INFO: Disconnect --- Client of id iucCg_JdvvpM1LOgAAAA leaves the server.
+3.01.2022, 19:55:55 --- INFO: Connect --- Client of id JxUelB7Nxo2aR7cYAAAB pops in to the server!
+3.01.2022, 19:56:04 --- INFO: Disconnect --- Client of id JxUelB7Nxo2aR7cYAAAB leaves the server.
+3.01.2022, 19:56:04 --- INFO: Connect --- Client of id FcV_lXEQr3I_5AJiAAAC pops in to the server!
+3.01.2022, 19:56:08 --- INFO: Connect --- Client of id -8s7bxvxVscO7L0rAAAD pops in to the server!
+3.01.2022, 19:56:15 --- INFO: Disconnect --- Client of id FcV_lXEQr3I_5AJiAAAC leaves the server.
+3.01.2022, 20:07:44 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 20:07:44 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 20:07:47 --- INFO: Connect --- Client of id MTjGdzdJTFafxcwzAAAA pops in to the server!
+3.01.2022, 20:07:47 --- INFO: Disconnect --- Client of id MTjGdzdJTFafxcwzAAAA leaves the server.
+3.01.2022, 20:07:47 --- INFO: Connect --- Client of id hjZ653whbtOTfSaqAAAB pops in to the server!
+3.01.2022, 20:07:49 --- CRIT_ERR: Critical Error --- TypeError: Cannot read properties of undefined (reading 'length')
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/login.js:18:31
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:91:25
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+3.01.2022, 20:08:08 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 20:08:08 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 20:08:08 --- INFO: Connect --- Client of id 83ND7CutNXx-DZpxAAAA pops in to the server!
+3.01.2022, 20:08:09 --- INFO: Disconnect --- Client of id 83ND7CutNXx-DZpxAAAA leaves the server.
+3.01.2022, 20:08:09 --- INFO: Connect --- Client of id P3y259YeomQUuAPlAAAB pops in to the server!
+3.01.2022, 20:08:10 --- CRIT_ERR: Critical Error --- TypeError: Cannot read properties of undefined (reading '0')
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/login.js:19:41
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:91:25
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+3.01.2022, 20:08:28 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 20:08:28 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 20:08:30 --- INFO: Connect --- Client of id 8SYVhaAjxNwA_igcAAAA pops in to the server!
+3.01.2022, 20:08:31 --- CRIT_ERR: Critical Error --- TypeError: Cannot read properties of undefined (reading '0')
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/login.js:19:41
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:91:25
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+3.01.2022, 20:09:06 --- INFO: Init --- App initialization: Classic Chess starts!
+3.01.2022, 20:09:06 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+3.01.2022, 20:09:06 --- INFO: Connect --- Client of id RVNu7qb9e7xd-9ufAAAA pops in to the server!
+3.01.2022, 20:09:42 --- INFO: Disconnect --- Client of id RVNu7qb9e7xd-9ufAAAA leaves the server.
+3.01.2022, 20:09:42 --- INFO: Connect --- Client of id tXUJ6ZUP6EhvhOaPAAAB pops in to the server!
+3.01.2022, 22:08:26 --- INFO: Disconnect --- Client of id tXUJ6ZUP6EhvhOaPAAAB leaves the server.

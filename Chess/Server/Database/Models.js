@@ -1,14 +1,23 @@
 ﻿export default function (mongoose) {
     var Schema = mongoose.Schema;
 
-    var userSchema = new Schema(
-    {
+    var userSchema = new Schema({
         login: { type: String, required: true },
         password: { type: String, required: true },
-        wins: { type: Number, required: true },
-        draws: { type: Number, required: true },
-        losses: { type: Number, required: true },
-        points: { type: Number, required: true },
+        salt: { type: String, required: true },
+        email: { type: String, required: false },
+        rankingId: { type: "objectId", required: true },
+        mutedGames: { type: Array, required: false, default: [] },
+        isBanned: { type: Boolean, required: false, default: false }
+    });
+
+    var rankingSchema = new Schema({
+        username: { type: String, required: true },
+        wins: { type: Number, required: false, default: 0 },
+        draws: { type: Number, required: false, default: 0 },
+        losses: { type: Number, required: false, default: 0 },
+        points: { type: Number, required: false, default: 0 },
+        rank:{ type: Number, required: false, default: 0 }
     });
 
     var freeGameSchema = new Schema({
@@ -24,32 +33,13 @@
 
     var models = {
         User: mongoose.model("User", userSchema),
+        Ranking: mongoose.model("Ranking", rankingSchema),
         Game: mongoose.model("Game", gameSchema),
         FreeGame: mongoose.model("FreeGame", freeGameSchema),
     }
     //==========================================================
-    var userSchema1= new Schema({
-        id:{ type: Number, required: true },
-        login:{ type: String, required: true },
-        password:{ type: String, required: true },
-        salt:{ type: String, required: true },
-        email:{ type: String, required: true },
-        rankingId:{ type: Number, required: true },
-        mutedGames:{ type: Number, required: true },
-        isBanned: { type: Boolean, required: true}
-    });
 
-    var rankingSchema=new Schema({
-        id:{ type: Number, required: true },
-        wins: { type: Number, required: true },
-        draws: { type: Number, required: true },
-        losses: { type: Number, required: true },
-        points: { type: Number, required: true },
-        rank:{ type: Number, required: true }
-    });
-
-    var historicalGameSchema=new Schema({
-        id:{ type: Number, required: true },
+    var historicalGameSchema = new Schema({
         historyOfMoves:{ type: Array, required: true },
         currentBoardState:{ type: Array, required: true },
         isAiPlaying: { type: Boolean, required: true},
@@ -62,14 +52,12 @@
         gameTime:{ type: Number, required: true }, // tu powinno być coś innego 
     });
 
-    var difficultyLevelsSchema=new Schema({
-        id:{ type: Number, required: true },
+    var difficultyLevelsSchema = new Schema({
         name:{ type: String, required: true },
         stepForeseen:{ type: Number, required: true }
     });
 
-    var gameSchema1=new Schema({
-        id:{ type: Number, required: true },
+    var gameSchema1 = new Schema({
         historyOfMoves:{ type: Array, required: true },
         currentBoardState:{ type: Array, required: true },
         isAiPlaying: { type: Boolean, required: true},
@@ -81,8 +69,7 @@
         gameTime:{ type: Number, required: true }, // tu powinno być coś innego 
     });
 
-    var ChatMessageSchema =new Schema ({
-        id:{ type: Number, required: true },
+    var ChatMessageSchema = new Schema ({
         content:{ type: String, required: true },
         markedForReview: { type: Boolean, required: true},
         date:{ type:String, required: true},

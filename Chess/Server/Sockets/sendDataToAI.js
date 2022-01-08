@@ -14,14 +14,15 @@ export default function sendDataToAI ({ client, opers, models, io }) {
                         x: response.from.x,
                         y: response.from.y
                     },
+                    color: response.color,
                     type: response.type
                 },
                 xDes: response.to.x,
                 yDes: response.to.y,
                 enPassant: response.enpassant,
                 casting: response.casting,
-                from_ai: true
-            }    
+                fromAI: true
+            }
             io.sockets.to(client.id).emit(channelBack, dataToSend);
         });
     });

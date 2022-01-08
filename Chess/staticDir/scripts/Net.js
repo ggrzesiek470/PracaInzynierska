@@ -36,22 +36,30 @@
             }
         })
         client.on("login", function (data) {
-            if (data.status != "deny") {
-                if (data.data.length > 0) {
-                    window.showWindow("Zalogowano.");
-                    main.zalogowano(data.data[0].login);
-                    main.setStatistics(data.data[0].wins, data.data[0].draws, data.data[0].losses, data.data[0].points);
-                    const ranking = new Ranking(25, 70);
-                    document.body.appendChild(ranking.getComponent());
-                    setTimeout(() => {
-                        ranking.show();
-                    }, 10)
-
-                } else {
-                    window.showWindow("Nieprawidłowe hasło bądź nazwa użytkownika");
-                }
-            } else {
+            if (data.status == "userAlreadyLogged") {
                 window.showWindow("Taki użytkownik jest właśnie zalogowany");
+            }
+            else if (data.status == "badPassword") {
+                window.showWindow("Nieprawidłowe hasło.");
+            }
+            else if (data.status == "userNonExistent") {
+                window.showWindow("Taki użytkownik nie istnieje.");
+            }
+            else if (data.user.length > 0) {
+                console.log(data.allRanking);
+                window.showWindow("Zalogowano.");
+                main.zalogowano(data.user[0].login);
+                main.setStatistics(data.ranking[0].wins, data.ranking[0].draws, data.ranking[0].losses, data.ranking[0].points);
+                const menuBar = new MenuBar();
+                document.body.appendChild(menuBar.getComponent());
+                menuBar.hide();
+                const ranking = new Ranking(data.allRanking);
+                menuBar.pushMenuOption(ranking);
+                // menuBar.getComponent().appendChild(ranking.getComponent());
+                ranking.hide();
+
+            } else {
+                window.showWindow("Niezidentyfikowany problem. Skontaktuj się z administratorem");
             }
         })
         client.on("searchForGames", function (data) {
@@ -62,7 +70,6 @@
             }
         })
         client.on("joinGame", function (data) {
-            // console.log(data);
             game.setGameId(data.gameId);
             game.setYourColor(data.yourColor);
             game.turnTheGameOn();
@@ -70,7 +77,6 @@
             document.getElementById("bariera").style.display = "none";
             document.getElementById("checkChecker").style.display = "initial";
             var string;
-            console.log(data);
             if (data.yourColor == "white") { string = "białymi.<br/>Twój ruch."; main.setCameraPosition(-600, 600, 0); }
             if (data.yourColor == "black") { string = "czarnymi.<br/>Ruch przeciwnika."; main.setCameraPosition(600, 600, 0); }
             window.onlyHalfly();
@@ -80,7 +86,7 @@
             client.on("getMessageByChat", chat.getMessage);
         })
         client.on("turn", function (data) {
-            if (data.from_ai) {
+            if (data.fromAI) {
                 console.log(data)
             }
             game.opponentMove(data.pawn, data.xDes, data.yDes, data.enPassant, data.casting);
@@ -144,7 +150,6 @@
     }
 
     this.turn = function (pawn, xDes, yDes, enPassant, casting, color, gmid, localTable, depth) {
-        console.log(localTable)
         client.emit("turn", {
             pawn: pawn,
             xDes: xDes,

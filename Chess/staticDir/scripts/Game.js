@@ -62,13 +62,13 @@
         document.getElementById("x" + x + "_y" + y).click();
     }
 
-    this.opponentMove = function (pawn, xDes, yDes, enPassant, casting) {
-        movePawn(pawn, xDes, yDes, enPassant, casting);
+    this.opponentMove = async function (pawn, xDes, yDes, enPassant, casting) {
+        await movePawn(pawn, xDes, yDes, enPassant, casting);
         checkIfCheck();
         document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
     }
 
-    function createTable() {
+    async function createTable() {
         var div = document.createElement("div");
         div.id = "plansza";
         div.style.width = "432px";
@@ -89,7 +89,7 @@
                 if (j == 0) window.style.borderLeft = "2px solid black";
                 div.appendChild(window);
 
-                window.addEventListener("click", function () {
+                window.addEventListener("click", async function () {
                     if (gameEnabled == true && chosenColor == yourColor) {
                         var x = (parseInt(this.id[1]) - 1);
                         var y = (parseInt(this.id[4]) - 1);
@@ -116,9 +116,12 @@
                                     if (ai_playing == false) {
                                         net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
                                     }
-                                    movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
+                                    await movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
                                     if (ai_playing == true) {
-                                        net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable, game.depth);
+                                        checkIfCheck();
+                                        if (gameEnabled == true) {
+                                            net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable, game.depth);
+                                        }
                                     }
                                     chosenPawn = undefined;
                                     
@@ -217,51 +220,66 @@
         }
     }
 
-    function movePawn(pawn, xDes, yDes, enPassant, casting) {
-        for (var i = 0; i < localTable.length; i++) {
-            for (var j = 0; j < localTable[0].length; j++) {
-                if (localTable[i][j] != undefined) {
-                    if (localTable[i][j].type == "Pawn") {
-                        localTable[i][j].enPassant = false;
+    async function movePawn(pawn, xDes, yDes, enPassant, casting) {
+        return new Promise(async (resolve) => {
+            for (var i = 0; i < localTable.length; i++) {
+                for (var j = 0; j < localTable[0].length; j++) {
+                    if (localTable[i][j] != undefined) {
+                        if (localTable[i][j].type == "Pawn") {
+                            localTable[i][j].enPassant = false;
+                        }
                     }
                 }
             }
-        }
-        main.deletePawn(xDes, yDes);
-        main.movePawn(pawn.position.x, pawn.position.y, xDes, yDes);
-        if (pawn.type == "Pawn") {
-            if (pawn.position.y - yDes == 2 || pawn.position.y - yDes == (-2)) {
-                pawn.enPassant = true;
+            main.deletePawn(xDes, yDes);
+            await main.movePawn(pawn.position.x, pawn.position.y, xDes, yDes,
+                                                                            pawn.type == "Knight" ? true : false, true);
+            if (pawn.type == "Pawn") {
+                if (pawn.position.y - yDes == 2 || pawn.position.y - yDes == (-2)) {
+                    pawn.enPassant = true;
+                }
             }
-        }
-        if (casting == true) {
-            if (pawn.position.x - xDes > 0) { // -4
-                main.movePawn(pawn.position.x - 3, pawn.position.y, xDes + 1, yDes);
-                localTable[pawn.position.y - 1][pawn.position.x - 1 - 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 - 3];
-                localTable[pawn.position.y - 1][pawn.position.x - 1 - 3] = "";
-                localTable[pawn.position.y - 1][pawn.position.x - 1 - 1].position.x = xDes + 1;
-            } else { // +3
-                main.movePawn(pawn.position.x + 4, pawn.position.y, xDes - 1, yDes);
-                localTable[pawn.position.y - 1][pawn.position.x - 1 + 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 + 4];
-                localTable[pawn.position.y - 1][pawn.position.x - 1 + 4] = "";
-                localTable[pawn.position.y - 1][pawn.position.x - 1 + 1].position.x = xDes - 1;
+            if (casting == true) {
+                if (pawn.position.x - xDes < 0) { // -4
+                    await main.movePawn(pawn.position.x + 3, pawn.position.y, xDes - 1, yDes, true);
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 + 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 + 3];
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 + 3] = "";
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 + 1].position.x = xDes - 1;
+                } else { // +3
+                    await main.movePawn(pawn.position.x - 4, pawn.position.y, xDes + 1, yDes, true);
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 - 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 - 4];
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 - 4] = "";
+                    localTable[pawn.position.y - 1][pawn.position.x - 1 - 1].position.x = xDes + 1;
+                }
             }
-        }
-        var temp = localTable[pawn.position.y - 1][pawn.position.x - 1];
-        localTable[pawn.position.y - 1][pawn.position.x - 1] = "";
-        localTable[yDes - 1][xDes - 1] = temp;
-        localTable[yDes - 1][xDes - 1].position = {
-            x: xDes,
-            y: yDes
-        };
-        localTable[yDes - 1][xDes - 1].firstMove = true;
-		if (pawn.type == "Pawn") {
-            if (pawn.color == "white" && yDes == 8) { pawn.type = "Queen"; main.changeModel(pawn.position.x, pawn.position.y, "Queen"); }
-            if (pawn.color == "black" && yDes == 1) { pawn.type = "Queen"; main.changeModel(pawn.position.x, pawn.position.y, "Queen"); }
-        }
-        if (enPassant == true) { if (pawn.color == "white") { main.deletePawn(pawn.position.x, pawn.position.y - 1); localTable[pawn.position.y - 1 - 1][pawn.position.x - 1] = ""; } else if (pawn.color == "black") { main.deletePawn(pawn.position.x, pawn.position.y + 1); localTable[pawn.position.y - 1 + 1][pawn.position.x - 1] = ""; } }
-        pawn.firstMove = true;
-        if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
+            var temp = localTable[pawn.position.y - 1][pawn.position.x - 1];
+            localTable[pawn.position.y - 1][pawn.position.x - 1] = "";
+            localTable[yDes - 1][xDes - 1] = temp;
+            localTable[yDes - 1][xDes - 1].position = {
+                x: xDes,
+                y: yDes
+            };
+            localTable[yDes - 1][xDes - 1].firstMove = true;
+            console.log(pawn.type);
+            if (pawn.type == "Pawn") {
+                console.log(yDes)
+                console.log(pawn.color)
+                if (pawn.color == "white" && yDes == 8) {
+                    pawn.type = "Queen";
+                    localTable[yDes - 1][xDes - 1].type = "Queen";
+                    main.changeModel(xDes, yDes, "Queen");
+                }
+                if (pawn.color == "black" && yDes == 1) {
+                    pawn.type = "Queen";
+                    localTable[yDes - 1][xDes - 1].type = "Queen";
+                    main.changeModel(xDes, yDes, "Queen");
+                }
+            }
+            if (enPassant == true) { if (pawn.color == "white") { main.deletePawn(xDes, yDes - 1); localTable[yDes - 1 - 1][xDes - 1] = ""; } else if (pawn.color == "black") { main.deletePawn(pawn.position.x, pawn.position.y + 1); localTable[pawn.position.y - 1 + 1][pawn.position.x - 1] = ""; } }
+            pawn.firstMove = true;
+            if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
+            resolve();
+        });
     }
 
     function clearColors() {
@@ -494,34 +512,10 @@
             if (document.getElementById("x" + (pawn.position.x + 1) + "_y" + (pawn.position.y)) != null) if (table[pawn.position.y - 1][pawn.position.x - 1 + 1] == "") { var ch = true; if (checkMove == true) { ch = checkIfMoveIsPossible(pawn, pawn.position.x + 1, pawn.position.y); } if (ch == true) wherecango.push(document.getElementById("x" + (pawn.position.x + 1) + "_y" + (pawn.position.y))); } else { if (table[pawn.position.y - 1][pawn.position.x - 1 + 1].color != colorToCheck) { var ch = true; if (checkMove == true) { ch = checkIfMoveIsPossible(pawn, pawn.position.x + 1, pawn.position.y); } if (ch == true) wherecanattack.push(document.getElementById("x" + (pawn.position.x + 1) + "_y" + (pawn.position.y))); } }
             if (document.getElementById("x" + (pawn.position.x + 1) + "_y" + (pawn.position.y + 1)) != null) if (table[pawn.position.y - 1 + 1][pawn.position.x - 1 + 1] == "") { var ch = true; if (checkMove == true) { ch = checkIfMoveIsPossible(pawn, pawn.position.x + 1, pawn.position.y + 1); } if (ch == true) wherecango.push(document.getElementById("x" + (pawn.position.x + 1) + "_y" + (pawn.position.y + 1))); } else { if (table[pawn.position.y - 1 + 1][pawn.position.x - 1 + 1].color != colorToCheck) { var ch = true; if (checkMove == true) { ch = checkIfMoveIsPossible(pawn, pawn.position.x + 1, pawn.position.y + 1); } if (ch == true) wherecanattack.push(document.getElementById("x" + (pawn.position.x + 1) + "_y" + (pawn.position.y + 1))); } }
             if (pawn.firstMove == false) { // Castling
-                if (document.getElementById("x" + (pawn.position.x + 4) + "_y" + (pawn.position.y)) != undefined) {
-                    if (table[pawn.position.y - 1][pawn.position.x - 1 + 4] != "") {
-                        if (table[pawn.position.y - 1][pawn.position.x - 1 + 4].firstMove == false && table[pawn.position.y - 1][pawn.position.x - 1 + 4].type == "Rook") {
-                            if (table[pawn.position.y - 1][pawn.position.x - 1 + 1] == "" && table[pawn.position.y - 1][pawn.position.x - 1 + 2] == "" && table[pawn.position.y - 1][pawn.position.x - 1 + 3] == "") {
-                                var ch = true;
-                                if (checkMove == true) {
-                                    ch = checkIfMoveIsPossible(pawn, pawn.position.x, pawn.position.y);
-                                    if (ch == true) {
-                                        ch = checkIfMoveIsPossible(pawn, pawn.position.x + 1, pawn.position.y);
-                                        if (ch == true) {
-                                            ch = checkIfMoveIsPossible(pawn, pawn.position.x + 2, pawn.position.y);
-                                            if (ch == true) {
-                                                ch = checkIfMoveIsPossible(pawn, pawn.position.x + 3, pawn.position.y);
-                                            }
-                                        }
-                                    }
-                                }
-                                if (ch == true) {
-                                    wherecancast.push(document.getElementById("x" + (pawn.position.x + 2) + "_y" + (pawn.position.y)));
-                                }
-                            }
-                        }
-                    }
-                }
-                if (document.getElementById("x" + (pawn.position.x - 3) + "_y" + (pawn.position.y)) != undefined) {
-                    if (table[pawn.position.y - 1][pawn.position.x - 1 - 3] != "") {
-                        if (table[pawn.position.y - 1][pawn.position.x - 1 - 3].firstMove == false && table[pawn.position.y - 1][pawn.position.x - 1 - 3].type == "Rook") {
-                            if (table[pawn.position.y - 1][pawn.position.x - 1 - 1] == "" && table[pawn.position.y - 1][pawn.position.x - 1 - 2] == "") {
+                if (document.getElementById("x" + (pawn.position.x - 4) + "_y" + (pawn.position.y)) != undefined) {
+                    if (table[pawn.position.y - 1][pawn.position.x - 1 - 4] != "") {
+                        if (table[pawn.position.y - 1][pawn.position.x - 1 - 4].firstMove == false && table[pawn.position.y - 1][pawn.position.x - 1 - 4].type == "Rook") {
+                            if (table[pawn.position.y - 1][pawn.position.x - 1 - 1] == "" && table[pawn.position.y - 1][pawn.position.x - 1 - 2] == "" && table[pawn.position.y - 1][pawn.position.x - 1 - 3] == "") {
                                 var ch = true;
                                 if (checkMove == true) {
                                     ch = checkIfMoveIsPossible(pawn, pawn.position.x, pawn.position.y);
@@ -529,11 +523,35 @@
                                         ch = checkIfMoveIsPossible(pawn, pawn.position.x - 1, pawn.position.y);
                                         if (ch == true) {
                                             ch = checkIfMoveIsPossible(pawn, pawn.position.x - 2, pawn.position.y);
+                                            if (ch == true) {
+                                                ch = checkIfMoveIsPossible(pawn, pawn.position.x - 3, pawn.position.y);
+                                            }
                                         }
                                     }
                                 }
                                 if (ch == true) {
                                     wherecancast.push(document.getElementById("x" + (pawn.position.x - 2) + "_y" + (pawn.position.y)));
+                                }
+                            }
+                        }
+                    }
+                }
+                if (document.getElementById("x" + (pawn.position.x + 3) + "_y" + (pawn.position.y)) != undefined) {
+                    if (table[pawn.position.y - 1][pawn.position.x - 1 + 3] != "") {
+                        if (table[pawn.position.y - 1][pawn.position.x - 1 + 3].firstMove == false && table[pawn.position.y - 1][pawn.position.x - 1 + 3].type == "Rook") {
+                            if (table[pawn.position.y - 1][pawn.position.x - 1 + 1] == "" && table[pawn.position.y - 1][pawn.position.x - 1 + 2] == "") {
+                                var ch = true;
+                                if (checkMove == true) {
+                                    ch = checkIfMoveIsPossible(pawn, pawn.position.x, pawn.position.y);
+                                    if (ch == true) {
+                                        ch = checkIfMoveIsPossible(pawn, pawn.position.x + 1, pawn.position.y);
+                                        if (ch == true) {
+                                            ch = checkIfMoveIsPossible(pawn, pawn.position.x + 2, pawn.position.y);
+                                        }
+                                    }
+                                }
+                                if (ch == true) {
+                                    wherecancast.push(document.getElementById("x" + (pawn.position.x + 2) + "_y" + (pawn.position.y)));
                                 }
                             }
                         }
@@ -686,7 +704,6 @@
 
                         if (tempLocalTable[k][l].color != tempLocalTable[y - 1][x - 1].color && tempLocalTable[y - 1][x - 1].type == "King") {
                             tempKingCheck = true;
-                            // console.log("The king may be endangered");
                         }
                     }
                 }
@@ -710,18 +727,15 @@
                 }
             }
             if (kingCheck == true) {
-                var string;
-                if (kingColorCheck == "white") string = "Białe";
-                else string = "Czarne";
+                var string = (kingColorCheck == "white") ? "Białe" : "Czarne";
                 document.getElementById("check").innerHTML = "SZACH! " + string + " zagrożone.";
 
                 // A jeśli jest szach to może być jeszcze mat...
 
                 if (checkIfMateOrStalemate() == true) {
                     document.getElementById("check").innerHTML = "SZACH-MAT! ";
-                    if (kingColorCheck == "white") document.getElementById("check").innerHTML += "Czarne wygrywają!";
-                    else document.getElementById("check").innerHTML += "Białe wygrywają!";
-
+                    document.getElementById("check").innerHTML += (kingColorCheck == "white") ?
+                                                                    "Czarne wygrywają!" : "Białe wygrywają!";
                     var statistics = main.getStatistics();
 
                     if (kingColorCheck == "white") {
@@ -796,6 +810,7 @@
         $("#bariera").css("display", "none");
         $("#checkChecker").css("display", "initial");
         var string;
+        game.depth = params.difficulty;
         if (yourColor == "white") {
             string = "białymi.<br/>Twój ruch.";
             main.setCameraPosition(-600, 600, 0);
@@ -803,7 +818,6 @@
         if (yourColor == "black") {
             string = "czarnymi.<br/>Ruch przeciwnika.";
             main.setCameraPosition(600, 600, 0);
-            game.depth = params.difficulty;
             var intervalToRemove = setInterval(() => {
                 if (game.loadingFigures >= 32) {
                     net.sendDataToAI(game.depth, localTable);

@@ -5,6 +5,7 @@
     var draws;
     var losses;
     var points;
+    var arrowHelpers = [];
 
     this.setStatistics = function (Wins, Draws, Losses, Points) {
         wins = Wins;
@@ -70,19 +71,98 @@
         }
     }
 
-    this.movePawn = function (x, y, xDes, yDes) {
-        for (var i = 0; i < scene.children.length; i++) {
-            if (scene.children[i].pawnData != undefined) {
-                if (scene.children[i].pawnData.position.x == x && scene.children[i].pawnData.position.y == y) {
-                    // console.log("poszed");
-                    scene.children[i].pawnData.position.x = xDes;
-                    scene.children[i].pawnData.position.y = yDes;
-                    scene.children[i].position.set(pola_tab[xDes - 1][yDes - 1].position.x, 10, pola_tab[xDes - 1][yDes - 1].position.z);
-                    game.getLocalTable[y - 1, x - 1];
-                    // console.log(scene.children[i]);
+    this.movePawn = function (x, y, xDes, yDes, shouldGoUp = true, addArrow = false, time = 500) {
+        return new Promise(resolve => {
+            for (var i = 0; i < scene.children.length; i++) {
+                let pawn3dObject = scene.children[i];
+                if (pawn3dObject.pawnData != undefined
+                    && pawn3dObject.pawnData.position.x == x
+                    && pawn3dObject.pawnData.position.y == y) {
+                        let startTime = new Date();
+                        pawn3dObject.pawnData.position.x = xDes;
+                        pawn3dObject.pawnData.position.y = yDes;
+    
+                        let priorPos = pola_tab[x - 1][y - 1].position;
+                        let priorXPos = priorPos.x;
+                        let priorZPos = priorPos.z;
+    
+                        let nextPos = pola_tab[xDes - 1][yDes - 1].position;
+                        let nextXPos = nextPos.x;
+                        let nextZPos = nextPos.z;
+
+                        let percentOfMove = 0;
+                        let currentXPos = priorXPos;
+                        let currentYPos = 10;
+                        let currentZPos = priorZPos;
+
+                        let up = shouldGoUp;
+    
+                        let intervalMove = setInterval(() => {
+                            let currentTime = new Date();
+                            if (up == true) {
+                                percentOfMove = Math.min((currentTime - startTime) / time, 1);
+                                currentYPos = 10 + 170*percentOfMove;
+
+                                pawn3dObject.position.set(currentXPos, currentYPos, currentZPos);
+
+                                if (percentOfMove >= 1) {
+                                    startTime = new Date();
+                                    up = false;
+                                }
+                            } else if (up == false) {
+                                percentOfMove = Math.min((currentTime - startTime) / time, 1);
+        
+                                currentXPos = priorXPos + (nextXPos - priorXPos)*percentOfMove;
+                                currentYPos = shouldGoUp ? 180 : 10;
+                                currentZPos = priorZPos + (nextZPos - priorZPos)*percentOfMove;
+        
+                                pawn3dObject.position.set(currentXPos, currentYPos, currentZPos);
+        
+                                if (percentOfMove >= 1) {
+                                    if (shouldGoUp == true) {
+                                        percentOfMove = Math.min((currentTime - startTime) / time, 2);
+                                        currentYPos = shouldGoUp ? 180 - 170*(percentOfMove - 1) : 10;
+
+                                        pawn3dObject.position.set(currentXPos, currentYPos, currentZPos);
+                                        if (percentOfMove >= 2) {
+                                            clearInterval(intervalMove);
+                                            main.removeAllArrows();
+                                            main.addArrow(priorXPos, priorZPos, nextXPos, nextZPos);
+                                            resolve();
+                                        }
+                                    } else {
+                                        clearInterval(intervalMove);
+                                        main.removeAllArrows();
+                                        main.addArrow(priorXPos, priorZPos, nextXPos, nextZPos);
+                                        resolve();
+                                    }
+                                }
+                            }
+                        }, 20);
                 }
             }
-        }
+        });
+    }
+
+    this.removeAllArrows = function () {
+        arrowHelpers.forEach(arrow => {
+            scene.remove(arrow);
+        });
+    }
+
+    this.addArrow = function (x, z, xDes, zDes) {
+        const dir = new THREE.Vector3( xDes-x, 15, zDes-z );
+        const origin = new THREE.Vector3( x, 15, z );
+        dir.normalize();
+
+        const length = Math.sqrt(Math.pow(xDes - x, 2) + Math.pow(zDes - z, 2));
+        const hex = "rgba(244, 81, 30, 0.7)";
+
+        const arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+        scene.add(arrowHelper);
+        arrowHelpers.push(arrowHelper);
+
+        return arrowHelper;
     }
 
     this.deletePawn = function (x, y) {
@@ -113,9 +193,9 @@
 						modelData.children[0].children[0].geometry.computeVertexNormals();
 							
                         modelData.children[0].children[0].material = new THREE.MeshPhongMaterial({
-                            color: 0xFFFFFF,
-							specular: 0x101010,
-                            shininess: 60,
+                            color: game.getLocalTable()[y - 1][x - 1].color == "black" ? "#322a1e" : 0xEEEEEE,
+							specular: 0x303030,
+                            shininess: 10,
 							polygonOffset: true,  
 							polygonOffsetUnits: 1,
 							polygonOffsetFactor: 1,
@@ -246,40 +326,41 @@
 
     function loadCorners () {
         var letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
+        var numbers = ["1", "2", "3", "4", "5", "6", "7", "8"];
         const loader = new THREE.FontLoader();
 
         var x = -370;
         var z = -460;
 
-        letters.forEach(letter => {
-            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "white");
+        numbers.forEach(n => {
+            new PositionText(loader, scene, n, { x: x, y: 0, z: z }, "white");
             x += 100;
         });
 
         x = -470;
         z = -360;
 
-        ["1", "2", "3", "4", "5", "6", "7", "8"].forEach(letter => {
-            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "white");
+        letters.forEach(l => {
+            new PositionText(loader, scene, l, { x: x, y: 0, z: z }, "white");
             z += 100;
         });
 
         x = 350;
         z = 460;
 
-        letters.sort(function(a, b){return b-a});
+        numbers.sort(function(a, b){return b-a});
 
-        letters.forEach(letter => {
-            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "black");
+        numbers.forEach(n => {
+            new PositionText(loader, scene, n, { x: x, y: 0, z: z }, "black");
             x -= 100;
         });
 
-        x = 450;
-        z = 360;
+        x = 460;
+        z = -330;
 
-        ["8", "7", "6", "5", "4", "3", "2", "1"].forEach(letter => {
-            new PositionText(loader, scene, letter, { x: x, y: 0, z: z }, "black");
-            z -= 100;
+        letters.forEach(l => {
+            new PositionText(loader, scene, l, { x: x, y: 0, z: z }, "black");
+            z += 100;
         });
 
         

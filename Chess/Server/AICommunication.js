@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import Logger from './Logger.js';
+
 export default class AICommunication {
     static AI_URL = "http://localhost:3001/ai_module";
 
@@ -45,8 +47,7 @@ export default class AICommunication {
             });
           })
           .catch((error) => {
-            console.log(new Date() + "fail");
-            console.log(error);
+            Logger.print(error, Logger.type.CRITICAL, "AI Connection Attempt. Request sent. Got type error");
           });
     }
 

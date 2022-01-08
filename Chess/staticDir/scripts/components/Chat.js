@@ -7,29 +7,28 @@ function Chat() {
     console.log("gdzie jest czat")
 
     this.init = () => {
-        var wholeChat = $("<div>");
-        wholeChat.addClass("chat-container");
-        wholeChat.addClass("hidden-chat");
+        var wholeChat = $("<div>")
+                        .addClass("chat-container")
+                        .addClass("hidden-chat");
         
-        var containerForMessages = $("<div>");
-        containerForMessages.addClass("chat-messages-container");
-        this.containerForMessages = containerForMessages;
+        this.containerForMessages = $("<div>")
+                                    .addClass("chat-messages-container");
 
-        var inputSender = $("<input>");
-        inputSender.addClass("chat-input-sender");
-        inputSender.attr("placeholder", "Napisz swoją wiadomość.");
+        var inputSender = $("<input>")
+                            .addClass("chat-input-sender")
+                            .attr("placeholder", "Napisz swoją wiadomość.");
 
-        var buttonSender = $("<button>");
-        buttonSender.addClass("chat-button-sender");
-        buttonSender.html("Wyślij");
+        var buttonSender = $("<button>")
+                            .addClass("chat-button-sender")
+                            .html("Wyślij");
 
-        var chatOpener = $("<img>");
-        chatOpener.attr("src", "/gfx/icons/chat_no_colours.png");
-        chatOpener.attr("alt", "Open Chat");
-        chatOpener.addClass("chat-open-button");
-        chatOpener.addClass("hidden-chat");
+        var chatOpener = $("<img>")
+                        .attr("src", "/gfx/icons/chat_no_colours.png")
+                        .attr("alt", "Open Chat")
+                        .addClass("chat-open-button")
+                        .addClass("hidden-chat");
 
-        wholeChat.append(containerForMessages);
+        wholeChat.append(this.containerForMessages);
         wholeChat.append(inputSender);
         wholeChat.append(buttonSender);
 

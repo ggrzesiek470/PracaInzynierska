@@ -11,6 +11,6 @@ export default function setStatisticsForUser ({ client, opers, models }) {
                         + ", points: " + data.points,
                         Logger.type.INFO, "Stat change");
                     
-        opers.UpdateStatistics(models.User, data.user, data.wins, data.draws, data.losses, data.points);
+        opers.UpdateStatistics(models.Ranking, data.user, data.wins, data.draws, data.losses, data.points);
     })
 }
