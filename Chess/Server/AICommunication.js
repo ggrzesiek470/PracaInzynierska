@@ -14,20 +14,10 @@ export default class AICommunication {
             let enpassant = move.split(";").length > 1 ? true : false; 
             let color = response.data.split("<br>")[1][0] == "W" ? "white" : "black";
             var figure = response.data.split("<br>")[1][1];
-            switch (figure) {
-                case "P":
-                    figure = "Pawn"; break;
-                case "R":
-                    figure = "Rook"; break;
-                case "N":
-                    figure = "Knight"; break;
-                case "B":
-                    figure = "Bishop"; break;
-                case "K":
-                    figure = "King"; break;
-                case "Q":
-                    figure = "Queen"; break;
-            }
+            
+            let assoc = { "P": "Pawn", "R": "Rook", "N": "Knight", "B": "Bishop", "K": "King", "Q": "Queen" };
+            figure = assoc[figure];
+
             let from = {
                 x: parseInt(coords.split("->")[0][3]),
                 y: parseInt(coords.split("->")[0][1])
