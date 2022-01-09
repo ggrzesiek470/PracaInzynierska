@@ -24,6 +24,7 @@ export default class SocketsInit {
             Sockets.getForRegister(tools);
             Sockets.sendMessageByChat(tools);
             Sockets.setStatisticsForUser(tools);
+            Sockets.getAllDiffLevels(tools);
         })
     }
 }

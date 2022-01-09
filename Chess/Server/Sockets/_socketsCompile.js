@@ -1,4 +1,5 @@
 import disconnect from './disconnect.js';
+import getAllDiffLevels from './getAllDiffLevels.js';
 import register from './register.js';
 import login from './login.js';
 import read from './read.js';
@@ -13,7 +14,7 @@ import sendMessageByChat from './sendMessageByChat.js';
 
 var Sockets = {
     disconnect: disconnect,
-    register: register,
+    register: register.registerListener,
     login: login,
     read: read,
     searchForGames: searchForGames,
@@ -23,7 +24,8 @@ var Sockets = {
     turn: turn,
     getForRegister: getForRegister,
     setStatisticsForUser: setStatisticsForUser,
-    sendMessageByChat: sendMessageByChat
+    sendMessageByChat: sendMessageByChat,
+    getAllDiffLevels: getAllDiffLevels
 }
 
 export default Sockets;

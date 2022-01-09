@@ -19,6 +19,7 @@
     this.depth = 5;
 
     this.ai_playing = false;
+    this.timer;
 
     this.turnTheGameOn = function () {
         gameEnabled = true;
@@ -260,10 +261,7 @@
                 y: yDes
             };
             localTable[yDes - 1][xDes - 1].firstMove = true;
-            console.log(pawn.type);
             if (pawn.type == "Pawn") {
-                console.log(yDes)
-                console.log(pawn.color)
                 if (pawn.color == "white" && yDes == 8) {
                     pawn.type = "Queen";
                     localTable[yDes - 1][xDes - 1].type = "Queen";
@@ -800,7 +798,7 @@
         else return false;
     }
 
-    this.playAIGame = function (params) {
+    this.playAIGame = (params) => {
         ai_playing = true;
 
         game.setGameId("with_computer");
@@ -814,6 +812,12 @@
         if (yourColor == "white") {
             string = "białymi.<br/>Twój ruch.";
             main.setCameraPosition(-600, 600, 0);
+            var intervalToRemove = setInterval(() => {
+                if (game.loadingFigures >= 32) {
+                    this.timer = new Timer(params.timer);
+                    clearInterval(intervalToRemove);
+                }
+            }, 500);
         }
         if (yourColor == "black") {
             string = "czarnymi.<br/>Ruch przeciwnika.";

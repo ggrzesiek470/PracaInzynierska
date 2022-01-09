@@ -2,8 +2,9 @@
     var client = io();
     var window = new Window();
     this.window = window;
+    this.callback;
 
-    function init() {
+    init = () => {
         client.on("read", function (data) {
             var check = false;
             for (var i = 0; i < data.data.length; i++) {
@@ -46,7 +47,6 @@
                 window.showWindow("Taki użytkownik nie istnieje.");
             }
             else if (data.user.length > 0) {
-                console.log(data.allRanking);
                 window.showWindow("Zalogowano.");
                 main.zalogowano(data.user[0].login);
                 main.setStatistics(data.ranking[0].wins, data.ranking[0].draws, data.ranking[0].losses, data.ranking[0].points);
@@ -86,9 +86,6 @@
             client.on("getMessageByChat", chat.getMessage);
         })
         client.on("turn", function (data) {
-            if (data.fromAI) {
-                console.log(data)
-            }
             game.opponentMove(data.pawn, data.xDes, data.yDes, data.enPassant, data.casting);
             if (game.isGameEnabled() == true) {
                 var string;
@@ -97,6 +94,11 @@
                 window.showWindow("Grasz " + string);
             }
             document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
+        })
+        client.on("getAllDiffLevels", (data) => {
+            if (this.callback) {
+                this.callback(data);
+            }
         })
     }
 
@@ -113,10 +115,6 @@
         })
     }
 
-    this.checkAdmin = function () {
-        client.emit("read", {})
-    }
-
     this.login = function (user, pass) {
         client.emit("login", {
             login: user,
@@ -124,8 +122,8 @@
         })
     }
 
-    this.searchForGames = function () {
-        client.emit("searchForGames", {});
+    this.searchForGames = function (timer) {
+        client.emit("searchForGames", { timer: timer });
     }
 
     this.addFreeGame = function (login) {
@@ -182,5 +180,10 @@
             color: game.getYourColor(),
             gameId: game.getGameId()
         })
+    }
+
+    this.getAllDiffLevels = (callback) => {
+        client.emit("getAllDiffLevels", {});
+        this.callback = callback;
     }
 }

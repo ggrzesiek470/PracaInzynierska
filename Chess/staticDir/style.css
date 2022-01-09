@@ -208,46 +208,39 @@ input:focus {
 .choose_game_mode {
     position:absolute;
     width:60vw;
-    height:80vh;
+    padding-top:80px;
+    padding-bottom:80px;
     background-color: rgba(230, 216, 25, 0.504);
     left:50%;
     top:50%;
     transform:translate(-50%, -50%);
     z-index:1001;
-    min-height:200px;
     font-family:Tahoma;
     text-shadow: 0px 0px 6px rgba(95, 95, 95, 0.604);
     border-radius:10px;
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .choose_game_mode_header {
-    grid-column: 1 / span 3;
-    grid-row: 1 / span 1;
     text-align: center;
     font-size:min(24px, 6vw);
+    margin-bottom:10px;
 }
 .choose_game_mode_buttons {
-    grid-column: 1 / span 3;
-    grid-row: 2 / span 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
     margin-left:15px;
     margin-right:15px;
 }
 .difficulty_header {
-    grid-column: 1 / span 3;
-    grid-row: 3 / span 1;
     text-align: center;
     margin-top:10px;
 }
 .vs_player {
-    grid-column: 1 / span 1;
+    width:47.5%;
+    display:inline-block;
+    margin-right: 2.5%;
 }
 .vs_computer {
-    grid-column: 2 / span 1;
+    width:47.5%;
+    display:inline-block;
+    margin-left: 2.5%;
 }
 .vs_player, .vs_computer {
     cursor:pointer;
@@ -286,8 +279,6 @@ input:focus {
     background-color:rgba(235, 32, 17, 0.7) !important;
 }
 .choose_your_difficulty {
-    grid-column: 1 / span 3;
-    grid-row: 4 / span 1;
     text-align: center;
 }
 .choose_your_difficulty > div {
@@ -321,24 +312,18 @@ input:focus {
     display: none;
 }
 .color_header {
-    grid-column: 1 / span 3;
-    grid-row: 5 / span 1;
     text-align: center;
 }
 .choose_your_color {
-    grid-column: 1 / span 3;
-    grid-row: 6 / span 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+
 }
-.choose_your_color > div.white {
-    grid-column: 1 / span 1;
-}
-.choose_your_color > div.mixed {
-    grid-column: 2 / span 1;
-}
+.choose_your_color > div.white,
+.choose_your_color > div.mixed,
 .choose_your_color > div.black {
-    grid-column: 3 / span 1;
+    width:30%;
+    display:inline-block;
+    margin-left: 1.66%;
+    margin-right: 1.66%;
 }
 .choose_your_color > div {
     text-align: center;
@@ -346,7 +331,6 @@ input:focus {
     text-shadow: 0px 0px 6px rgba(95, 95, 95, 0.604);
     border-radius:15px;
     cursor:pointer;
-    margin: 0 10px;
     transition-duration:0.5s;
 }
 .choose_your_color > div > img {
@@ -373,34 +357,22 @@ input:focus {
     z-index:10;
     transition-duration:0.3s;
     margin:0 auto;
-    grid-column: 2 / span 1;
     margin-top:15px;
 }
 .finalButton:hover {
     background-color:#cc2604;
     transition-duration:0.5s;
 }
-.curtain {
-    position:absolute;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    display: grid;
-    background-color: rgba(0, 0, 0, 0);
-    pointer-events: none;
+.containerForButtons {
+    display:inline-block;
+    position:relative;
+    left:50%;
+    transform:translate(-50%);  
 }
-.strikethrough {
-    grid-row: 4 / span 4;
-    grid-column: 1 / span 3;
-    margin-top:10px;
-}
-.strikethrough > img {
-    width:100%;
-    height:100%;
-    pointer-events: initial;
+.containerForButtons > .finalButton {
+    display:inline-block;
+    margin-left:10px;
+    margin-right:10px;
 }
 .chat-container {
     position:absolute;
@@ -513,4 +485,65 @@ input:focus {
     text-align:center;
     width:100vw;
     bottom:30%;
+}
+.containerForTimerSetters {
+    text-align:center;
+
+}
+.timerSetterContainer {
+    background-color:black;
+    display:inline-block;
+    padding:0.7vw;
+    margin:0.7vw;
+    border-radius:20px;
+    color: #f4511e;
+    font-size:36px;
+    transition-duration:0.5s;
+}
+.timerDigit {
+    width:2.8vw;
+    height:6.23vw;
+    margin-right:0.8vw;
+}
+.timerSetterContainer:hover, .timerSetterContainerWhitened {
+    cursor:pointer;
+    color:white;
+    transition-duration:0.6s;
+}
+.timerSetterContainer > img {
+    transition-duration:0.4s;
+}
+.timerSetterContainer:hover > img, .timerSetterContainerWhitened > img {
+    transition-duration:0.5s;
+    filter: brightness(5) contrast(5);
+}
+@media only screen and (max-width: 860px) {
+    .timerSetterContainer {
+        background-color:black;
+        display:block;
+        padding:1vw;
+        margin:20px;
+        text-align:center;
+    }
+    .timerDigit {
+        width:6vw;
+        height:14.82vw;
+        margin-right:0.8vw;
+    }
+}
+.timerDiv {
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:17vw;
+    height:8vw;
+    background-color:rgba(255, 216, 0, 0.7);
+    border-top-right-radius:20px;
+    background-color:black;
+}
+.timerDiv > .digit {
+    width:2.8vw;
+    height:6.23vw;
+    padding-right:0.8vw;
+    background-color:black;
 }

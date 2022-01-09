@@ -6,9 +6,11 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="/libs/socket.io-1.4.5.js"></script>
     <script src="/scripts/components/Chat.js"></script>
+    <script src="/scripts/components/GameModeInit.js"></script>
     <script src="/scripts/components/LoadingScreen.js"></script>
     <script src="/scripts/components/Ranking.js"></script>
     <script src="/scripts/components/MenuBar.js"></script>
+    <script src="/scripts/components/Timer.js"></script>
     <script src="/scripts/Canvas.js"></script>
     <script src="/scripts/Fireplace.js"></script>
     <script src="/scripts/Game.js"></script>
@@ -45,57 +47,5 @@
     <div id="window"><div id="text">TEXT</div><button id="close">Zamknij</button></div>
     <div id="checkChecker"><div id="checkText">TEXT</div></div>
     <button id="szukajGracza">Wybierz tryb rozgrywki</button>
-
-    <div class="choose_game_mode display_none">
-        <div class="choose_game_mode_header">
-            Graj przeciwko:
-        </div>
-        <div class ="choose_game_mode_buttons">
-            <div class="vs_player">
-                <div>
-                    <img src="gfx/icons/profle.png" alt="Gracz">
-                </div>
-                <span>Gracz</span>
-            </div>
-            <div class="vs_computer"> 
-                <div>
-                    <img src="gfx/icons/computer.png" alt="Komputer">
-                </div>
-                <span>Komputer</span>
-            </div>
-        </div>
-        <div class="difficulty_header">
-            Wybierz poziom trudności:
-        </div>
-        <div class="choose_your_difficulty">
-            <div class="one"></div>
-            <div class="two"></div>
-            <div class="three"></div>
-            <div class="four"></div>
-            <div class="five"></div>
-        </div>
-        <div class="color_header">
-            Wybierz kolor:
-        </div>
-        <div class="choose_your_color">
-            <div class="white">
-                <img src="gfx/icons/white.png" alt="White color"/>
-            </div>
-            <div class="mixed">
-                <img src="gfx/icons/mixed.png" alt="Random color"/>
-            </div>
-            <div class="black">
-                <img src="gfx/icons/black.png" alt="Black color"/>
-            </div>
-        </div>
-        <div class="finalButton">
-            Graj!
-        </div>
-        <div class="curtain">
-            <div class="strikethrough">
-                <img src="gfx/icons/strikethrough.png" alt="Not available"/>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

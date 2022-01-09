@@ -1,6 +1,6 @@
 class MenuBar {
-    static width = 6;
-    static height = 80;
+    static width = 60; // "px"
+    static height = 80; // "%"
     numberOfElements = 0;
 
     constructor () {
@@ -30,7 +30,7 @@ class MenuBar {
     }
 
     hide () {
-        this.menuBar.style.right = "-" + MenuBar.width + "%";
+        this.menuBar.style.right = "-" + MenuBar.width + "px";
         this.button.setAttribute("src", "/gfx/icons/hamburger.png");
         this.button.style.right = "calc(100% + 5px)";
         this.button.style.zIndex = "1199";
@@ -38,10 +38,10 @@ class MenuBar {
 
     createComponent () {
         let menuBar = document.createElement("div");
-        menuBar.style.width = MenuBar.width + "%";
+        menuBar.style.width = MenuBar.width + "px";
         menuBar.style.height = MenuBar.height + "%";
         menuBar.style.top = "0";
-        menuBar.style.right = "-" + MenuBar.width + "%";
+        menuBar.style.right = "-" + MenuBar.width + "px";
         menuBar.classList.add("menuBar-component");
 
         this.button = this.createButtonIcon();

@@ -4,8 +4,6 @@ function Chat() {
     this.opened = false;
     this.containerForMessages;
 
-    console.log("gdzie jest czat")
-
     this.init = () => {
         var wholeChat = $("<div>")
                         .addClass("chat-container")
