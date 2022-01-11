@@ -41,8 +41,7 @@ public class Queen extends Piece {
 
                 candidateDestinationCoordinate += currentCandidateOffset;
 
-                if (!BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate))
-                    break;
+                if (!BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) break;
                 else {
                     final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
 

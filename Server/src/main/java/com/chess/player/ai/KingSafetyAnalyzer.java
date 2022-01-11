@@ -112,6 +112,7 @@ public class KingSafetyAnalyzer {
         final Piece enemyPiece;
         final int distance;
 
+
         KingDistance(final Piece enemyPiece,
                      final int distance) {
             this.enemyPiece = enemyPiece;

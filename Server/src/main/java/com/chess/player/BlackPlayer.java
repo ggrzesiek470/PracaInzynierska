@@ -54,6 +54,7 @@ public class BlackPlayer extends Player {
                                 kingSideRook.getPiecePosition(), 5));
 
             }
+
             //blacks queen side castle
             if (this.board.getPiece(1) == null && this.board.getPiece(2) == null &&
                     this.board.getPiece(3) == null) {

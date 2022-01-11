@@ -35,8 +35,7 @@ public class Rook extends Piece {
             int candidateDestinationCoordinate = this.piecePosition;
 
             while (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
-                if (isColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate))
-                    break;
+                if (isColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate)) break;
 
                 candidateDestinationCoordinate += currentCandidateOffset;
 

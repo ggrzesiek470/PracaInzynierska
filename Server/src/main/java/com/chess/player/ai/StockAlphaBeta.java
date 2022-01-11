@@ -44,7 +44,6 @@ public class StockAlphaBeta implements MoveStrategy {
         abstract Collection<Move> sort(Collection<Move> moves);
     }
 
-
     public StockAlphaBeta(final int searchDepth) {
         this.evaluator = StandardBoardEvaluator.get();
         this.searchDepth = searchDepth;
@@ -64,27 +63,19 @@ public class StockAlphaBeta implements MoveStrategy {
 
     @Override
     public Move execute(final Board board) {
-        final long startTime = System.currentTimeMillis();
         final Player currentPlayer = board.currentPlayer();
         Move bestMove = Move.MoveFactory.getNullMove();
         int highestSeenValue = Integer.MIN_VALUE;
         int lowestSeenValue = Integer.MAX_VALUE;
         int currentValue;
 
-        System.out.println(board.currentPlayer() + " THINKING with depth = " + this.searchDepth);
-
-        int moveCounter = 1;
-        int numMoves = board.currentPlayer().getLegalMoves().size();
-
         for (final Move move: MoveSorter.EXPENSIVE.sort(board.currentPlayer().getLegalMoves())) {
             move.getMovedPiece().setOldPosition(move.getCurrentCoordinate());
 
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
             this.quiescenceCount = 0;
-            final String s;
 
             if (moveTransition.getMoveStatus().isDone()) {
-                final long candidateMoveStartTime = System.nanoTime();
                 currentValue = currentPlayer.getAlliance().isWhite() ?
                         min(moveTransition.getToBoard(), this.searchDepth - 1, highestSeenValue, lowestSeenValue) :
                         max(moveTransition.getToBoard(), this.searchDepth - 1, highestSeenValue, lowestSeenValue);
@@ -92,29 +83,16 @@ public class StockAlphaBeta implements MoveStrategy {
                 if (currentPlayer.getAlliance().isWhite() && currentValue > highestSeenValue) {
                     highestSeenValue = currentValue;
                     bestMove = move;
-
                     if (moveTransition.getToBoard().blackPlayer().isInCheckMate()) break;
                 } else if (currentPlayer.getAlliance().isBlack() && currentValue < lowestSeenValue) {
                     lowestSeenValue = currentValue;
                     bestMove = move;
-
                     if (moveTransition.getToBoard().whitePlayer().isInCheckMate()) break;
                 }
 
-                final String quiescenceInfo = " " + score(currentPlayer, highestSeenValue, lowestSeenValue) + " q:" + this.quiescenceCount;
-                s = "\t" + "(" + this.searchDepth + "), m: (" + moveCounter + "/" + numMoves + ") " + move + ", best: " + bestMove +
-                        quiescenceInfo + ", t: " + calculateTimeTaken(candidateMoveStartTime, System.nanoTime());
-            } else
-                s = "\t" + "(" + this.searchDepth + ")" + ", m: (" + moveCounter + "/" + numMoves + ") " + move + " is illegal! best: " + bestMove;
 
-            System.out.println(s);
-            moveCounter++;
+            }
         }
-
-        final long executionTime = System.currentTimeMillis() - startTime;
-
-        System.out.printf("%s SELECTS %s [#boards evaluated = %d, time taken = %d ms, rate = %.1f\n", board.currentPlayer(),
-                bestMove, this.boardsEvaluated, executionTime, (1000 * ((double)this.boardsEvaluated / executionTime)));
 
         return bestMove;
     }
@@ -123,7 +101,7 @@ public class StockAlphaBeta implements MoveStrategy {
         if (currentPlayer.getAlliance().isWhite()) return "[score: " + highestSeenValue + "]";
         else if (currentPlayer.getAlliance().isBlack()) return "[score: " + lowestSeenValue + "]";
 
-        throw new RuntimeException("how?");
+        throw new RuntimeException("somethings wrong");
     }
 
     private int max(final Board board, final int depth, final int highest, final int lowest) {

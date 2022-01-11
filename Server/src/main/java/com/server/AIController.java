@@ -24,52 +24,28 @@ public class AIController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public @ResponseBody String returnMove(@RequestBody Map<String, Object> game) throws ParseException {
-        Integer depth = (Integer) game.get("depth");
-        String computer = (String) game.get("computer");
+        Integer searchDepth = (Integer) game.get("depth");
+        String computerPlayerAllianceString = (String) game.get("computer");
 
-        ArrayList<ArrayList<JSONObject>> boardArrayList = (ArrayList<ArrayList<JSONObject>>) game.get("board");
-        String json = new Gson().toJson(boardArrayList);
+        ArrayList<ArrayList<JSONObject>> boardAsArrayList = (ArrayList<ArrayList<JSONObject>>) game.get("board");
+        String jsonFromBoard = new Gson().toJson(boardAsArrayList);
         JSONParser jsonParser = new JSONParser();
-        Object object = jsonParser.parse(json);
-        JSONArray arrayObj = (JSONArray) object;
+        Object objectFromBoardJson = jsonParser.parse(jsonFromBoard);
+        JSONArray boardAsObjArray = (JSONArray) objectFromBoardJson;
 
         Board.Builder builder = new Board.Builder();
-        Board board = builder.buildFromJson(arrayObj, computer);
+        Board board = builder.buildFromJSON(boardAsObjArray, computerPlayerAllianceString);
 
-        //StockAlphaBeta ai = new StockAlphaBeta(depth); // slower
-        AlphaBetaWithMoveOrdering ai = new AlphaBetaWithMoveOrdering(depth); // faster
-        Move bestMove = (Move) ai.execute(board);
+        AlphaBetaWithMoveOrdering ai = new AlphaBetaWithMoveOrdering(searchDepth);
+        Move move = (Move) ai.execute(board);
 
-        int[] oldPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getCurrentCoordinate());
-        int[] newPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getDestinationCoordinate());
-
-        StringBuilder bestMoveString = new StringBuilder();
-        bestMoveString.append(bestMove).append("<br>")
-                .append(bestMove.getMovedPiece().getPieceAlliance().toString().charAt(0))
-                .append(bestMove.getMovedPiece().getPieceType()).append(":")
-                .append("(").append(8 - oldPosition[0]).append(",")
-                .append(oldPosition[1]).append(")").append("->")
-                .append("(").append(8 - newPosition[0]).append(",")
-                .append(newPosition[1]).append(")");
-        System.out.println(bestMoveString);
-
-        return bestMoveString.toString();
-    }
-
-    // bug fixed, Pawn class code changed
-    @GetMapping("/error/{depth}")
-    public String errorTest(@PathVariable int depth) {
-        Board.Builder builder = new Board.Builder();
-        Board board = builder.errorBoard();
-        StockAlphaBeta ai = new StockAlphaBeta(depth);
-        Move bestMove = (Move) ai.execute(board);
-        int[] oldPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getCurrentCoordinate());
-        int[] newPosition = bestMove.getMovedPiece().getPiecePositionXY(bestMove.getDestinationCoordinate());
+        int[] oldPosition = move.getMovedPiece().getPiecePositionXY(move.getCurrentCoordinate());
+        int[] newPosition = move.getMovedPiece().getPiecePositionXY(move.getDestinationCoordinate());
 
         StringBuilder bestMoveString = new StringBuilder();
-        bestMoveString.append(bestMove).append("<br>")
-                .append(bestMove.getMovedPiece().getPieceAlliance().toString().charAt(0))
-                .append(bestMove.getMovedPiece().getPieceType()).append(":")
+        bestMoveString.append(move).append("<br>")
+                .append(move.getMovedPiece().getPieceAlliance().toString().charAt(0))
+                .append(move.getMovedPiece().getPieceType()).append(":")
                 .append("(").append(8 - oldPosition[0]).append(",")
                 .append(oldPosition[1]).append(")").append("->")
                 .append("(").append(8 - newPosition[0]).append(",")

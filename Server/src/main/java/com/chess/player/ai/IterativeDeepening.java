@@ -16,7 +16,6 @@ public class IterativeDeepening implements MoveStrategy {
     private final int searchDepth;
     private final MoveSorter moveSorter;
     private long boardsEvaluated;
-    private int cutOffsProduced;
 
 
     private enum MoveSorter {
@@ -48,7 +47,6 @@ public class IterativeDeepening implements MoveStrategy {
         this.searchDepth = searchDepth;
         this.moveSorter = MoveSorter.SORT;
         this.boardsEvaluated = 0;
-        this.cutOffsProduced = 0;
     }
 
     @Override
@@ -63,9 +61,6 @@ public class IterativeDeepening implements MoveStrategy {
 
     @Override
     public Move execute(Board board) {
-        final long startTime = System.currentTimeMillis();
-        System.out.println(board.currentPlayer() + " THINKING with depth = " + this.searchDepth);
-
         MoveOrderingBuilder builder = new MoveOrderingBuilder();
         builder.setOrder(board.currentPlayer().getAlliance().isWhite() ? Ordering.DESC : Ordering.ASC);
 
@@ -79,7 +74,6 @@ public class IterativeDeepening implements MoveStrategy {
         int lowestSeenValue = Integer.MAX_VALUE;
 
         while (currentDepth <= this.searchDepth) {
-            final long subTimeStart = System.currentTimeMillis();
             int currentValue;
 
             final List<MoveScoreRecord> records = builder.build();
@@ -106,16 +100,8 @@ public class IterativeDeepening implements MoveStrategy {
                 }
             }
 
-            final long subTime = System.currentTimeMillis()- subTimeStart;
-            System.out.println("\t" + " bestMove = " + bestMove + " Depth = " + currentDepth + " took " + (subTime) + " ms, ordered moves : " + records);
-
             currentDepth++;
         }
-
-        long executionTime = System.currentTimeMillis() - startTime;
-        System.out.printf("%s SELECTS %s [#boards evaluated = %d, time taken = %d ms, eval rate = %.1f cutoffCount = %d prune percent = %.2f\n",
-                board.currentPlayer(), bestMove, this.boardsEvaluated, executionTime, (1000 * ((double)this.boardsEvaluated/ executionTime)),
-                this.cutOffsProduced, 100 * ((double)this.cutOffsProduced/this.boardsEvaluated));
 
         return bestMove;
     }
@@ -133,10 +119,7 @@ public class IterativeDeepening implements MoveStrategy {
             if (moveTransition.getMoveStatus().isDone()) {
                 currentHighest = Math.max(currentHighest, min(moveTransition.getToBoard(), depth - 1,
                                                               currentHighest, lowest));
-                if (lowest <= currentHighest) {
-                    this.cutOffsProduced++;
-                    break;
-                }
+                if (lowest <= currentHighest) break;
             }
         }
 
@@ -156,10 +139,7 @@ public class IterativeDeepening implements MoveStrategy {
             if (moveTransition.getMoveStatus().isDone()) {
                 currentLowest = Math.min(currentLowest, max(moveTransition.getToBoard(), depth - 1,
                                                             highest, currentLowest));
-                if (currentLowest <= highest) {
-                    this.cutOffsProduced++;
-                    break;
-                }
+                if (currentLowest <= highest) break;
             }
         }
 
@@ -202,7 +182,6 @@ public class IterativeDeepening implements MoveStrategy {
             @Override
             List<MoveScoreRecord> order(final List<MoveScoreRecord> moveScoreRecords) {
                 moveScoreRecords.sort((o1, o2) -> Ints.compare(o1.getScore(), o2.getScore()));
-
                 return moveScoreRecords;
             }
         },
@@ -211,7 +190,6 @@ public class IterativeDeepening implements MoveStrategy {
             @Override
             List<MoveScoreRecord> order(final List<MoveScoreRecord> moveScoreRecords) {
                 moveScoreRecords.sort((o1, o2) -> Ints.compare(o2.getScore(), o1.getScore()));
-
                 return moveScoreRecords;
             }
         };

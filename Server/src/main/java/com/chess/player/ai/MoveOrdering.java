@@ -73,6 +73,7 @@ public class MoveOrdering {
         int lowestSeenValue = Integer.MAX_VALUE;
         for (final Move move: calculateSimpleMoveOrder(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
+
             if (moveTransition.getMoveStatus().isDone()) {
                 final int currentValue = max(moveTransition.getToBoard(), depth - 1);
                 if (currentValue <= lowestSeenValue) lowestSeenValue = currentValue;
@@ -89,6 +90,7 @@ public class MoveOrdering {
         int highestSeenValue = Integer.MIN_VALUE;
         for (final Move move: calculateSimpleMoveOrder(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
+
             if (moveTransition.getMoveStatus().isDone()) {
                 final int currentValue = min(moveTransition.getToBoard(), depth - 1);
                 if (currentValue >= highestSeenValue) highestSeenValue = currentValue;
@@ -102,6 +104,7 @@ public class MoveOrdering {
     private static class MoveOrderEntry {
         final Move move;
         final int score;
+
 
         MoveOrderEntry(final Move move,
                        final int score) {

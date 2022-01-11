@@ -36,8 +36,7 @@ public class WhitePlayer extends Player {
 
     @Override
     protected Collection<Move> calculateKingCastles(final Collection<Move> playerLegals, final Collection<Move> opponentLegals) {
-        if (!hasCastleOpportunities())
-            return Collections.emptyList();
+        if (!hasCastleOpportunities()) return Collections.emptyList();
 
         final List<Move> kingCastles = new ArrayList<>();
 
@@ -54,6 +53,7 @@ public class WhitePlayer extends Player {
                             kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing, 62, (Rook) kingSideRook,
                                     kingSideRook.getPiecePosition(), 61));
             }
+
             //whites queen side castle
             if (this.board.getPiece(59) == null && this.board.getPiece(58) == null &&
                 this.board.getPiece(57) == null) {

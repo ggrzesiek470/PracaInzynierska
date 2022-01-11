@@ -119,12 +119,14 @@ public abstract class Move {
                 return true;
             }
         },
+
         ILLEGAL_MOVE {
             @Override
             public boolean isDone() {
                 return false;
             }
         },
+
         LEAVES_PLAYER_IN_CHECK {
             @Override
             public boolean isDone() {
@@ -391,6 +393,7 @@ public abstract class Move {
         protected final Rook castleRook;
         protected final int castleRookStart;
         protected final int castleRookDestination;
+
 
         public CastleMove(final Board board,
                           final Piece movedPiece,

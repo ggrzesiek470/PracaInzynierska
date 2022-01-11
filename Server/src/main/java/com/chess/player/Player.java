@@ -80,8 +80,7 @@ public abstract class Player {
     private boolean hasEscapeMoves() {
         for (final Move move: this.legalMoves) {
             final MoveTransition transition = makeMove(move);
-            if (transition.getMoveStatus().isDone())
-                return true;
+            if (transition.getMoveStatus().isDone()) return true;
         }
 
         return false;
@@ -91,16 +90,14 @@ public abstract class Player {
         final List<Move> attackMoves = new ArrayList<>();
 
         for (final Move move: moves)
-            if (piecePosition == move.getDestinationCoordinate())
-                attackMoves.add(move);
+            if (piecePosition == move.getDestinationCoordinate()) attackMoves.add(move);
 
         return attackMoves;
     }
 
     private King establishKing() {
         for (final Piece piece: getActivePieces())
-            if (piece.getPieceType() == Piece.PieceType.KING)
-                return (King) piece;
+            if (piece.getPieceType() == Piece.PieceType.KING) return (King) piece;
 
         throw new RuntimeException("Should not reach here! Not a valid board!");
     }

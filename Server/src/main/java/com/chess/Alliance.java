@@ -139,8 +139,8 @@ public enum Alliance {
     public abstract boolean isWhite();
     public abstract boolean isBlack();
     public abstract boolean isPawnPromotionSquare(int position);
-    public abstract Player choosePlayerByAlliance(final WhitePlayer whitePlayer, final BlackPlayer blackPlayer);
-
+    public abstract Player choosePlayerByAlliance(final WhitePlayer whitePlayer,
+                                                  final BlackPlayer blackPlayer);
     public abstract int pawnBonus(int position);
     public abstract int knightBonus(int position);
     public abstract int bishopBonus(int position);
@@ -281,3 +281,4 @@ public enum Alliance {
             -30,-40,-40,-50,-50,-40,-40,-30
     };
 }
+

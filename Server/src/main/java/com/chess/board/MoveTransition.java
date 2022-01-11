@@ -6,6 +6,7 @@ public class MoveTransition {
     private final Move transitionMove;
     private final Move.MoveStatus moveStatus;
 
+
     public MoveTransition(final Board fromBoard,
                           final Board toBoard,
                           final Move transitionMove,

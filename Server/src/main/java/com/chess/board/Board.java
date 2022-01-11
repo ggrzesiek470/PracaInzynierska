@@ -14,34 +14,27 @@ import java.util.stream.Stream;
 
 public class Board {
     private final Map<Integer, Piece> boardConfig;
-
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
-
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
     private final Player currentPlayer;
-
     private final Pawn enPassantPawn;
     private final Move transitionMove;
 
-
-    private Board(Builder builder) {
+    private Board(final Builder builder) {
         this.boardConfig = Collections.unmodifiableMap(builder.boardConfig);
-
         this.whitePieces = calculateActivePieces(builder, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(builder, Alliance.BLACK);
-
         this.enPassantPawn = builder.enPassantPawn;
-
         final Collection<Move> whiteStandardMoves = calculateLegalMoves(this.whitePieces);
         final Collection<Move> blackStandardMoves = calculateLegalMoves(this.blackPieces);
-
         this.whitePlayer = new WhitePlayer(this, whiteStandardMoves, blackStandardMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardMoves, blackStandardMoves);
-        this.currentPlayer = builder.nextMoveMaker.choosePlayerByAlliance(this.whitePlayer, this.blackPlayer);
-
-        this.transitionMove = builder.transitionMove != null ? builder.transitionMove : Move.MoveFactory.getNullMove();
+        this.currentPlayer = builder.nextMoveMaker
+                                    .choosePlayerByAlliance(this.whitePlayer, this.blackPlayer);
+        this.transitionMove = builder.transitionMove != null ?
+                builder.transitionMove : Move.MoveFactory.getNullMove();
     }
 
     @Override
@@ -50,18 +43,14 @@ public class Board {
         for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
             final String tileText = prettyPrint(this.boardConfig.get(i));
             builder.append(String.format("%3s", tileText));
-
-            if ((i + 1) % 8 == 0)
-                builder.append("\n");
+            if ((i + 1) % 8 == 0) builder.append("\n");
         }
-
         return builder.reverse().toString();
     }
 
     private static String prettyPrint(final Piece piece) {
-        if (piece != null)
-            return piece.getPieceAlliance().isBlack() ? piece.toString().toLowerCase() : piece.toString();
-
+        if (piece != null) return piece.getPieceAlliance().isBlack() ?
+                    piece.toString().toLowerCase() : piece.toString();
         return "-";
     }
 
@@ -104,30 +93,21 @@ public class Board {
 
     private Collection<Move> calculateLegalMoves(Collection<Piece> pieces) {
         final List<Move> legalMoves = new ArrayList<>();
-
-        for (final Piece piece: pieces)
-            legalMoves.addAll(piece.calculateLegalMoves(this));
-
+        for (final Piece piece: pieces) legalMoves.addAll(piece.calculateLegalMoves(this));
         return legalMoves;
     }
 
-    private static Collection<Piece> calculateActivePieces(final Builder builder, final Alliance alliance) {
-        return builder.boardConfig.values().stream().filter(piece -> piece.getPieceAlliance() == alliance)
-                                                    .collect(Collectors.toList());
+    private static Collection<Piece> calculateActivePieces(final Builder builder,
+                                                           final Alliance alliance) {
+        return builder.boardConfig.values().stream()
+                .filter(piece -> piece.getPieceAlliance() == alliance).collect(Collectors.toList());
     }
-
-    public Iterable<Move> getAllLegalMoves() {
-        return Stream.concat(this.whitePlayer.getLegalMoves().stream(), this.blackPlayer.getLegalMoves().stream())
-                     .collect(Collectors.toList());
-    }
-
 
     public static class Builder {
         Map<Integer, Piece> boardConfig;
         Alliance nextMoveMaker;
         Pawn enPassantPawn;
         Move transitionMove;
-
 
         public Builder() {
             this.boardConfig = new HashMap<>(32);
@@ -154,96 +134,57 @@ public class Board {
             this.transitionMove = transitionMove;
         }
 
-        // for already fixed bug
-        public Board errorBoard() {
-            this.setPiece(new Rook(Alliance.WHITE, 63));
-            this.setPiece(new Rook(Alliance.WHITE, 56));
-            this.setPiece(new Pawn(Alliance.WHITE, 54));
-            this.setPiece(new Pawn(Alliance.WHITE, 53));
-            this.setPiece(new King(Alliance.WHITE, 52, false, false, false, false));
-            this.setPiece(new Pawn(Alliance.WHITE, 50));
-            this.setPiece(new Pawn(Alliance.WHITE, 49));
-            this.setPiece(new Pawn(Alliance.WHITE, 48));
-            this.setPiece(new Queen(Alliance.WHITE, 42, false));
-            this.setPiece(new Pawn(Alliance.WHITE, 39, false));
-            this.setPiece(new Bishop(Alliance.WHITE, 38, false));
-            this.setPiece(new Pawn(Alliance.WHITE, 36, false));
-            this.setPiece(new Pawn(Alliance.WHITE, 35, false));
-
-            this.setPiece(new Knight(Alliance.BLACK, 32, false));
-            this.setPiece(new Pawn(Alliance.BLACK, 22, false));
-            this.setPiece(new Pawn(Alliance.BLACK, 20, false));
-            this.setPiece(new Pawn(Alliance.BLACK, 19, false));
-            this.setPiece(new Pawn(Alliance.BLACK, 18, false));
-            this.setPiece(new Pawn(Alliance.BLACK, 13));
-            this.setPiece(new Bishop(Alliance.BLACK, 12, false));
-            this.setPiece(new Pawn(Alliance.BLACK, 10));
-            this.setPiece(new Pawn(Alliance.BLACK, 8));
-            this.setPiece(new Queen(Alliance.BLACK, 4));
-            this.setPiece(new Rook(Alliance.BLACK, 3, false));
-            this.setPiece(new King(Alliance.BLACK, 1, false, true, false, false));
-
-            this.setMoveMaker(Alliance.WHITE);
-            return new Board(this);
-        }
-
-        public Board buildFromJson(JSONArray board, String computerAlliance) {
-            for (int i = 0; i < 8; i++) {
-                JSONArray row = (JSONArray) board.get(i);
-
-                for (int j = 0; j < 8; j++) {
+        public Board buildFromJSON(JSONArray JSONboard, String computerAlliance) {
+            for (int i = 0; i < BoardUtils.NUM_TILES_PER_ROW; i++) {
+                JSONArray row = (JSONArray) JSONboard.get(i);
+                for (int j = 0; j < BoardUtils.NUM_TILES_PER_ROW; j++)
                     if (row.get(j) != "") {
                         JSONObject piece = (JSONObject) row.get(j);
                         parsePiece(piece);
                     }
-                }
             }
             this.setMoveMaker(parseAlliance(computerAlliance));
-
-            Board newBoard = new Board(this);
-            System.out.println(newBoard);
-            return newBoard;
+            return new Board(this);
         }
 
-        private void parsePiece(JSONObject piece) {
-            if (piece.isEmpty()) return;
-
-            String pieceType = (String) piece.get("type");
-            String pieceAlliance = (String) piece.get("color");
+        private void parsePiece(JSONObject JSONpiece) {
+            if (JSONpiece.isEmpty()) return;
+            String pieceType = (String) JSONpiece.get("type");
+            String pieceAlliance = (String) JSONpiece.get("color");
             Alliance alliance = parseAlliance(pieceAlliance);
-            boolean firstMove = (boolean) piece.get("firstMove");
-            JSONObject position = (JSONObject) piece.get("position");
+            boolean firstMove = !(boolean) JSONpiece.get("firstMove");
+            JSONObject position = (JSONObject) JSONpiece.get("position");
             Long x = (Long) position.get("x");
             Long y = (Long) position.get("y");
             int coordinate = calculateCoordinate(8-x, y-1);
-            Piece newPiece;
-
+            Piece piece;
             switch (pieceType) {
                 case "Pawn" -> {
-                    newPiece = new Pawn(alliance, coordinate, firstMove);
-                    this.setPiece(newPiece);
+                    piece = new Pawn(alliance, coordinate, firstMove);
+                    this.setPiece(piece);
                 }
                 case "Rook" -> {
-                    newPiece = new Rook(alliance, coordinate, firstMove);
-                    this.setPiece(newPiece);
+                    piece = new Rook(alliance, coordinate, firstMove);
+                    this.setPiece(piece);
                 }
                 case "Knight" -> {
-                    newPiece = new Knight(alliance, coordinate, firstMove);
-                    this.setPiece(newPiece);
+                    piece = new Knight(alliance, coordinate, firstMove);
+                    this.setPiece(piece);
                 }
                 case "Bishop" -> {
-                    newPiece = new Bishop(alliance, coordinate, firstMove);
-                    this.setPiece(newPiece);
+                    piece = new Bishop(alliance, coordinate, firstMove);
+                    this.setPiece(piece);
                 }
                 case "King" -> {
-                    boolean kingSideCastleCapable = (boolean) piece.get("kingSideCastlePossible");
-                    boolean queenSideCastleCapable = (boolean) piece.get("queenSideCastlePossible");
-                    newPiece = new King(alliance, coordinate, firstMove, false, kingSideCastleCapable, queenSideCastleCapable);
-                    this.setPiece(newPiece);
+                    boolean kingSideCastleCapable = (boolean) JSONpiece.get("kingSideCastlePossible");
+                    boolean queenSideCastleCapable = (boolean) JSONpiece.get("queenSideCastlePossible");
+                    piece = new King(alliance, coordinate, firstMove, false,
+                            kingSideCastleCapable, queenSideCastleCapable);
+                    this.setPiece(piece);
                 }
                 case "Queen" -> {
-                    newPiece = new Queen(alliance, coordinate, firstMove);
-                    this.setPiece(newPiece);
+                    piece = new Queen(alliance, coordinate, firstMove);
+                    this.setPiece(piece);
                 }
                 default -> {}
             }

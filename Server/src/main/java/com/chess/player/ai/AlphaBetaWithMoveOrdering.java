@@ -17,9 +17,6 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
     private final int searchDepth;
     private final MoveSorter moveSorter;
     private long boardsEvaluated;
-    private int quiescenceCount;
-    private int cutOffsProduced;
-
 
     private enum MoveSorter {
         SORT {
@@ -46,8 +43,6 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
         this.searchDepth = searchDepth;
         this.moveSorter = MoveSorter.SORT;
         this.boardsEvaluated = 0;
-        this.quiescenceCount = 0;
-        this.cutOffsProduced = 0;
     }
 
     @Override
@@ -62,30 +57,22 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
 
     @Override
     public Move execute(Board board) {
-        final long startTime = System.currentTimeMillis();
         final Player currentPlayer = board.currentPlayer();
         final Alliance alliance = currentPlayer.getAlliance();
         Move bestMove = Move.MoveFactory.getNullMove();
         int highestSeenValue = Integer.MIN_VALUE;
         int lowestSeenValue = Integer.MAX_VALUE;
         int currentValue;
-        int moveCounter = 1;
-        final int numMoves = this.moveSorter.sort(board.currentPlayer().getLegalMoves()).size();
-
-        System.out.println(board.currentPlayer() + " THINKING with depth = " + this.searchDepth);
-        System.out.println("\tOrdered moves! : " + this.moveSorter.sort(board.currentPlayer().getLegalMoves()));
 
         for (final Move move: this.moveSorter.sort(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
-            this.quiescenceCount = 0;
-            final String s;
 
             if (moveTransition.getMoveStatus().isDone()) {
-                final long candidateMoveStartTime = System.nanoTime();
                 currentValue = alliance.isWhite() ?
-                        min(moveTransition.getToBoard(), this.searchDepth - 1, highestSeenValue, lowestSeenValue) :
-                        max(moveTransition.getToBoard(), this.searchDepth - 1, highestSeenValue, lowestSeenValue);
-
+                        min(moveTransition.getToBoard(), this.searchDepth - 1,
+                                highestSeenValue, lowestSeenValue) :
+                        max(moveTransition.getToBoard(), this.searchDepth - 1,
+                                highestSeenValue, lowestSeenValue);
                 if (alliance.isWhite() && currentValue > highestSeenValue) {
                     highestSeenValue = currentValue;
                     bestMove = move;
@@ -93,21 +80,8 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
                     lowestSeenValue = currentValue;
                     bestMove = move;
                 }
-
-                final String quiescenceInfo = " [h: " + highestSeenValue + " l:" + lowestSeenValue + "] q:" + this.quiescenceCount;
-                s = "\t" + "(" + this.searchDepth + "), m: (" + moveCounter + "/" + numMoves + ") " + move + ", best: " + bestMove
-                        + quiescenceInfo + ", t: " + calculateTimeTaken(candidateMoveStartTime, System.nanoTime());
-            } else s = "\t" + ", m: (" + moveCounter + "/" + numMoves + ") " + move + " is illegal, best: " + bestMove;
-
-            System.out.println(s);
-
-            moveCounter++;
+            }
         }
-
-        long executionTime = System.currentTimeMillis() - startTime;
-        System.out.printf("%s SELECTS %s [#boards evaluated = %d, time taken = %d ms, eval rate = %.1f cutoffCount = %d prune percent = %.2f\n",
-                board.currentPlayer(), bestMove, this.boardsEvaluated, executionTime, (1000 * ((double)this.boardsEvaluated/ executionTime)),
-                this.cutOffsProduced, 100 * ((double)this.cutOffsProduced/this.boardsEvaluated));
 
         return bestMove;
     }
@@ -123,13 +97,9 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
 
             if (moveTransition.getMoveStatus().isDone()) {
-                currentHighest = Math.max(currentHighest, min(moveTransition.getToBoard(),
-                                                              calculateQuiescenceDepth(board, move, depth),
+                currentHighest = Math.max(currentHighest, min(moveTransition.getToBoard(),depth-1,
                                                               currentHighest, lowest));
-                if (lowest <= currentHighest) {
-                    this.cutOffsProduced++;
-                    break;
-                }
+                if (lowest <= currentHighest) break;
             }
         }
 
@@ -145,26 +115,14 @@ public class AlphaBetaWithMoveOrdering implements MoveStrategy {
         int currentLowest = lowest;
         for (final Move move: this.moveSorter.sort(board.currentPlayer().getLegalMoves())) {
             final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
+
             if (moveTransition.getMoveStatus().isDone()) {
-                currentLowest = Math.min(currentLowest, max(moveTransition.getToBoard(),
-                                                            calculateQuiescenceDepth(board, move, depth),
+                currentLowest = Math.min(currentLowest, max(moveTransition.getToBoard(), depth-1,
                                                             highest, currentLowest));
-                if (currentLowest <= highest) {
-                    this.cutOffsProduced++;
-                    break;
-                }
+                if (currentLowest <= highest) break;
             }
         }
 
         return currentLowest;
-    }
-
-    private int calculateQuiescenceDepth(final Board board, final Move move, final int depth) {
-        return depth - 1;
-    }
-
-    private static String calculateTimeTaken(final long start, final long end) {
-        final long timeTaken = (end - start) / 1000000;
-        return timeTaken + "ms";
     }
 }

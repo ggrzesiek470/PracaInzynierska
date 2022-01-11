@@ -110,6 +110,7 @@ public abstract class Piece {
         private final String pieceName;
         private final int pieceValue;
 
+
         PieceType(final String pieceName,
                   final int pieceValue) {
             this.pieceName = pieceName;
