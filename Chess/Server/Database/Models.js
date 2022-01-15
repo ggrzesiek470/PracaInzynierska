@@ -22,6 +22,7 @@
 
     var freeGameSchema = new Schema({
         waitingPlayer: { type: String, required: true },
+        timer: { type: Number, required: true }
     })
 
     var difficultyLevelsSchema = new Schema({
@@ -33,13 +34,15 @@
         gameId: { type: Number, required: true },
         historyOfMoves:{ type: Array, required: false },
         currentBoardState:{ type: Array, required: false },
-        isAiPlaying: { type: Boolean, required: false },
+        whoseTurn: { type: String, required: true, default: "white" },
         whitePlayer:{ type: String, required: true },
         blackPlayer:{ type: String, required: true },
-        difficultyLevel:{ type: "objectId", required: false },
         whitePlayerTimeLeft:{ type: Number, required: false },
         blackPlayerTimeLeft:{ type: Number, required: false },
         gameTime:{ type: Number, required: false },
+
+        isAiPlaying: { type: Boolean, required: false },
+        difficultyLevel:{ type: "objectId", required: false },
     });
 
     var historicalGameSchema = new Schema({

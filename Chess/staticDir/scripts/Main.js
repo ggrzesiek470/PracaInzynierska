@@ -72,7 +72,7 @@
         }
     }
 
-    this.movePawn = function (x, y, xDes, yDes, shouldGoUp = true, addArrow = false, time = 500) {
+    this.moveFigure = function (x, y, xDes, yDes, shouldGoUp = true, addArrow = false, time = 500) {
         return new Promise(resolve => {
             for (var i = 0; i < scene.children.length; i++) {
                 let pawn3dObject = scene.children[i];
@@ -157,7 +157,7 @@
         dir.normalize();
 
         const length = Math.sqrt(Math.pow(xDes - x, 2) + Math.pow(zDes - z, 2));
-        const hex = "rgba(244, 81, 30, 0.7)";
+        const hex = "rgb(244, 81, 30)";
 
         const arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
         scene.add(arrowHelper);
@@ -173,9 +173,11 @@
                     // console.log("usuniety");
                     scene.remove(scene.children[i]);
                     game.getLocalTable[y - 1, x - 1];
+                    return true;
                 }
             }
         }
+        return false;
     }
 	
 	this.changeModel = function (x, y, type) {
@@ -251,9 +253,9 @@
         }
     }
 
-    this.createPawns = function () { createPawns(); }
+    this.createFigures = function () { createFigures(); }
 
-    function createPawns() {
+    function createFigures() {
         loadCorners();
         var loadingScreen = new LoadingScreen(32);
         for (var i = 0; i < 8; i++) {
@@ -405,7 +407,7 @@
         createLight(-600, 100, 50, "#eeeeee", 0xffffff, 300, 1.5, false);
         createLight(600, 100, 50, "#eeeeee", 0xffffff, 300, 1.5, false);
         createLight(0, 300, 0, "#eeeeee", 0xffffff, 300, 1.25, false);
-        // createPawns();
+        // createFigures();
 
         function animateScene() {
             requestAnimationFrame(animateScene);

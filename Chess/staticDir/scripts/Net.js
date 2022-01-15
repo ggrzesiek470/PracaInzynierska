@@ -64,16 +64,16 @@
         })
         client.on("searchForGames", function (data) {
             if (data.data.length <= 0) { // Stwórz własną wolną grę
-                net.addFreeGame(main.getNick());
+                net.addFreeGame(main.getNick(), data.timer);
             } else { // Dołącz do pierwszej wolnej gry
-                net.joinGame(main.getNick());
+                net.joinGame(main.getNick(), data.timer);
             }
         })
         client.on("joinGame", function (data) {
             game.setGameId(data.gameId);
             game.setYourColor(data.yourColor);
             game.turnTheGameOn();
-            main.createPawns();
+            main.createFigures();
             document.getElementById("bariera").style.display = "none";
             document.getElementById("checkChecker").style.display = "initial";
             var string;
@@ -84,13 +84,20 @@
             document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
             var chat = new Chat();
             client.on("getMessageByChat", chat.getMessage);
+
+            var intervalToRemove = setInterval(() => {
+                if (game.loadingFigures >= 32) {
+                    game.timer = new Timer(game.timerParam, data.yourColor == "white" ? true : false);
+                    clearInterval(intervalToRemove);
+                }
+            }, 500);
         })
         client.on("turn", function (data) {
             game.opponentMove(data.pawn, data.xDes, data.yDes, data.enPassant, data.casting);
             if (game.isGameEnabled() == true) {
-                var string;
-                if (game.getYourColor() == "white") string = "białymi.<br/>Twój ruch.";
-                if (game.getYourColor() == "black") string = "czarnymi.<br/>Twój ruch.";
+                var string = (game.getYourColor() == "white")
+                                                            ? "białymi.<br/>Twój ruch."
+                                                            : "czarnymi.<br/>Twój ruch.";
                 window.showWindow("Grasz " + string);
             }
             document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
@@ -126,15 +133,18 @@
         client.emit("searchForGames", { timer: timer });
     }
 
-    this.addFreeGame = function (login) {
+    this.addFreeGame = function (login, timer) {
         client.emit("addFreeGame", {
             login: login,
+            timer: timer
         });
     }
 
-    this.joinGame = function (login) {
+    this.joinGame = function (login, timer) {
         client.emit("joinGame", {
             login: login,
+            timer: timer,
+            currentBoardState: game.getLocalTable()
         });
     }
 
@@ -144,14 +154,20 @@
             computer: (game.getYourColor() == "white") ? "black" : "white",
             localTable: localTable
         };
+        game.timer.stopTimer();
         client.emit("sendDataToAI", obj)
     }
 
-    this.turn = function (pawn, xDes, yDes, enPassant, casting, color, gmid, localTable, depth) {
+    this.turn = function (pawn, fromX, fromY, xDes, yDes, hitPawn, enPassant, casting, color, gmid, localTable, depth) {
         client.emit("turn", {
             pawn: pawn,
+            from: {
+                x: fromX,
+                y: fromY
+            },
             xDes: xDes,
             yDes: yDes,
+            hitPawn: hitPawn,
             enPassant: enPassant,
             casting: casting,
             color: color,
@@ -159,7 +175,8 @@
             localTable: localTable,
             computer: (game.getYourColor() == "white") ? "black" : "white",
             depth: depth,
-            ai_playing: game.ai_playing
+            ai_playing: game.ai_playing,
+            time_of_turn: new Date()
         });
     }
 

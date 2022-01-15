@@ -7,12 +7,18 @@ class GameModeInit {
         timer: 0
     };
     mixed = 0;
+    timerSet = false;
     screenNumber = 1;
     numberOfScreens = 4;
+    difficultyLevels = [];
 
     constructor () {
         this.containerElement = $("<div>").addClass("choose_game_mode display_none");
         $("body").append(this.containerElement);
+        
+        net.getAllDiffLevels((diffLevels) => {
+            this.difficultyLevels = diffLevels;
+        });
 
         this.chooseScreen(1);
     }
@@ -52,18 +58,16 @@ class GameModeInit {
     screen2 () {
         let header = $("<div>").html("Wybierz poziom trudności:")
                     .addClass("choose_game_mode_header");
-        net.getAllDiffLevels((diffLevels) => {
-            this.diffLevelsContainer = this.difficultyLevelsInit(diffLevels);
-            let containerForButtons = $("<div>").addClass("containerForButtons");
-            this.backButton = this.createBackButton();
-            this.nextButton = this.createNextButton();
-            containerForButtons.append(this.backButton);
-            containerForButtons.append(this.nextButton);
-    
-            this.containerElement.append(header);
-            this.containerElement.append(this.diffLevelsContainer);
-            this.containerElement.append(containerForButtons);
-        });
+        this.diffLevelsContainer = this.difficultyLevelsInit(this.difficultyLevels);
+        let containerForButtons = $("<div>").addClass("containerForButtons");
+        this.backButton = this.createBackButton();
+        this.nextButton = this.createNextButton();
+        containerForButtons.append(this.backButton);
+        containerForButtons.append(this.nextButton);
+
+        this.containerElement.append(header);
+        this.containerElement.append(this.diffLevelsContainer);
+        this.containerElement.append(containerForButtons);
     }
 
     screen3 () {
@@ -222,6 +226,7 @@ class GameModeInit {
                     $("#szukajGracza").css("display", "none");
                     $("#close").css("display", "none");
                     this.hide();
+                    game.timerParam = this.options.timer;
                     net.window.showWindow("Czekaj na gracza...");
                     net.searchForGames(this.options.timer);
                 } else if (this.options.versus == "computer") {
@@ -277,6 +282,11 @@ class GameModeInit {
             if (this.options.difficulty != 0) {
                 $(`.choose_your_difficulty > div:nth-child(${this.options.difficulty})`).click();
             }
+            if (this.numberOfScreens == 2) {
+                if (this.timerSet == true) {
+                    $(".timerSetterContainer[time="+this.options.timer+"]").click();
+                }
+            }
         } else if (this.screenNumber == 3) {
             if (this.mixed == 0) {
                 if (this.options.color == "white") {
@@ -286,6 +296,10 @@ class GameModeInit {
                 }
             } else if (this.mixed == 1) {
                 $(".choose_your_color > .mixed").click();
+            }
+        } else if (this.screenNumber == 4) {
+            if (this.timerSet == true) {
+                $(".timerSetterContainer[time="+this.options.timer+"]").click();
             }
         }
     }
@@ -297,11 +311,13 @@ class GameModeInit {
 
         times.forEach(time => {
             let timerSetter = this.createTimerSetter(time);
+            timerSetter.attr("time", ""+time);
 
             timerSetter.on("click", () => {
                 this.options.timer = time;
                 $(".timerSetterContainer").removeClass("timerSetterContainerWhitened");
                 timerSetter.addClass("timerSetterContainerWhitened");
+                this.timerSet = true;
             })
 
             containerForTimerSetters.append(timerSetter);

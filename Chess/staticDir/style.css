@@ -546,4 +546,18 @@ input:focus {
     height:6.23vw;
     padding-right:0.8vw;
     background-color:black;
+    position:relative;
+    top:1.2vw;
+}
+.timerDiv > .timerInfo {
+    position:absolute;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:11px;
+    font-variant:small-caps;
+    color:yellow;
+}
+.timerDiv > .digitHighlighted {
+    filter: brightness(3) contrast(3);
 }

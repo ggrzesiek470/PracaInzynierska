@@ -8,12 +8,19 @@ class Timer {
 
     timerDiv;
 
-    constructor (minutes) {
+    constructor (minutes, launched) {
         this.secondsLeft = minutes*60;
         if (this.secondsLeft > 0) {
             this.timerDiv = $("<div>").addClass("timerDiv");
 
-            this.startTimer();
+            if (launched) {
+                this.startTimer();
+            } else {
+                this.lastBeginningDate = new Date();
+                let nextDate = new Date();
+                this.yourTimeShownLeft = Math.ceil((this.secondsLeft*1000 - (nextDate - this.lastBeginningDate))/1000);
+                this.evaluateTime();
+            }
 
             $("body").append(this.timerDiv);
         }
@@ -44,15 +51,28 @@ class Timer {
         this.yourTimeShownLeft = Math.ceil((this.secondsLeft*1000 - (nextDate - this.lastBeginningDate))/1000);
         this.secondsLeft = (this.secondsLeft*1000 - (nextDate - this.lastBeginningDate))/1000;
         clearInterval(this.interval);
+        this.visuallyShowStopping();
     }
 
     startTimer () {
         this.lastBeginningDate = new Date();
+        this.visuallyShowStarting();
         this.interval = setInterval(() => {
             let nextDate = new Date();
             this.yourTimeShownLeft = Math.ceil((this.secondsLeft*1000 - (nextDate - this.lastBeginningDate))/1000);
             this.evaluateTime();
         }, 20);
+    }
+
+    visuallyShowStopping () {
+        var span = $("<span>").addClass("timerInfo").html("Czas zatrzymany.");
+        this.timerDiv.append(span);
+        $(".timerDiv > .digit").addClass("digitHighlighted");
+    }
+
+    visuallyShowStarting () {
+        $(".timerInfo").remove();
+        $(".timerDiv > .digit").removeClass("digitHighlighted");
     }
 
 }

@@ -6,7 +6,8 @@ let channel = "addFreeGame";
 export default function addFreeGame ({ client, opers, models }) {
     client.on(channel, function (data) {
         var freegame = new models.FreeGame({
-            waitingPlayer: data.login
+            waitingPlayer: data.login,
+            timer: data.timer
         });
 
         opers.InsertOne(freegame);

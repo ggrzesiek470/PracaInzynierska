@@ -6,30 +6,34 @@ let channel = "joinGame";
 
 export default function joinGame ({ client, opers, models, io }) {
     client.on(channel, function (data) {
-        var me = data.login;
-        opers.SelectAndLimit(models.FreeGame, 1, function (data) {
-            var whitePlayer, blackPlayer;
-            var color = Math.round(Math.random());
-            var gameId = GlobalData.newGameId;
+        const me = data.login;
+        const currentBoardState = data.currentBoardState;
+        opers.SelectByDataAndLimit(models.FreeGame, {
+            timer: data.timer
+        }, 1, function (data) {
+            const color = Math.round(Math.random());
+            const gameId = GlobalData.newGameId;
+
+            let whitePlayer, blackPlayer;
             GlobalData.newGameId++;
 
-            var dane = {
+            let dataToSendBack = {
                 gameId: gameId,
             }
             
             if (color == 0) {
                 whitePlayer = data.data[0].waitingPlayer;
                 blackPlayer = me;
-                dane.yourColor = "black";
+                dataToSendBack.yourColor = "black";
             } else {
                 whitePlayer = me;
                 blackPlayer = data.data[0].waitingPlayer;
-                dane.yourColor = "white";
+                dataToSendBack.yourColor = "white";
             }
-            io.sockets.to(client.id).emit(channel, dane);
+            io.sockets.to(client.id).emit(channel, dataToSendBack);
 
-            if (color == 0) dane.yourColor = "white";
-            else dane.yourColor = "black";
+            if (color == 0) dataToSendBack.yourColor = "white";
+            else dataToSendBack.yourColor = "black";
 
             var opponentsId;
 
@@ -39,15 +43,16 @@ export default function joinGame ({ client, opers, models, io }) {
                 }
             }
 
-            io.sockets.to(opponentsId).emit(channel, dane);
+            io.sockets.to(opponentsId).emit(channel, dataToSendBack);
 
             var game = new models.Game({
                 gameId: gameId,
                 whitePlayer: whitePlayer,
                 blackPlayer: blackPlayer,
+                currentBoardState: currentBoardState,
             });
 
-            opers.DeleteFirst(models.FreeGame);
+            opers.DeleteByWaitingPlayerAndTimer(models.FreeGame, data.data[0].waitingPlayer, data.data[0].timer);
             opers.InsertOne(game);
         })
     })

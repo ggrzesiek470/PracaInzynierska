@@ -35,6 +35,18 @@ export default function () {
             }).limit(count)
         },
 
+        SelectByDataAndLimit: function (Model, data, count, callback) {
+            var obj = {};
+            Model.find(data, function (err, data) {
+                if (err) {
+                    Logger.print(err, Logger.type.CRITICAL, "Database Record SELECT Attempt - SelectByDataAndLimit func");
+                    obj.data = err;
+                }
+                else obj.data = data;
+                callback(obj);
+            }).limit(count)
+        },
+
         DeleteByWaitingPlayer: function (Model, waitingPlayer) {
             Model.deleteOne({ waitingPlayer: waitingPlayer }, function (err, data) {
                 if (err) {
@@ -62,6 +74,15 @@ export default function () {
             })
         },
 
+        DeleteByWaitingPlayerAndTimer: function (Model, waitingPlayer, timer) {
+            Model.deleteOne({ waitingPlayer: waitingPlayer, timer: timer }, function (err, data) {
+                if (err) {
+                    Logger.print(err, Logger.type.CRITICAL, "Database Record DELETE Attempt - DeleteById func");
+                    return console.error(err);
+                }
+            })
+        },
+
         DeleteFirst: function (Model) {
             Model.deleteOne({}, function (err, data) {
                 if (err) {
@@ -71,29 +92,31 @@ export default function () {
             })
         },
 
-        SelectByOnlyLogin: function (ModelUser, ModelRanking, login, callback) {
-            var obj = {};
-            ModelUser.find({ login: login }, function (err, data) {
-                if (err) {
-                    Logger.print(err, Logger.type.CRITICAL, "Database Record SELECT Attempt - SelectByOnlyLogin func - in ModelUser section.");
-                    obj.user = err;
-                } else {
-                    obj.user = data;
-                }
-                if (ModelRanking && data.length > 0) {
-                    ModelRanking.find({ _id: data[0].rankingId }, function (err, data) {
-                        if (err) {
-                            Logger.print(err, Logger.type.CRITICAL, "Database Record SELECT Attempt - SelectByOnlyLogin func - in ModelRanking section.");
-                            obj.ranking = err;
-                        } else {
-                            obj.ranking = data;
-                        }
-                        callback(obj);
-                    }).limit(1)
-                } else {
-                    callback(obj);
-                }
-            }).limit(1)
+        SelectByOnlyLogin: function (ModelUser, ModelRanking, login) {
+            return new Promise(resolve => {
+                var obj = {};
+                ModelUser.find({ login: login }, function (err, data) {
+                    if (err) {
+                        Logger.print(err, Logger.type.CRITICAL, "Database Record SELECT Attempt - SelectByOnlyLogin func - in ModelUser section.");
+                        obj.user = err;
+                    } else {
+                        obj.user = data;
+                    }
+                    if (ModelRanking && data.length > 0) {
+                        ModelRanking.find({ _id: data[0].rankingId }, function (err, data) {
+                            if (err) {
+                                Logger.print(err, Logger.type.CRITICAL, "Database Record SELECT Attempt - SelectByOnlyLogin func - in ModelRanking section.");
+                                obj.ranking = err;
+                            } else {
+                                obj.ranking = data;
+                            }
+                            resolve(obj);
+                        }).limit(1)
+                    } else {
+                        resolve(obj);
+                    }
+                }).limit(1)
+            })
         },
         SelectByLogin: function (Model, login, password, count, callback) {
             var obj = {};
@@ -121,17 +144,19 @@ export default function () {
             }).limit(count)
         },
 
-        SelectTopStatistics: function (Model, topCount, callback) {
-            let obj = {};
-            Model.find({}, function (err, data) {
-                if (err) {
-                    Logger.print(err, Logger.type.CRITICAL, "Database Record SELECT Attempt - SelectTopStatistics func");
-                    obj.data = err;
-                } else {
-                    obj.data = data;
-                }
-                callback(obj);
-            }).limit(topCount).sort({  points: -1, rank: -1, wins: -1, losses: 1, draws: -1, username: -1  })
+        SelectTopStatistics: function (Model, topCount) {
+            return new Promise(resolve => {
+                let obj = {};
+                Model.find({}, function (err, data) {
+                    if (err) {
+                        Logger.print(err, Logger.type.CRITICAL, "Database Record SELECT Attempt - SelectTopStatistics func");
+                        obj.data = err;
+                    } else {
+                        obj.data = data;
+                    }
+                    resolve(obj);
+                }).limit(topCount).sort({  points: -1, rank: -1, wins: -1, losses: 1, draws: -1, username: -1  })
+            });
         },
 
         UpdateStatistics: function (Model, login, wins, draws, losses, points) {
@@ -142,6 +167,31 @@ export default function () {
                 }
             })
         },
+
+        UpdateGame: function (Model, gameData) {
+            return Promise(resolve => {
+                try {
+                    let findingObj = {
+                        gameId: gameData.gameId
+                    };
+                    let updatingObj =                         {
+                        $push: {
+                            historyOfMoves: gameData.historicalMove,
+                        },
+                        currentBoardState: gameData.currentBoardState,
+                        whoseTurn: gameData.whoseTurn,
+                        whitePlayerTimeLeft: gameData.whitePlayerTimeLeft,
+                        blackPlayerTimeLeft: gameData.blackPlayerTimeLeft
+                    }
+
+                    Model.updateOne(findingObj, updatingObj);
+                    resolve("success");
+                } catch (err) {
+                    Logger.print(err, Logger.type.CRITICAL, "Database Record UPDATE Attempt - UpdateGame func");
+                    resolve(err);
+                }
+            });
+        }
     }
 
     return opers;

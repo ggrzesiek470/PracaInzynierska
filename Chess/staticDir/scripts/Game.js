@@ -64,9 +64,12 @@
     }
 
     this.opponentMove = async function (pawn, xDes, yDes, enPassant, casting) {
-        await movePawn(pawn, xDes, yDes, enPassant, casting);
+        await moveFigure(pawn, xDes, yDes, enPassant, casting);
         checkIfCheck();
         document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
+        if (game.isGameEnabled() == true) {
+            game.timer.startTimer();
+        }
     }
 
     async function createTable() {
@@ -113,15 +116,22 @@
                                 for (var i = 0; i < whereCanEnPassant.length; i++) if (whereCanEnPassant[i] == this) { isPossible = true; enPassant = true; }
                                 for (var i = 0; i < whereCanCast.length; i++) if (whereCanCast[i] == this) { isPossible = true; Casting = true; }
                                 if (isPossible == true) {
+                                    game.timer.stopTimer();
+                                    let fromX = chosenPawn.position.x;
+                                    let fromY = chosenPawn.position.y;
+                                    let hitPawn = false;
+                                    if (localTable[y][x].color == "black" || localTable[y][x].color == "white") {
+                                        hitPawn = true;
+                                    }
                                     clearColors();
                                     if (ai_playing == false) {
-                                        net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable);
+                                        net.turn(chosenPawn, fromX, fromY, x + 1, y + 1, hitPawn, enPassant, Casting, yourColor, gameId, localTable);
                                     }
-                                    await movePawn(chosenPawn, x + 1, y + 1, enPassant, Casting);
+                                    await moveFigure(chosenPawn, x + 1, y + 1, enPassant, Casting);
                                     if (ai_playing == true) {
                                         checkIfCheck();
                                         if (gameEnabled == true) {
-                                            net.turn(chosenPawn, x + 1, y + 1, enPassant, Casting, yourColor, gameId, localTable, game.depth);
+                                            net.turn(chosenPawn, fromX, fromY, x + 1, y + 1, hitPawn, enPassant, Casting, yourColor, gameId, localTable, game.depth);
                                         }
                                     }
                                     chosenPawn = undefined;
@@ -221,7 +231,7 @@
         }
     }
 
-    async function movePawn(pawn, xDes, yDes, enPassant, casting) {
+    async function moveFigure(pawn, xDes, yDes, enPassant, casting) {
         return new Promise(async (resolve) => {
             for (var i = 0; i < localTable.length; i++) {
                 for (var j = 0; j < localTable[0].length; j++) {
@@ -232,8 +242,8 @@
                     }
                 }
             }
-            main.deletePawn(xDes, yDes);
-            await main.movePawn(pawn.position.x, pawn.position.y, xDes, yDes,
+            let isDeleted = main.deletePawn(xDes, yDes);
+            await main.moveFigure(pawn.position.x, pawn.position.y, xDes, yDes,
                                                                             pawn.type == "Knight" ? true : false, true);
             if (pawn.type == "Pawn") {
                 if (pawn.position.y - yDes == 2 || pawn.position.y - yDes == (-2)) {
@@ -242,12 +252,12 @@
             }
             if (casting == true) {
                 if (pawn.position.x - xDes < 0) { // -4
-                    await main.movePawn(pawn.position.x + 3, pawn.position.y, xDes - 1, yDes, true);
+                    await main.moveFigure(pawn.position.x + 3, pawn.position.y, xDes - 1, yDes, true);
                     localTable[pawn.position.y - 1][pawn.position.x - 1 + 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 + 3];
                     localTable[pawn.position.y - 1][pawn.position.x - 1 + 3] = "";
                     localTable[pawn.position.y - 1][pawn.position.x - 1 + 1].position.x = xDes - 1;
                 } else { // +3
-                    await main.movePawn(pawn.position.x - 4, pawn.position.y, xDes + 1, yDes, true);
+                    await main.moveFigure(pawn.position.x - 4, pawn.position.y, xDes + 1, yDes, true);
                     localTable[pawn.position.y - 1][pawn.position.x - 1 - 1] = localTable[pawn.position.y - 1][pawn.position.x - 1 - 4];
                     localTable[pawn.position.y - 1][pawn.position.x - 1 - 4] = "";
                     localTable[pawn.position.y - 1][pawn.position.x - 1 - 1].position.x = xDes + 1;
@@ -276,7 +286,7 @@
             if (enPassant == true) { if (pawn.color == "white") { main.deletePawn(xDes, yDes - 1); localTable[yDes - 1 - 1][xDes - 1] = ""; } else if (pawn.color == "black") { main.deletePawn(pawn.position.x, pawn.position.y + 1); localTable[pawn.position.y - 1 + 1][pawn.position.x - 1] = ""; } }
             pawn.firstMove = true;
             if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
-            resolve();
+            resolve(isDeleted);
         });
     }
 
@@ -728,9 +738,8 @@
                 var string = (kingColorCheck == "white") ? "Białe" : "Czarne";
                 document.getElementById("check").innerHTML = "SZACH! " + string + " zagrożone.";
 
-                // A jeśli jest szach to może być jeszcze mat...
-
                 if (checkIfMateOrStalemate() == true) {
+                    game.timer.stopTimer();
                     document.getElementById("check").innerHTML = "SZACH-MAT! ";
                     document.getElementById("check").innerHTML += (kingColorCheck == "white") ?
                                                                     "Czarne wygrywają!" : "Białe wygrywają!";
@@ -767,6 +776,7 @@
                 // A tutaj może być jeszcze pat
 
                 if (checkIfMateOrStalemate() == true) {
+                    game.timer.stopTimer();
                     document.getElementById("check").innerHTML = "PAT! Nikt dzisiaj nie wygrał.";
 
                     var statistics = main.getStatistics();
@@ -804,7 +814,7 @@
         game.setGameId("with_computer");
         game.setYourColor(params.color);
         game.turnTheGameOn();
-        main.createPawns();
+        main.createFigures();
         $("#bariera").css("display", "none");
         $("#checkChecker").css("display", "initial");
         var string;
@@ -814,7 +824,7 @@
             main.setCameraPosition(-600, 600, 0);
             var intervalToRemove = setInterval(() => {
                 if (game.loadingFigures >= 32) {
-                    this.timer = new Timer(params.timer);
+                    this.timer = new Timer(params.timer, true);
                     clearInterval(intervalToRemove);
                 }
             }, 500);
@@ -824,6 +834,7 @@
             main.setCameraPosition(600, 600, 0);
             var intervalToRemove = setInterval(() => {
                 if (game.loadingFigures >= 32) {
+                    this.timer = new Timer(params.timer, false);
                     net.sendDataToAI(game.depth, localTable);
                     clearInterval(intervalToRemove);
                 }
