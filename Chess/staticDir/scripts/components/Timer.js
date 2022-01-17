@@ -20,6 +20,7 @@ class Timer {
                 let nextDate = new Date();
                 this.yourTimeShownLeft = Math.ceil((this.secondsLeft*1000 - (nextDate - this.lastBeginningDate))/1000);
                 this.evaluateTime();
+                this.visuallyShowStopping();
             }
 
             $("body").append(this.timerDiv);

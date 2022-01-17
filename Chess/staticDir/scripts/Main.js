@@ -96,11 +96,11 @@
                         let currentYPos = 10;
                         let currentZPos = priorZPos;
 
-                        let up = shouldGoUp;
+                        let goingUp = shouldGoUp;
     
                         let intervalMove = setInterval(() => {
                             let currentTime = new Date();
-                            if (up == true) {
+                            if (goingUp == true) {
                                 percentOfMove = Math.min((currentTime - startTime) / time, 1);
                                 currentYPos = 10 + 170*percentOfMove;
 
@@ -108,9 +108,9 @@
 
                                 if (percentOfMove >= 1) {
                                     startTime = new Date();
-                                    up = false;
+                                    goingUp = false;
                                 }
-                            } else if (up == false) {
+                            } else if (goingUp == false) {
                                 percentOfMove = Math.min((currentTime - startTime) / time, 1);
         
                                 currentXPos = priorXPos + (nextXPos - priorXPos)*percentOfMove;
@@ -213,8 +213,8 @@
         }
 	}
 
-    function createLight(x, y, z, lightColor, fireColor, distance, intensity, visibility) {
-        var fire = new Fireplace(lightColor, fireColor, distance, intensity);
+    function createLight(x, y, z, lightColor, fireColorsArray, distance, intensity, visibility) {
+        var fire = new Fireplace(lightColor, fireColorsArray, distance, intensity);
         fire.generateFireplace(x, y, z);
         if (visibility == false) fire.makeInvisible();
         ognie.push(fire);
@@ -251,76 +251,68 @@
             y += 100;
             w += 1;
         }
+
+        loadCorners();
+        let env = new LoadEnvironment(scene);
     }
 
     this.createFigures = function () { createFigures(); }
 
     function createFigures() {
-        loadCorners();
         var loadingScreen = new LoadingScreen(32);
         for (var i = 0; i < 8; i++) {
             for (var j = 0; j < 8; j++) {
-                if (game.getLocalTable()[i][j] == 0) { } else {
-                    if (game.getLocalTable()[i][j].color == "black") {
+                if (game.getLocalTable()[i][j] != 0) {
+                    const colorOfPlayer = game.getLocalTable()[i][j].color;
+                    let colorHex = (colorOfPlayer == "black") ? "#322a1e" : 0xEEEEEE;
+
+                    if (colorOfPlayer == "black" || colorOfPlayer == "white") {
                         var model = new Piece(game.getLocalTable()[i][j].type);
                         model.name = game.getLocalTable()[i][j].type + i.toString() + j.toString();
-                        model.pawnData = { position: { x: game.getLocalTable()[i][j].position.x, y: game.getLocalTable()[i][j].position.y, }, type: game.getLocalTable()[i][j].type, color: game.getLocalTable()[i][j].color };
+                        model.pawnData = {
+                            position: {
+                                x: game.getLocalTable()[i][j].position.x,
+                                y: game.getLocalTable()[i][j].position.y,
+                            },
+                            type: game.getLocalTable()[i][j].type,
+                            color: game.getLocalTable()[i][j].color
+                        };
 
                         model.loadModel(game.getLocalTable()[i][j].src, function (modelData) {
-                            modelData.children[0].children[0].geometry.computeFaceNormals();
-                            modelData.children[0].children[0].geometry.mergeVertices();
-                            modelData.children[0].children[0].geometry.computeVertexNormals();
-
-                            modelData.children[0].children[0].material = new THREE.MeshPhongMaterial({
-                                color: "#322a1e",
+                            let mainMesh = modelData.children[0].children[0];
+                            let position = {
+                                x: modelData.pawnData.position.x,
+                                y: modelData.pawnData.position.y
+                            }
+                            
+                            mainMesh.geometry.computeFaceNormals();
+                            mainMesh.geometry.mergeVertices();
+                            mainMesh.geometry.computeVertexNormals();
+                            mainMesh.material = new THREE.MeshPhongMaterial({
+                                color: colorHex,
                                 specular: 0x303030,
                                 shininess: 10,
                                 polygonOffset: true,
                                 polygonOffsetUnits: 1,
                                 polygonOffsetFactor: 1,
                                 shading: THREE.SmoothShading,
-                                // wireframe: true,
                             });
-                            if (modelData.pawnData.type == "King") {
-                                modelData.rotation.y = 90 * Math.PI / 180;
+                            if (colorOfPlayer == "white") {
+                                modelData.rotation.y = Math.PI * 180 / 180;
                             }
-                            modelData.position.set(pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.x, 10, pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.z);
+                            if (modelData.pawnData.type == "King") {
+                                modelData.rotation.y = (colorOfPlayer == "black") ? (90 * Math.PI / 180) : ((-90) * Math.PI / 180);
+                            }
+
+                            modelData.position.set(
+                                pola_tab[position.x - 1][position.y - 1].position.x,
+                                10,
+                                pola_tab[position.x - 1][position.y - 1].position.z
+                            );
                             scene.add(modelData);
                             game.loadingFigures += 1;
                             loadingScreen.addOneToVal();
                         })
-                        // console.log('Dodano czarnego o nazwie: ' + model.name)
-                    }
-                    if (game.getLocalTable()[i][j].color == "white") {
-                        var model = new Piece(game.getLocalTable()[i][j].type);
-                        model.name = game.getLocalTable()[i][j].type + i.toString() + j.toString();
-                        model.pawnData = { position: { x: game.getLocalTable()[i][j].position.x, y: game.getLocalTable()[i][j].position.y, }, type: game.getLocalTable()[i][j].type, color: game.getLocalTable()[i][j].color };
-
-                        model.loadModel(game.getLocalTable()[i][j].src, function (modelData) {
-                            modelData.children[0].children[0].geometry.computeFaceNormals();
-                            modelData.children[0].children[0].geometry.mergeVertices();
-                            modelData.children[0].children[0].geometry.computeVertexNormals();
-
-                            modelData.children[0].children[0].material = new THREE.MeshPhongMaterial({
-                                color: 0xEEEEEE,
-                                specular: 0x303030,
-                                shininess: 10,
-                                polygonOffset: true,
-                                polygonOffsetUnits: 1,
-                                polygonOffsetFactor: 1,
-                                shading: THREE.SmoothShading,
-                                // wireframe: true,
-                            });
-                            modelData.rotation.y = Math.PI * 180 / 180;
-                            if (modelData.pawnData.type == "King") {
-                                modelData.rotation.y = (-90) * Math.PI / 180;
-                            }
-                            modelData.position.set(pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.x, 10, pola_tab[modelData.pawnData.position.x - 1][modelData.pawnData.position.y - 1].position.z);
-                            scene.add(modelData);
-                            game.loadingFigures += 1;
-                            loadingScreen.addOneToVal();
-                        })
-                        // console.log('Dodano białego o nazwie: ' + model.name)
                     }
                 };
             }
@@ -365,8 +357,6 @@
             new PositionText(loader, scene, l, { x: x, y: 0, z: z }, "black");
             z += 100;
         });
-
-        
     }
 
     this.setCameraPosition = function (x, y, z) {
@@ -401,12 +391,20 @@
         camera.position.set(0, 600, -600);
         camera.lookAt(new THREE.Vector3());
 
+        let fireColorsArray = [0xe25822, 0xfbb741, 0xc2261f, 0xfda50f, 0xcc7722, 0x883000];
+
         createChessboard();
-        createLight(50, 10, 525, "#eeaa66", 0xff0077, 300, 3, true);
-        createLight(50, 10, -425, "#eeaa66", 0xff0077, 300, 3, true);
-        createLight(-600, 100, 50, "#eeeeee", 0xffffff, 300, 1.5, false);
-        createLight(600, 100, 50, "#eeeeee", 0xffffff, 300, 1.5, false);
-        createLight(0, 300, 0, "#eeeeee", 0xffffff, 300, 1.25, false);
+        createLight(120, 300, 708, "#eeaa66", fireColorsArray, 300, 2, false);
+        createLight(120, 70, 592, "#eeaa66", fireColorsArray, 300, 2, false);
+        createLight(-120, 70, 592, "#eeaa66", fireColorsArray, 300, 2, false);
+        createLight(45, 150, 608, "#eeaa66", fireColorsArray, 300, 0.25, true);
+        createLight(45, 150, -592, "#eeaa66", fireColorsArray, 300, 0.25, true);
+        createLight(120, 300, -708, "#eeaa66", fireColorsArray, 300, 2, false);
+        createLight(120, 70, -492, "#eeaa66", fireColorsArray, 300, 2, false);
+        createLight(-120, 70, -492, "#eeaa66", fireColorsArray, 300, 2, false);
+        createLight(-600, 100, 50, "#eeeeee", fireColorsArray, 300, 1.5, false);
+        createLight(600, 100, 50, "#eeeeee", fireColorsArray, 300, 1.5, false);
+        createLight(0, 300, 0, "#eeeeee", fireColorsArray, 300, 1.25, false);
         // createFigures();
 
         function animateScene() {

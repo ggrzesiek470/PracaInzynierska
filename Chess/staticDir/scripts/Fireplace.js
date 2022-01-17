@@ -1,10 +1,14 @@
-﻿function Fireplace(lightColor, fireColor, distance, intensity) {
-    var material = new THREE.MeshBasicMaterial({
-        color: fireColor,
-        transparent: true,
-        opacity: 0.5,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending // kluczowy element zapewniający mieszanie kolorów poszczególnych cząsteczek
+﻿function Fireplace(lightColor, fireColorsArray, distance, intensity) {
+    var materialsArray = [];
+
+    fireColorsArray.forEach(color => {
+        materialsArray.push(new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.5,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending // kluczowy element zapewniający mieszanie kolorów poszczególnych cząsteczek
+        }));
     });
 
     var geometry0 = new THREE.TetrahedronGeometry(5, 0);
@@ -16,32 +20,34 @@
 
     this.generateFireplace = function (x, y, z) {
         var fireLight = new THREE.SpotLight(lightColor, intensity, 2.5 * distance, 3.14);
-        fireLight.position.set(0, 20, 0);
+        fireLight.position.set(0, 60, 0);
         fireLight.name = "fireLight";
         fireLight.castShadow = true;
         container.add(fireLight);
-        for (var i = 0; i < 200; i++) {
+        for (var i = 0; i < 100; i++) {
             var random = Math.round(Math.random() * 3);
-            var particle = new THREE.Mesh(geometry0, material.clone());
+            var randomColor = Math.floor(Math.random() * fireColorsArray.length);
+            var setMaterial = materialsArray[randomColor].clone();
+            var particle = new THREE.Mesh(geometry0, setMaterial);
             switch (random) {
                 case 0:
-                    particle = new THREE.Mesh(geometry0, material.clone());
+                    particle = new THREE.Mesh(geometry0, setMaterial);
                     break;
                 case 1:
-                    particle = new THREE.Mesh(geometry1, material.clone());
+                    particle = new THREE.Mesh(geometry1, setMaterial);
                     break;
                 case 2:
-                    particle = new THREE.Mesh(geometry2, material.clone());
+                    particle = new THREE.Mesh(geometry2, setMaterial);
                     break;
             }
             particle.name = "fireplace";
             particle.position.y = (Math.random() * 0.1);
-            particle.position.x = (Math.random() * 80) - 80;
-            particle.position.z = (Math.random() * 80) - 80;
+            particle.position.x = (Math.random() * 10) - 10;
+            particle.position.z = (Math.random() * 10) - 10;
             particle.material.opacity = 1;
             particle.speed = (Math.random() * 10) + 2;
             var random1 = Math.floor((Math.random() * 10) + 1);
-            particle.scale.set(random1*0.5, random1*0.5, random1*0.5);
+            particle.scale.set(random1*0.1, random1*0.1, random1*0.1);
             particles.push(particle);
             container.add(particle);
         }
@@ -61,14 +67,14 @@
             if (particles[i].speed == undefined) particles[i].speed = (Math.random() * 10) + 2;
             particles[i].position.y += particles[i].speed;
             particles[i].material.opacity -= 0.015;
-            if (particles[i].position.y > 500) {
+            if (particles[i].position.y > 60) {
                 particles[i].position.y = (Math.random() * 0.1);
-                particles[i].position.x = (Math.random() * 80) - 80;
-                particles[i].position.z = (Math.random() * 80) - 80;
+                particles[i].position.x = (Math.random() * 10) - 10;
+                particles[i].position.z = (Math.random() * 10) - 10;
                 particles[i].material.opacity = 1;
                 particles[i].speed = (Math.random() * 10) + 2;
                 var random1 = Math.floor((Math.random() * 10) + 1);
-                particles[i].scale.set(random1 * 0.5, random1 * 0.5, random1 * 0.5);
+                particles[i].scale.set(random1 * 0.1, random1 * 0.1, random1 * 0.1);
             }
         }
     }

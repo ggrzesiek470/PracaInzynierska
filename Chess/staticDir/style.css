@@ -76,7 +76,7 @@ input:focus {
     top:9vh;
 }
 #bariera {
-    background-color:rgba(128, 128, 128, 0.5);
+    background-color:rgba(128, 128, 128, 0.3);
     position:absolute;
     left:0;
     top:0;
