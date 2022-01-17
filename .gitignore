@@ -17,6 +17,7 @@ Server/.springBeans
 Server/.sts4-cache
 
 ### IntelliJ IDEA ###
+.idea
 Server/.idea
 Server/*.iws
 Server/*.iml

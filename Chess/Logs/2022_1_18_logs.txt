@@ -1,0 +1,4 @@
+18.01.2022, 00:00:32 --- INFO: Disconnect --- Client of id lZHW5v9pyPBdY4noAAD5 leaves the server.
+18.01.2022, 00:00:33 --- INFO: Connect --- Client of id j8lglkIsCEBE1pt7AAD6 pops in to the server!
+18.01.2022, 00:01:00 --- INFO: Disconnect --- Client of id j8lglkIsCEBE1pt7AAD6 leaves the server.
+18.01.2022, 00:01:01 --- INFO: Connect --- Client of id 4W07GLysTekqiS32AAD7 pops in to the server!
