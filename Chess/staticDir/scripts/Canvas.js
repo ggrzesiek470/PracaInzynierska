@@ -28,14 +28,14 @@
     }
 
     this.canvasUpdate = function (user, wins, draws, losses, points) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+    //     context.clearRect(0, 0, canvas.width, canvas.height);
 
-        context.font = "15px Tahoma";
-        context.fillStyle = "rgba(255, 255, 255, 1)";
-        context.fillText("Użytkownik: " + user, 0, 20);
-        context.fillText("Wygranych: " + wins, 0, 40);
-        context.fillText("Remisów: " + draws, 0, 60);
-        context.fillText("Przegranych: " + losses, 0, 80);
-        context.fillText("Punktów: " + points, 0, 100);
+    //     context.font = "15px Tahoma";
+    //     context.fillStyle = "rgba(255, 255, 255, 1)";
+    //     context.fillText("Użytkownik: " + user, 0, 20);
+    //     context.fillText("Wygranych: " + wins, 0, 40);
+    //     context.fillText("Remisów: " + draws, 0, 60);
+    //     context.fillText("Przegranych: " + losses, 0, 80);
+    //     context.fillText("Punktów: " + points, 0, 100);
     }
 }
