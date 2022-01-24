@@ -120,19 +120,44 @@
                                     let fromX = chosenPawn.position.x;
                                     let fromY = chosenPawn.position.y;
                                     let hitPawn = false;
+                                    let previousLocalTable;
                                     if (localTable[y][x].color == "black" || localTable[y][x].color == "white") {
                                         hitPawn = true;
                                     }
                                     clearColors();
-                                    if (ai_playing == false) {
-                                        net.turn(chosenPawn, fromX, fromY, x + 1, y + 1, hitPawn, enPassant, Casting, yourColor, gameId, localTable);
+
+                                    let objToBeSent = { pawn: JSON.parse(JSON.stringify(chosenPawn)),
+                                        fromX: fromX,
+                                        fromY: fromY,
+                                        xDes: x + 1,
+                                        yDes: y + 1,
+                                        hitPawn: hitPawn,
+                                        enPassant: enPassant,
+                                        casting: Casting,
+                                        color: yourColor,
+                                        gmid: gameId,
+                                        localTable: JSON.parse(JSON.stringify(localTable))
+                                    }
+
+                                    if (ai_playing == true) {
+                                        previousLocalTable = JSON.parse(JSON.stringify(localTable));
                                     }
                                     await moveFigure(chosenPawn, x + 1, y + 1, enPassant, Casting);
                                     if (ai_playing == true) {
                                         checkIfCheck();
+                                        objToBeSent.isFinishedGame = (game.isFinishedGame != undefined) ? game.isFinishedGame : false;
                                         if (gameEnabled == true) {
-                                            net.turn(chosenPawn, fromX, fromY, x + 1, y + 1, hitPawn, enPassant, Casting, yourColor, gameId, localTable, game.depth);
+                                            objToBeSent.pawn = JSON.parse(JSON.stringify(chosenPawn));
+                                            objToBeSent.localTable = JSON.parse(JSON.stringify(localTable));
+                                            objToBeSent.depth = game.depth;
+                                            objToBeSent.previousLocalTable = JSON.parse(JSON.stringify(previousLocalTable));
+
+                                            net.turn(objToBeSent);
                                         }
+                                    } else {
+                                        checkIfCheck();
+                                        objToBeSent.isFinishedGame = (game.isFinishedGame != undefined) ? game.isFinishedGame : false;
+                                        net.turn(objToBeSent);
                                     }
                                     chosenPawn = undefined;
                                     
@@ -156,12 +181,13 @@
             }
         }
         var check = document.createElement("div");
-        check.innerHTML = "Twoje szachy nie są zagrożone.";
+        check.innerHTML = "Twój król nie jest zagrożony.";
         check.style.textAlign = "center";
         check.style.width = "432px";
         check.id = "check";
         document.body.appendChild(div);
         document.body.appendChild(check);
+        net.window.safe();
     }
 
     function readTable() {
@@ -724,6 +750,7 @@
     function checkIfCheck() {
         if (gameEnabled == true) {
             kingCheck = false;
+            game.isFinishedGame = false;
             for (var k = 0; k < 2; k++) {
                 if (chosenColor == "white") chosenColor = "black"; else chosenColor = "white";
                 for (var i = 0; i < localTable.length; i++) {
@@ -737,10 +764,12 @@
             if (kingCheck == true) {
                 var string = (kingColorCheck == "white") ? "Białe" : "Czarne";
                 document.getElementById("check").innerHTML = "SZACH! " + string + " zagrożone.";
+                net.window.danger();
 
                 if (checkIfMateOrStalemate() == true) {
                     game.timer.stopTimer();
                     document.getElementById("check").innerHTML = "SZACH-MAT! ";
+                    game.isFinishedGame = "checkmate";
                     document.getElementById("check").innerHTML += (kingColorCheck == "white") ?
                                                                     "Czarne wygrywają!" : "Białe wygrywają!";
                     var statistics = main.getStatistics();
@@ -749,17 +778,27 @@
                         if (yourColor == "white") {
                             statistics.losses++;
                             statistics.points -= 25;
+                            net.window.checkMate();
                         } else {
                             statistics.wins++;
                             statistics.points += 50;
+                            net.window.win();
+                        }
+                        if (chessNotationCont != null) {
+                            chessNotationCont.updateTable(["0-1"]);
                         }
                     } else if (kingColorCheck == "black") {
                         if (yourColor == "white") {
                             statistics.wins++;
                             statistics.points += 50;
+                            net.window.win();
                         } else {
                             statistics.losses++;
                             statistics.points -= 25;
+                            net.window.checkMate();
+                        }
+                        if (chessNotationCont != null) {
+                            chessNotationCont.updateTable(["1-0"]);
                         }
                     }
 
@@ -771,17 +810,24 @@
                 }
 
             } else {
-                document.getElementById("check").innerHTML = "Twoje szachy nie są zagrożone.";
+                document.getElementById("check").innerHTML = "Twój król nie jest zagrożony.";
+                net.window.safe();
 
                 // A tutaj może być jeszcze pat
 
                 if (checkIfMateOrStalemate() == true) {
                     game.timer.stopTimer();
+                    game.isFinishedGame = "stalemate";
                     document.getElementById("check").innerHTML = "PAT! Nikt dzisiaj nie wygrał.";
+                    net.window.stalemate();
 
                     var statistics = main.getStatistics();
                     statistics.draws++;
                     statistics.points += 25;
+
+                    if (chessNotationCont != null) {
+                        chessNotationCont.updateTable(["½-½"]);
+                    }
 
                     main.setStatistics(statistics.wins, statistics.draws, statistics.losses, statistics.points);
                     net.setStatisticsForUser(main.getNick(), statistics.wins, statistics.draws, statistics.losses, statistics.points);
@@ -819,8 +865,14 @@
         $("#checkChecker").css("display", "initial");
         var string;
         game.depth = params.difficulty;
+        
+        let white = params.color == "white" ? main.getNick() : "Komputer poz."+params.difficulty;
+        let black = params.color != "white" ? main.getNick() : "Komputer poz."+params.difficulty;
+        chessNotationCont = new ChessNotationContainer(white, black);
+        game.surrenderGameModal = new SurrenderGameModal();
         if (yourColor == "white") {
             string = "białymi.<br/>Twój ruch.";
+            net.window.safe();
             main.setCameraPosition(-600, 600, 0);
             var intervalToRemove = setInterval(() => {
                 if (game.loadingFigures >= 32) {
@@ -832,6 +884,7 @@
         if (yourColor == "black") {
             string = "czarnymi.<br/>Ruch przeciwnika.";
             main.setCameraPosition(600, 600, 0);
+            net.window.safe();
             var intervalToRemove = setInterval(() => {
                 if (game.loadingFigures >= 32) {
                     this.timer = new Timer(params.timer, false);

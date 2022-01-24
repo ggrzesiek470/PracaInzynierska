@@ -33,7 +33,8 @@ function Chat() {
         $("body").append(wholeChat);
         $("body").append(chatOpener);
 
-        chatOpener.on("click", (event) => {
+        let openOrHideChat = (event) => {
+            chessNotationCont.hide();
             chatOpener.toggleClass("hidden-chat");
             wholeChat.toggleClass("hidden-chat");
             this.opened = !this.opened;
@@ -42,7 +43,10 @@ function Chat() {
             } else {
                 chatOpener.attr("src", "/gfx/icons/chat_no_colours.png");
             }
-        })
+        }
+
+        chatOpener.on("click", openOrHideChat);
+        this.openOrHideChat = openOrHideChat;
 
         inputSender.on("keydown", (event) => {
             if (event.keyCode == 13) {

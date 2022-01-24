@@ -13,6 +13,15 @@
         draws = Draws;
         losses = Losses;
         points = Points;
+        if (game.profile != undefined) {
+            game.profile.updateTable([
+                "Nick: " + main.getNick(),
+                "Wygranych: " + wins,
+                "Remisów: " + draws,
+                "Przegranych: " + losses,
+                "Punktów: " + points,
+            ]);
+        }
     }
 
     this.getStatistics = function () {
@@ -260,6 +269,7 @@
 
     function createFigures() {
         var loadingScreen = new LoadingScreen(32);
+        net.window.safe();
         for (var i = 0; i < 8; i++) {
             for (var j = 0; j < 8; j++) {
                 if (game.getLocalTable()[i][j] != 0) {

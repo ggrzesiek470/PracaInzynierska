@@ -106,7 +106,6 @@ class LoadEnvironment {
                 model.children[0].children[0].geometry.computeFaceNormals();
                 model.children[0].children[0].geometry.computeVertexNormals(true);
                 model.children[0].children[0].material = new THREE.MeshPhongMaterial(mat);
-                console.log(model.children[0].children[0])
                 
                 scene.add(model);
                 resolve(model);

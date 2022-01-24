@@ -1,5 +1,5 @@
 class Ranking {
-    static width = 25;
+    static width = 35;
     static height = 70;
     table;
 
@@ -12,8 +12,9 @@ class Ranking {
 
         this.button.onclick = () => {
             this.flag ? this.hide() : this.show();
-            this.flag = !this.flag;
         }
+
+        new Tooltip(this.button, "Ranking", "left");
 
         this.flag = false;
         this.updateTable(data);
@@ -31,21 +32,28 @@ class Ranking {
         this.table.appendChild(table_row);
         table_data.forEach(text => {
             let td = document.createElement("td");
+            if (table_data[1] == main.getNick()) {
+                td.style.backgroundColor = "rgba(0, 240, 0, 0.6)";
+            }
             td.innerHTML = text;
             table_row.appendChild(td);
         });
     }
 
     show () {
+        game.historicalGames.hide();
+        game.profile.hide();
         this.ranking.style.top = "0";
         this.button.setAttribute("src", "/gfx/icons/trophy_no_colours.png");
         this.button.style.zIndex = "1201";
+        this.flag = true;
     }
 
     hide () {
         this.ranking.style.top = "-" + Ranking.height + "%";
         this.button.setAttribute("src", "/gfx/icons/trophy.png");
         this.button.style.zIndex = "1199";
+        this.flag = false;
     }
 
     createComponent () {

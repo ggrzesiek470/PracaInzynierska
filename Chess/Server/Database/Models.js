@@ -56,7 +56,7 @@
         whitePlayerPointsGain:{ type: Number, required: false },
         blackPlayerPointsGain:{ type: Number, required: false },
         winInMoves:{ type: Number, required: false },
-        gameTime:{ type: Number, required: false },
+        finalGameTime:{ type: Number, required: false },
     });
 
     var chatMessageSchema = new Schema ({

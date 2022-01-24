@@ -1,0 +1,4 @@
+21.01.2022, 17:18:17 --- INFO: Init --- App initialization: Classic Chess starts!
+21.01.2022, 17:18:17 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+21.01.2022, 17:18:32 --- INFO: Connect --- Client of id 83OdSGYTn9MbQhjYAAAA pops in to the server!
+21.01.2022, 17:23:00 --- INFO: Disconnect --- Client of id 83OdSGYTn9MbQhjYAAAA leaves the server.

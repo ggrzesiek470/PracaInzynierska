@@ -73,6 +73,15 @@ export default function () {
                 }
             })
         },
+        
+        DeleteGameById: function (Model, gameId) {
+            Model.deleteOne({ gameId: gameId }, function (err, data) {
+                if (err) {
+                    Logger.print(err, Logger.type.CRITICAL, "Database Record DELETE Attempt - DeleteGameById func");
+                    return console.error(err);
+                }
+            })
+        },
 
         DeleteByWaitingPlayerAndTimer: function (Model, waitingPlayer, timer) {
             Model.deleteOne({ waitingPlayer: waitingPlayer, timer: timer }, function (err, data) {
@@ -159,6 +168,30 @@ export default function () {
             });
         },
 
+        SelectMyHistoricalGames: function (Model, nick) {
+            return new Promise(resolve => {
+                let obj = {};
+                Model.find({ $or: [ { whitePlayer: nick }, { blackPlayer: nick } ] }, function (err, data) {
+                    if (err) {
+                        Logger.print(err, Logger.type.CRITICAL, "Database Record SELECT Attempt - SelectMyHistoricalGames func");
+                        obj.data = err;
+                    } else {
+                        obj.data = data;
+                    }
+                    resolve(obj);
+                }).sort({  gameId: -1  })
+            });
+        },
+
+        ChangePassword: function (Model, login, newPassword, salt) {
+            Model.update({ login: login }, { password: newPassword, salt: salt }, function (err, data) {
+                if (err) {
+                    Logger.print(err, Logger.type.CRITICAL, "Database Record UPDATE Attempt - ChangePassword func");
+                    return console.error(err);
+                }
+            })
+        },
+
         UpdateStatistics: function (Model, login, wins, draws, losses, points) {
             Model.update({ username: login }, { username: login, wins: wins, draws: draws, losses: losses, points: points }, function (err, data) {
                 if (err) {
@@ -169,7 +202,7 @@ export default function () {
         },
 
         UpdateGame: function (Model, gameData) {
-            return Promise(resolve => {
+            return new Promise(resolve => {
                 try {
                     let findingObj = {
                         gameId: gameData.gameId
@@ -180,12 +213,20 @@ export default function () {
                         },
                         currentBoardState: gameData.currentBoardState,
                         whoseTurn: gameData.whoseTurn,
-                        whitePlayerTimeLeft: gameData.whitePlayerTimeLeft,
-                        blackPlayerTimeLeft: gameData.blackPlayerTimeLeft
+                    }
+                    if (gameData.whoseTurn == "white") {
+                        updatingObj.blackPlayerTimeLeft = gameData.blackPlayerTimeLeft;
+                    } else if (gameData.whoseTurn == "black") {
+                        updatingObj.whitePlayerTimeLeft = gameData.whitePlayerTimeLeft;
                     }
 
-                    Model.updateOne(findingObj, updatingObj);
-                    resolve("success");
+                    Model.updateOne(findingObj, updatingObj, function (err, data) {
+                        if (err) {
+                            Logger.print(err, Logger.type.CRITICAL, "Database Record UPDATE Attempt - UpdateGame func");
+                            return console.error(err);
+                        }
+                        resolve("success");
+                    });
                 } catch (err) {
                     Logger.print(err, Logger.type.CRITICAL, "Database Record UPDATE Attempt - UpdateGame func");
                     resolve(err);

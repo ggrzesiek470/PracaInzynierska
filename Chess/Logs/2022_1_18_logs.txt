@@ -2,3 +2,24 @@
 18.01.2022, 00:00:33 --- INFO: Connect --- Client of id j8lglkIsCEBE1pt7AAD6 pops in to the server!
 18.01.2022, 00:01:00 --- INFO: Disconnect --- Client of id j8lglkIsCEBE1pt7AAD6 leaves the server.
 18.01.2022, 00:01:01 --- INFO: Connect --- Client of id 4W07GLysTekqiS32AAD7 pops in to the server!
+18.01.2022, 00:11:14 --- INFO: Disconnect --- Client of id 4W07GLysTekqiS32AAD7 leaves the server.
+18.01.2022, 00:11:15 --- INFO: Connect --- Client of id SXSNFr1iyUBlLprfAAD8 pops in to the server!
+18.01.2022, 00:11:22 --- INFO: Disconnect --- Client of id SXSNFr1iyUBlLprfAAD8 leaves the server.
+18.01.2022, 12:50:34 --- CRIT_ERR: Critical Error --- Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1334:16)
+    at listenInCluster (node:net:1382:12)
+    at Server.listen (node:net:1469:7)
+    at file:///D:/PracaInzynierska/Chess/server.js:23:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:185:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:281:24)
+    at async loadESM (node:internal/process/esm_loader:88:5)
+    at async handleMainPromise (node:internal/modules/run_main:65:12)
+18.01.2022, 12:50:48 --- INFO: Init --- App initialization: Classic Chess starts!
+18.01.2022, 12:50:48 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+18.01.2022, 12:50:52 --- INFO: Connect --- Client of id ywzbtqg3LgZg8v-WAAAA pops in to the server!
+18.01.2022, 13:01:43 --- INFO: Stat change --- Change of statistics of user abc. Wins: 9, draws: 1, losses: 2, points: 425
+18.01.2022, 13:07:18 --- INFO: Disconnect --- Client of id ywzbtqg3LgZg8v-WAAAA leaves the server.
+18.01.2022, 13:07:18 --- INFO: Connect --- Client of id ZlQMJbKgQqIz7HcLAAAB pops in to the server!
+18.01.2022, 13:16:34 --- INFO: Stat change --- Change of statistics of user abc. Wins: 10, draws: 1, losses: 2, points: 475
+18.01.2022, 13:55:28 --- INFO: Disconnect --- Client of id ZlQMJbKgQqIz7HcLAAAB leaves the server.

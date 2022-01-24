@@ -19,12 +19,14 @@ export default function login ({ client, opers, models, io }) {
                 var pass = data.user[0].password;
                 var salt = data.user[0].salt;
                 if (SHA2.SHA512_t(80, sentPassword+salt) == pass) { // Password verified
-                    let allRanking = await opers.SelectTopStatistics(models.Ranking, 10);
+                    let allRanking = await opers.SelectTopStatistics(models.Ranking, 50);
+                    let historicalGames = await opers.SelectMyHistoricalGames(models.HistoricalGame, credentials.login);
 
                     let dataToDeliver = {
                         user: data.user,
                         ranking: data.ranking,
-                        allRanking: allRanking.data
+                        allRanking: allRanking.data,
+                        historicalGames: historicalGames.data
                     }
                     zalogowani.push({
                         login: data.user[0].login,

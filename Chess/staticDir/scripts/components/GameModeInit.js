@@ -11,6 +11,7 @@ class GameModeInit {
     screenNumber = 1;
     numberOfScreens = 4;
     difficultyLevels = [];
+    tooltips = [];
 
     constructor () {
         this.containerElement = $("<div>").addClass("choose_game_mode display_none");
@@ -50,6 +51,10 @@ class GameModeInit {
         this.gameModeButtons = this.gameModeButtonsInit();
         this.nextButton = this.createNextButton();
 
+        this.tooltips.forEach(t => {
+            t.remove();
+        });
+
         this.containerElement.append(header);
         this.containerElement.append(this.gameModeButtons);
         this.containerElement.append(this.nextButton);
@@ -81,6 +86,11 @@ class GameModeInit {
         this.nextButton = this.createNextButton();
         containerForButtons.append(this.backButton);
         containerForButtons.append(this.nextButton);
+
+        this.tooltips.forEach(t => {
+            t.remove();
+        });
+        this.tooltips = [];
 
         this.containerElement.append(header);
         this.containerElement.append(this.colorsContainer);
@@ -146,9 +156,15 @@ class GameModeInit {
     
     difficultyLevelsInit (diffLevels) {
         let diffLevelsContainer = $("<div>").addClass("choose_your_difficulty");
+
+        diffLevels.sort((a, b) => {
+            return a.stepsForeseen > b.stepsForeseen;
+        })
         
         diffLevels.forEach(level => {
             let levelContainer = $("<div>").addClass(level.class);
+            let tooltip = new Tooltip(levelContainer[0], level.name, "top");
+            this.tooltips.push(tooltip);
 
             levelContainer.on("click", (e) => {
                 $(".choose_your_difficulty > div").removeClass("filled");

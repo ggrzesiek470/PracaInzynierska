@@ -25,6 +25,7 @@
                     }
                 }
                 if (check == true) {
+                    net.window.danger();
                     window.showWindow("Taki użytkownik już istnieje!");
                 } else {
                     net.register(document.getElementById("user_reg").value, document.getElementById("pass_reg").value);
@@ -38,25 +39,47 @@
         })
         client.on("login", function (data) {
             if (data.status == "userAlreadyLogged") {
+                net.window.danger();
                 window.showWindow("Taki użytkownik jest właśnie zalogowany");
             }
             else if (data.status == "badPassword") {
+                net.window.danger();
                 window.showWindow("Nieprawidłowe hasło.");
             }
             else if (data.status == "userNonExistent") {
+                net.window.danger();
                 window.showWindow("Taki użytkownik nie istnieje.");
             }
             else if (data.user.length > 0) {
+                net.window.danger();
                 window.showWindow("Zalogowano.");
                 main.zalogowano(data.user[0].login);
                 main.setStatistics(data.ranking[0].wins, data.ranking[0].draws, data.ranking[0].losses, data.ranking[0].points);
                 const menuBar = new MenuBar();
                 document.body.appendChild(menuBar.getComponent());
                 menuBar.hide();
+                game.ranking.getComponent().remove();
                 const ranking = new Ranking(data.allRanking);
+                const historicalGames = new HistoricalGames(data.historicalGames);
+                let statistics = main.getStatistics();
+                const profile = new Profile([
+                    "Nick: " + main.getNick(),
+                    "Wygranych: " + statistics.wins,
+                    "Remisów: " + statistics.draws,
+                    "Przegranych: " + statistics.losses,
+                    "Punktów: " + statistics.points,
+                ]);
                 menuBar.pushMenuOption(ranking);
-                // menuBar.getComponent().appendChild(ranking.getComponent());
+                menuBar.pushMenuOption(historicalGames);
+                menuBar.pushMenuOption(profile);
+
                 ranking.hide();
+                historicalGames.hide();
+                profile.hide();
+
+                game.ranking = ranking;
+                game.historicalGames = historicalGames;
+                game.profile = profile;
 
             } else {
                 window.showWindow("Niezidentyfikowany problem. Skontaktuj się z administratorem");
@@ -82,7 +105,13 @@
             window.onlyHalfly();
             window.showWindow("Grasz "+string);
             document.getElementById("checkText").innerHTML = document.getElementById("check").innerHTML;
+
+            chessNotationCont = new ChessNotationContainer(data.whitePlayer, data.blackPlayer);
+            game.surrenderGameModal = new SurrenderGameModal();
+            game.stalematePreposition = new StalematePreposition();
+
             var chat = new Chat();
+            main.chat = chat;
             client.on("getMessageByChat", chat.getMessage);
 
             var intervalToRemove = setInterval(() => {
@@ -94,6 +123,9 @@
         })
         client.on("turn", function (data) {
             game.opponentMove(data.pawn, data.xDes, data.yDes, data.enPassant, data.casting);
+            if (chessNotationCont != null) {
+                chessNotationCont.updateTable([data.entry]);
+            }
             if (game.isGameEnabled() == true) {
                 var string = (game.getYourColor() == "white")
                                                             ? "białymi.<br/>Twój ruch."
@@ -106,6 +138,57 @@
             if (this.callback) {
                 this.callback(data);
             }
+        })
+        client.on("notationBack", (data) => {
+            if (chessNotationCont != null) {
+                chessNotationCont.updateTable([data]);
+            }
+        })
+        client.on("surrender", (data) => {
+            if (game.getGameId() == data.gameId) {
+                game.timer.stopTimer();
+
+                var statistics = main.getStatistics();
+                statistics.wins++;
+                statistics.points += 50;
+
+                main.setStatistics(statistics.wins, statistics.draws, statistics.losses, statistics.points);
+                net.setStatisticsForUser(main.getNick(), statistics.wins, statistics.draws, statistics.losses, statistics.points);
+
+                game.turnTheGameOff();
+                net.window.showWindow("Koniec gry");
+
+                document.getElementById("checkText").innerHTML = "Przeciwnik poddał się! ";
+                document.getElementById("checkText").innerHTML += (game.getYourColor() == "white") ? "Białe wygrywają!" : "Czarne wygrywają!";
+                net.window.win();
+
+            }
+        })
+
+        client.on("sendStalematePreposition", (data) => {
+            game.stalematePreposition.gotPrepositionOfStalemate(data.nick);
+        })
+
+        client.on("sendStalematePrepositionBack", (data) => {
+            console.log(data.accepted);
+            if (data.accepted == true) {
+                game.stalematePreposition.acceptedPreposition();
+            } else {
+                game.stalematePreposition.declinedPreposition();
+            }
+        })
+
+        client.on("getTopRanking", (data) => {
+            const ranking = new Ranking(data.allRanking);
+            game.ranking = ranking;
+
+            document.body.appendChild(ranking.getComponent());
+            ranking.getComponent().style.top = "initial";
+            ranking.getComponent().style.bottom = "0";
+            ranking.getComponent().style.borderBottomLeftRadius = "0";
+            ranking.getComponent().style.borderBottomRightRadius = "0";
+            ranking.getComponent().style.borderTopLeftRadius = "15px";
+            ranking.getComponent().style.borderTopRightRadius = "15px";
         })
     }
 
@@ -158,7 +241,7 @@
         client.emit("sendDataToAI", obj)
     }
 
-    this.turn = function (pawn, fromX, fromY, xDes, yDes, hitPawn, enPassant, casting, color, gmid, localTable, depth) {
+    this.turn = function ({ pawn, fromX, fromY, xDes, yDes, hitPawn, enPassant, casting, color, gmid, localTable, depth, previousLocalTable, isFinishedGame }) {
         client.emit("turn", {
             pawn: pawn,
             from: {
@@ -172,11 +255,14 @@
             casting: casting,
             color: color,
             gameId: gmid,
+            previousLocalTable: previousLocalTable,
             localTable: localTable,
             computer: (game.getYourColor() == "white") ? "black" : "white",
             depth: depth,
             ai_playing: game.ai_playing,
-            time_of_turn: new Date()
+            time_of_turn: new Date(),
+            timeLeft: game.timer.yourTimeShownLeft,
+            isFinishedGame: isFinishedGame
         });
     }
 
@@ -202,5 +288,46 @@
     this.getAllDiffLevels = (callback) => {
         client.emit("getAllDiffLevels", {});
         this.callback = callback;
+    }
+
+    this.surrender = () => {
+        client.emit("surrender", {
+            nick: main.getNick(),
+            gameId: game.getGameId()
+        });
+    }
+
+    this.sendStalematePreposition = () => {
+        client.emit("sendStalematePreposition", {
+            nick: main.getNick(),
+            gameId: game.getGameId()
+        });
+    }
+
+    this.acceptStalematePreposition = () => {
+        client.emit("sendStalematePrepositionBack", {
+            nick: main.getNick(),
+            gameId: game.getGameId(),
+            accepted: true
+        });
+    }
+
+    this.declineStalematePreposition = () => {
+        client.emit("sendStalematePrepositionBack", {
+            nick: main.getNick(),
+            gameId: game.getGameId(),
+            accepted: false
+        });
+    }
+
+    this.getTopRanking = () => {
+        client.emit("getTopRanking", {});
+    }
+
+    this.changePassword = (newPassword) => {
+        client.emit("changePassword", {
+            nick: main.getNick(),
+            newPassword: newPassword
+        });
     }
 }

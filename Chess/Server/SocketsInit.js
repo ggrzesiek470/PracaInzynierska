@@ -25,6 +25,10 @@ export default class SocketsInit {
             Sockets.sendMessageByChat(tools);
             Sockets.setStatisticsForUser(tools);
             Sockets.getAllDiffLevels(tools);
+            Sockets.surrender(tools);
+            Sockets.sendStalematePreposition(tools);
+            Sockets.getTopRanking(tools);
+            Sockets.changePassword(tools);
         })
     }
 }

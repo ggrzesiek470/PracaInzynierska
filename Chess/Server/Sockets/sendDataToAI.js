@@ -21,7 +21,8 @@ export default function sendDataToAI ({ client, opers, models, io }) {
                 yDes: response.to.y,
                 enPassant: response.enpassant,
                 casting: response.casting,
-                fromAI: true
+                fromAI: true,
+                entry: response.entry.split("<br>")[0],
             }
             io.sockets.to(client.id).emit(channelBack, dataToSend);
         });

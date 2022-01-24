@@ -6,12 +6,18 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="/libs/socket.io-1.4.5.js"></script>
     <script src="/scripts/components/Chat.js"></script>
+    <script src="/scripts/components/ChessNotationContainer.js"></script>
+    <script src="/scripts/components/HistoricalGames.js"></script>
     <script src="/scripts/components/LoadEnvironment.js"></script>
     <script src="/scripts/components/GameModeInit.js"></script>
     <script src="/scripts/components/LoadingScreen.js"></script>
+    <script src="/scripts/components/Profile.js"></script>
     <script src="/scripts/components/Ranking.js"></script>
     <script src="/scripts/components/MenuBar.js"></script>
+    <script src="/scripts/components/SurrenderGameModal.js"></script>
+    <script src="/scripts/components/StalematePreposition.js"></script>
     <script src="/scripts/components/Timer.js"></script>
+    <script src="/scripts/components/Tooltip.js"></script>
     <script src="/scripts/Canvas.js"></script>
     <script src="/scripts/Fireplace.js"></script>
     <script src="/scripts/Game.js"></script>
@@ -32,6 +38,9 @@
             net = new Net();
             game = new Game();
             main = new Main();
+            chessNotationCont = null;
+
+            net.getTopRanking();
         })
     </script>
 </head>

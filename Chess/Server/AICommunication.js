@@ -4,10 +4,12 @@ import Logger from './Logger.js';
 
 export default class AICommunication {
     static AI_URL = "http://localhost:3001/ai_module";
+    static Notation_URL = "http://localhost:3001/get_notation";
 
     static sendDataToAIServer (board, depth, computer, callback) {
         axios.post(this.AI_URL, this.toJSON(board, depth, computer))
           .then((response) => {
+            let entry = response.data.split(":")[0];
             let coords = response.data.split(":")[1];
             let move = response.data.split("<br>")[0];
             let casting = (move == "0-0" || move == "0-0-0");
@@ -28,6 +30,7 @@ export default class AICommunication {
             };
 
             callback({
+                entry: entry,
                 from: from,
                 to: to,
                 casting: casting,
@@ -39,6 +42,22 @@ export default class AICommunication {
           .catch((error) => {
             Logger.print(error, Logger.type.CRITICAL, "AI Connection Attempt. Request sent. Got type error");
           });
+    }
+
+    static getNotationBasedOnMove (board, player, move) {
+        return new Promise(resolve => {
+            axios.post(this.Notation_URL, {
+                board: board,
+                player: player,
+                fromX: move.from.x,
+                fromY: move.from.y,
+                toX: move.to.x,
+                toY: move.to.y
+            })
+            .then((response) => {
+                resolve(response.data);
+            });
+        })
     }
 
     static toJSON(board, depth, computer) {

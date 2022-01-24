@@ -11,6 +11,10 @@ import turn from './turn.js';
 import getForRegister from './getForRegister.js';
 import setStatisticsForUser from './setStatisticsForUser.js';
 import sendMessageByChat from './sendMessageByChat.js';
+import surrender from './surrender.js';
+import sendStalematePreposition from './sendStalematePreposition.js';
+import getTopRanking from './getTopRanking.js';
+import changePassword from './changePassword.js';
 
 var Sockets = {
     disconnect: disconnect,
@@ -25,7 +29,11 @@ var Sockets = {
     getForRegister: getForRegister,
     setStatisticsForUser: setStatisticsForUser,
     sendMessageByChat: sendMessageByChat,
-    getAllDiffLevels: getAllDiffLevels
+    getAllDiffLevels: getAllDiffLevels,
+    surrender: surrender,
+    sendStalematePreposition: sendStalematePreposition,
+    getTopRanking: getTopRanking,
+    changePassword: changePassword
 }
 
 export default Sockets;

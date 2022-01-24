@@ -1,0 +1,450 @@
+23.01.2022, 13:37:15 --- INFO: Connect --- Client of id 6ptdbEiVFjaVvB9OAAAF pops in to the server!
+23.01.2022, 13:58:06 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 2, points: 550
+23.01.2022, 13:58:59 --- INFO: Disconnect --- Client of id 6ptdbEiVFjaVvB9OAAAF leaves the server.
+23.01.2022, 13:59:00 --- INFO: Connect --- Client of id xmN2MO3g4MNqwUOSAAAG pops in to the server!
+23.01.2022, 14:00:05 --- INFO: Disconnect --- Client of id xmN2MO3g4MNqwUOSAAAG leaves the server.
+23.01.2022, 14:00:06 --- INFO: Connect --- Client of id ld_rv3sPkH5h4wJFAAAH pops in to the server!
+23.01.2022, 14:02:26 --- INFO: Disconnect --- Client of id ld_rv3sPkH5h4wJFAAAH leaves the server.
+23.01.2022, 14:02:27 --- INFO: Connect --- Client of id x4ZJs4wFqx13LiApAAAI pops in to the server!
+23.01.2022, 14:18:16 --- INFO: Disconnect --- Client of id x4ZJs4wFqx13LiApAAAI leaves the server.
+23.01.2022, 14:18:16 --- INFO: Connect --- Client of id 2AdKjOj7rEI5wKs2AAAJ pops in to the server!
+23.01.2022, 14:19:53 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 3, points: 525
+23.01.2022, 14:20:21 --- INFO: Disconnect --- Client of id 2AdKjOj7rEI5wKs2AAAJ leaves the server.
+23.01.2022, 14:20:22 --- INFO: Connect --- Client of id mkcwbjlVNnZk6lkCAAAK pops in to the server!
+23.01.2022, 14:21:01 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 4, points: 500
+23.01.2022, 15:27:14 --- INFO: Disconnect --- Client of id mkcwbjlVNnZk6lkCAAAK leaves the server.
+23.01.2022, 15:27:15 --- INFO: Connect --- Client of id QMnAEZpe99OEWlubAAAL pops in to the server!
+23.01.2022, 15:56:22 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 15:56:22 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 15:56:22 --- INFO: Connect --- Client of id WgiSmboGzDTEFKjzAAAA pops in to the server!
+23.01.2022, 15:56:24 --- INFO: Disconnect --- Client of id WgiSmboGzDTEFKjzAAAA leaves the server.
+23.01.2022, 15:56:25 --- INFO: Connect --- Client of id g9NkMz-hmALWQholAAAB pops in to the server!
+23.01.2022, 17:17:17 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 17:17:17 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 17:17:40 --- INFO: Connect --- Client of id 00ab5xMjkwiwVJIkAAAA pops in to the server!
+23.01.2022, 17:28:47 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 5, points: 475
+23.01.2022, 17:28:55 --- INFO: Disconnect --- Client of id 00ab5xMjkwiwVJIkAAAA leaves the server.
+23.01.2022, 17:28:56 --- INFO: Connect --- Client of id dkVjiX4ahIUw5x1LAAAB pops in to the server!
+23.01.2022, 17:29:29 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 6, points: 450
+23.01.2022, 17:31:51 --- INFO: Disconnect --- Client of id dkVjiX4ahIUw5x1LAAAB leaves the server.
+23.01.2022, 17:31:52 --- INFO: Connect --- Client of id fsm4x5pACAl1-uhYAAAC pops in to the server!
+23.01.2022, 17:31:56 --- INFO: Disconnect --- Client of id fsm4x5pACAl1-uhYAAAC leaves the server.
+23.01.2022, 17:31:56 --- INFO: Connect --- Client of id TXR5ObfXgBDibtAdAAAD pops in to the server!
+23.01.2022, 17:39:49 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 7, points: 425
+23.01.2022, 17:39:52 --- INFO: Disconnect --- Client of id TXR5ObfXgBDibtAdAAAD leaves the server.
+23.01.2022, 17:39:53 --- INFO: Connect --- Client of id a8pEiPJdHBOG8QACAAAE pops in to the server!
+23.01.2022, 17:40:59 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 8, points: 400
+23.01.2022, 17:54:21 --- INFO: Disconnect --- Client of id a8pEiPJdHBOG8QACAAAE leaves the server.
+23.01.2022, 17:54:21 --- INFO: Connect --- Client of id oKOXqe2ZSEJ_LdohAAAF pops in to the server!
+23.01.2022, 17:54:54 --- INFO: Disconnect --- Client of id oKOXqe2ZSEJ_LdohAAAF leaves the server.
+23.01.2022, 17:54:55 --- INFO: Connect --- Client of id hGT4VOb8pLcZLVaYAAAG pops in to the server!
+23.01.2022, 17:56:22 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 9, points: 375
+23.01.2022, 17:56:50 --- INFO: Disconnect --- Client of id hGT4VOb8pLcZLVaYAAAG leaves the server.
+23.01.2022, 17:56:51 --- INFO: Connect --- Client of id 2B3_cMIM1bpZClVJAAAH pops in to the server!
+23.01.2022, 17:58:20 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 10, points: 350
+23.01.2022, 17:58:33 --- INFO: Disconnect --- Client of id 2B3_cMIM1bpZClVJAAAH leaves the server.
+23.01.2022, 17:58:34 --- INFO: Connect --- Client of id _7QZHmDhnxOd24bIAAAI pops in to the server!
+23.01.2022, 18:00:39 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 18:00:39 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 18:00:40 --- INFO: Connect --- Client of id xvuXgKWss7FcL1guAAAA pops in to the server!
+23.01.2022, 18:07:49 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 11, points: 325
+23.01.2022, 18:07:55 --- INFO: Disconnect --- Client of id xvuXgKWss7FcL1guAAAA leaves the server.
+23.01.2022, 18:07:57 --- INFO: Connect --- Client of id idVX3xzIfI8WslyrAAAB pops in to the server!
+23.01.2022, 18:07:59 --- INFO: Connect --- Client of id T9OoJCyimhnLwhVSAAAC pops in to the server!
+23.01.2022, 18:08:12 --- INFO: Disconnect --- Client of id T9OoJCyimhnLwhVSAAAC leaves the server.
+23.01.2022, 18:08:13 --- INFO: Connect --- Client of id mwYKaEg3k-sJjOb1AAAD pops in to the server!
+23.01.2022, 18:08:18 --- INFO: Disconnect --- Client of id idVX3xzIfI8WslyrAAAB leaves the server.
+23.01.2022, 18:08:19 --- INFO: Connect --- Client of id v4GMqSTFx-iGt_fnAAAE pops in to the server!
+23.01.2022, 18:09:15 --- INFO: Disconnect --- Client of id v4GMqSTFx-iGt_fnAAAE leaves the server.
+23.01.2022, 18:09:17 --- INFO: Connect --- Client of id mdvL3mKlSXdHDL2LAAAF pops in to the server!
+23.01.2022, 18:09:34 --- INFO: Disconnect --- Client of id mwYKaEg3k-sJjOb1AAAD leaves the server.
+23.01.2022, 18:09:35 --- INFO: Connect --- Client of id e2x7DVFsHfLcRpuiAAAG pops in to the server!
+23.01.2022, 18:18:31 --- INFO: Disconnect --- Client of id e2x7DVFsHfLcRpuiAAAG leaves the server.
+23.01.2022, 18:18:34 --- INFO: Connect --- Client of id xBq3Pu87Xe6GB92mAAAH pops in to the server!
+23.01.2022, 18:18:35 --- INFO: Disconnect --- Client of id mdvL3mKlSXdHDL2LAAAF leaves the server.
+23.01.2022, 18:18:36 --- INFO: Connect --- Client of id Z10IW5nNS27ziJF4AAAI pops in to the server!
+23.01.2022, 18:18:50 --- INFO: Disconnect --- Client of id Z10IW5nNS27ziJF4AAAI leaves the server.
+23.01.2022, 18:18:50 --- INFO: Connect --- Client of id RTbG8gWByPcDlJiiAAAJ pops in to the server!
+23.01.2022, 18:18:52 --- INFO: Disconnect --- Client of id xBq3Pu87Xe6GB92mAAAH leaves the server.
+23.01.2022, 18:18:53 --- INFO: Connect --- Client of id o5grCywH6XhWs2tcAAAK pops in to the server!
+23.01.2022, 18:19:54 --- INFO: Stat change --- Change of statistics of user tez. Wins: 1, draws: 0, losses: 1, points: 25
+23.01.2022, 18:19:54 --- CRIT_ERR: Critical Error --- SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/surrender.js:12:39
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:152:17
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+23.01.2022, 18:21:00 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 18:21:00 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 18:21:00 --- INFO: Connect --- Client of id Gpj5qlJSAc9e5ooGAAAA pops in to the server!
+23.01.2022, 18:21:01 --- INFO: Connect --- Client of id TIatdsMn7e47X-SEAAAB pops in to the server!
+23.01.2022, 18:21:59 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 12, points: 300
+23.01.2022, 18:21:59 --- CRIT_ERR: Critical Error --- SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/surrender.js:13:39
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:152:17
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+23.01.2022, 18:23:37 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 18:23:37 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 18:23:37 --- INFO: Connect --- Client of id oa5pI_o0SO7nVxqzAAAA pops in to the server!
+23.01.2022, 18:23:37 --- INFO: Connect --- Client of id 1T4okyXQ9iSVu1b5AAAB pops in to the server!
+23.01.2022, 18:23:38 --- INFO: Disconnect --- Client of id oa5pI_o0SO7nVxqzAAAA leaves the server.
+23.01.2022, 18:23:38 --- INFO: Disconnect --- Client of id 1T4okyXQ9iSVu1b5AAAB leaves the server.
+23.01.2022, 18:23:38 --- INFO: Connect --- Client of id Zi_DLtn1Hmql3eYGAAAC pops in to the server!
+23.01.2022, 18:23:39 --- INFO: Connect --- Client of id enoGJFOROxYNHZ2bAAAD pops in to the server!
+23.01.2022, 18:24:17 --- INFO: Stat change --- Change of statistics of user tez. Wins: 1, draws: 0, losses: 2, points: 0
+23.01.2022, 18:24:17 --- CRIT_ERR: Critical Error --- SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/surrender.js:15:39
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:152:17
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+23.01.2022, 18:25:45 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 18:25:45 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 18:25:46 --- INFO: Connect --- Client of id VU_9GSyCGnXUMujWAAAA pops in to the server!
+23.01.2022, 18:25:47 --- INFO: Disconnect --- Client of id VU_9GSyCGnXUMujWAAAA leaves the server.
+23.01.2022, 18:25:48 --- INFO: Connect --- Client of id oAAv8JpYthYY-y0xAAAB pops in to the server!
+23.01.2022, 18:25:48 --- INFO: Connect --- Client of id 54yKV7Fu8xOKGeNVAAAC pops in to the server!
+23.01.2022, 18:29:30 --- INFO: Stat change --- Change of statistics of user tez. Wins: 1, draws: 0, losses: 3, points: -25
+23.01.2022, 18:29:30 --- CRIT_ERR: Critical Error --- ReferenceError: dagameDatata is not defined
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/surrender.js:29:30
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:152:17
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+23.01.2022, 18:33:24 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 18:33:24 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 18:33:26 --- INFO: Connect --- Client of id KSa1oCH9LWlbFZLuAAAA pops in to the server!
+23.01.2022, 18:33:27 --- INFO: Connect --- Client of id zsSMYwfmVrWSIA_YAAAB pops in to the server!
+23.01.2022, 18:46:24 --- INFO: Disconnect --- Client of id zsSMYwfmVrWSIA_YAAAB leaves the server.
+23.01.2022, 18:46:25 --- INFO: Disconnect --- Client of id KSa1oCH9LWlbFZLuAAAA leaves the server.
+23.01.2022, 18:46:25 --- INFO: Connect --- Client of id o9Q1dkvXrS6oeKacAAAC pops in to the server!
+23.01.2022, 18:46:27 --- INFO: Connect --- Client of id CoDkKVmT8a0iqZxmAAAD pops in to the server!
+23.01.2022, 18:47:01 --- INFO: Disconnect --- Client of id o9Q1dkvXrS6oeKacAAAC leaves the server.
+23.01.2022, 18:47:02 --- INFO: Connect --- Client of id ack7ehCWeNJRl2MOAAAE pops in to the server!
+23.01.2022, 18:47:02 --- INFO: Disconnect --- Client of id CoDkKVmT8a0iqZxmAAAD leaves the server.
+23.01.2022, 18:47:03 --- INFO: Connect --- Client of id l4FVt-DUUwyqfoHZAAAF pops in to the server!
+23.01.2022, 18:51:44 --- INFO: Disconnect --- Client of id ack7ehCWeNJRl2MOAAAE leaves the server.
+23.01.2022, 18:51:46 --- INFO: Connect --- Client of id F1P49qXmcN7h0pqeAAAG pops in to the server!
+23.01.2022, 18:51:46 --- INFO: Disconnect --- Client of id l4FVt-DUUwyqfoHZAAAF leaves the server.
+23.01.2022, 18:51:46 --- INFO: Connect --- Client of id sqsC6qxRCQW_koQ6AAAH pops in to the server!
+23.01.2022, 19:02:05 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 19:02:05 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 19:02:05 --- INFO: Connect --- Client of id apNY0Kfan58rm-pnAAAA pops in to the server!
+23.01.2022, 19:02:06 --- INFO: Connect --- Client of id 216I5tmAPdhLlEv2AAAB pops in to the server!
+23.01.2022, 19:02:14 --- INFO: Disconnect --- Client of id 216I5tmAPdhLlEv2AAAB leaves the server.
+23.01.2022, 19:02:14 --- INFO: Disconnect --- Client of id apNY0Kfan58rm-pnAAAA leaves the server.
+23.01.2022, 19:02:16 --- INFO: Connect --- Client of id bZAO3w0ktlHEER4XAAAC pops in to the server!
+23.01.2022, 19:02:16 --- INFO: Connect --- Client of id S_HBTkHkz70Sfn_9AAAD pops in to the server!
+23.01.2022, 19:15:56 --- INFO: Disconnect --- Client of id bZAO3w0ktlHEER4XAAAC leaves the server.
+23.01.2022, 19:16:26 --- INFO: Disconnect --- Client of id S_HBTkHkz70Sfn_9AAAD leaves the server.
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id gz50bkVEow3OGX9rAAAE pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id zA9lmGXzYSeT4di0AAAF pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id pLnq-MNrRjQNWBg3AAAG pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id yDWGp4RSA7kcIcixAAAH pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id mdhmOLpZqMBvCQQhAAAI pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id NEcXfIoH9dNB6zi-AAAJ pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id 5BSoX58fF91-R6FfAAAK pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id iHXuhsDN2cOGZ8QmAAAM pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id 3cr0TR5Ok7dCEIurAAAL pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id 7defcd17S34y3xJoAAAN pops in to the server!
+23.01.2022, 19:19:41 --- INFO: Connect --- Client of id 16UNNQi5aqItw3vrAAAO pops in to the server!
+23.01.2022, 19:19:42 --- INFO: Connect --- Client of id dayYPpEwWgvwtcxMAAAP pops in to the server!
+23.01.2022, 19:19:42 --- INFO: Connect --- Client of id NrZFa8pNEIOYwuYLAAAQ pops in to the server!
+23.01.2022, 19:19:42 --- INFO: Connect --- Client of id YfVrhRTgnCX_6gIBAAAR pops in to the server!
+23.01.2022, 19:19:43 --- INFO: Connect --- Client of id 1vA6Znn8HjT4co1GAAAS pops in to the server!
+23.01.2022, 19:19:45 --- INFO: Connect --- Client of id xT0mk8_HMvXh9ie6AAAT pops in to the server!
+23.01.2022, 19:19:56 --- INFO: Disconnect --- Client of id xT0mk8_HMvXh9ie6AAAT leaves the server.
+23.01.2022, 19:19:56 --- INFO: Connect --- Client of id r-WnehfHy9IVOA_xAAAU pops in to the server!
+23.01.2022, 19:19:59 --- INFO: Disconnect --- Client of id 1vA6Znn8HjT4co1GAAAS leaves the server.
+23.01.2022, 19:19:59 --- INFO: Connect --- Client of id yTzHgYz-rWsCielAAAAV pops in to the server!
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id gz50bkVEow3OGX9rAAAE leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id zA9lmGXzYSeT4di0AAAF leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id pLnq-MNrRjQNWBg3AAAG leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id yDWGp4RSA7kcIcixAAAH leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id 5BSoX58fF91-R6FfAAAK leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id iHXuhsDN2cOGZ8QmAAAM leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id 3cr0TR5Ok7dCEIurAAAL leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id NEcXfIoH9dNB6zi-AAAJ leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id mdhmOLpZqMBvCQQhAAAI leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id 7defcd17S34y3xJoAAAN leaves the server.
+23.01.2022, 19:21:06 --- INFO: Disconnect --- Client of id 16UNNQi5aqItw3vrAAAO leaves the server.
+23.01.2022, 19:21:07 --- INFO: Disconnect --- Client of id dayYPpEwWgvwtcxMAAAP leaves the server.
+23.01.2022, 19:21:07 --- INFO: Disconnect --- Client of id NrZFa8pNEIOYwuYLAAAQ leaves the server.
+23.01.2022, 19:21:07 --- INFO: Disconnect --- Client of id YfVrhRTgnCX_6gIBAAAR leaves the server.
+23.01.2022, 19:26:05 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 13, points: 275
+23.01.2022, 19:26:05 --- CRIT_ERR: Critical Error --- ReferenceError: io is not defined
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/surrender.js:47:13
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:152:17
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+23.01.2022, 19:26:32 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 19:26:32 --- INFO: Connect --- Client of id Q6GuE-8kvkYrUZlRAAAA pops in to the server!
+23.01.2022, 19:26:32 --- INFO: Connect --- Client of id PmsgVcjq5pW1LQYHAAAB pops in to the server!
+23.01.2022, 19:26:32 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 19:26:33 --- INFO: Disconnect --- Client of id Q6GuE-8kvkYrUZlRAAAA leaves the server.
+23.01.2022, 19:26:34 --- INFO: Connect --- Client of id UFJHBMVsNAblOaycAAAC pops in to the server!
+23.01.2022, 19:26:34 --- INFO: Disconnect --- Client of id PmsgVcjq5pW1LQYHAAAB leaves the server.
+23.01.2022, 19:26:35 --- INFO: Connect --- Client of id JQADrMUVzVQJfiZeAAAD pops in to the server!
+23.01.2022, 19:28:31 --- INFO: Stat change --- Change of statistics of user tez. Wins: 1, draws: 0, losses: 4, points: -50
+23.01.2022, 19:28:31 --- CRIT_ERR: Critical Error --- ReferenceError: opponentsId is not defined
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/surrender.js:47:27
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:152:17
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+23.01.2022, 19:31:25 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 19:31:25 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 19:31:27 --- INFO: Connect --- Client of id hv8KuPGXoH4tcdkUAAAA pops in to the server!
+23.01.2022, 19:31:38 --- INFO: Connect --- Client of id 02C89SyDteCuJlReAAAB pops in to the server!
+23.01.2022, 19:33:09 --- INFO: Stat change --- Change of statistics of user tez. Wins: 2, draws: 0, losses: 4, points: 0
+23.01.2022, 19:33:10 --- INFO: Stat change --- Change of statistics of user abc. Wins: 11, draws: 2, losses: 14, points: 250
+23.01.2022, 19:33:24 --- INFO: Disconnect --- Client of id 02C89SyDteCuJlReAAAB leaves the server.
+23.01.2022, 19:33:25 --- INFO: Connect --- Client of id 2mtbFPqeyrBaYsnhAAAC pops in to the server!
+23.01.2022, 19:33:26 --- INFO: Disconnect --- Client of id hv8KuPGXoH4tcdkUAAAA leaves the server.
+23.01.2022, 19:33:27 --- INFO: Connect --- Client of id eJdL8tr_AOx40a24AAAD pops in to the server!
+23.01.2022, 19:34:24 --- INFO: Stat change --- Change of statistics of user tez. Wins: 2, draws: 0, losses: 5, points: -25
+23.01.2022, 19:34:24 --- INFO: Stat change --- Change of statistics of user abc. Wins: 12, draws: 2, losses: 14, points: 300
+23.01.2022, 19:36:50 --- INFO: Disconnect --- Client of id 2mtbFPqeyrBaYsnhAAAC leaves the server.
+23.01.2022, 19:36:52 --- INFO: Disconnect --- Client of id eJdL8tr_AOx40a24AAAD leaves the server.
+23.01.2022, 19:36:53 --- INFO: Connect --- Client of id 8wo1lS2_xHGlbI7aAAAE pops in to the server!
+23.01.2022, 19:49:05 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 19:49:05 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 19:49:21 --- INFO: Connect --- Client of id iDFyVPcuXC9v-1b9AAAA pops in to the server!
+23.01.2022, 19:49:29 --- INFO: Connect --- Client of id WMdzW-hFAVfjpDdCAAAB pops in to the server!
+23.01.2022, 19:51:28 --- INFO: Stat change --- Change of statistics of user abc. Wins: 13, draws: 2, losses: 14, points: 350
+23.01.2022, 19:51:28 --- CRIT_ERR: Database Record INSERT Attempt - InsertOne func --- ValidationError: blackPlayer: Path `blackPlayer` is required., whitePlayer: Path `whitePlayer` is required.
+23.01.2022, 19:52:11 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 19:52:11 --- INFO: Connect --- Client of id 9hHZGAKDUK4qXjI9AAAA pops in to the server!
+23.01.2022, 19:52:11 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 19:52:12 --- INFO: Stat change --- Change of statistics of user tez. Wins: 2, draws: 0, losses: 6, points: -50
+23.01.2022, 19:52:14 --- INFO: Disconnect --- Client of id 9hHZGAKDUK4qXjI9AAAA leaves the server.
+23.01.2022, 19:52:14 --- INFO: Connect --- Client of id 2oR-HkqzzoVtyTq1AAAB pops in to the server!
+23.01.2022, 19:52:16 --- INFO: Connect --- Client of id A87d4Z5osr5CNfXkAAAC pops in to the server!
+23.01.2022, 19:52:49 --- INFO: Disconnect --- Client of id A87d4Z5osr5CNfXkAAAC leaves the server.
+23.01.2022, 19:52:51 --- INFO: Connect --- Client of id SyaEw8wkToat_MHEAAAD pops in to the server!
+23.01.2022, 19:52:56 --- INFO: Disconnect --- Client of id 2oR-HkqzzoVtyTq1AAAB leaves the server.
+23.01.2022, 19:52:56 --- INFO: Connect --- Client of id XFqQyWLLqtdRQ0MtAAAE pops in to the server!
+23.01.2022, 19:53:07 --- INFO: Disconnect --- Client of id SyaEw8wkToat_MHEAAAD leaves the server.
+23.01.2022, 19:53:08 --- INFO: Connect --- Client of id fNp5GIpAjQnhp4vRAAAF pops in to the server!
+23.01.2022, 19:55:49 --- INFO: Stat change --- Change of statistics of user abc. Wins: 14, draws: 2, losses: 14, points: 400
+23.01.2022, 19:55:49 --- INFO: Stat change --- Change of statistics of user tez. Wins: 2, draws: 0, losses: 7, points: -75
+23.01.2022, 19:57:43 --- CRIT_ERR: Critical Error --- TypeError: Cannot read properties of undefined (reading 'whitePlayer')
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/sendMessageByChat.js:31:61
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:152:17
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+23.01.2022, 20:05:37 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 20:05:37 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 20:05:37 --- INFO: Connect --- Client of id DFbZeS9f2uoGNs7MAAAA pops in to the server!
+23.01.2022, 20:05:39 --- INFO: Disconnect --- Client of id DFbZeS9f2uoGNs7MAAAA leaves the server.
+23.01.2022, 20:05:39 --- INFO: Connect --- Client of id wOsZqg9MUvTG06zJAAAB pops in to the server!
+23.01.2022, 20:05:40 --- INFO: Connect --- Client of id ATOvz7dPiti3DTnOAAAC pops in to the server!
+23.01.2022, 20:13:06 --- INFO: Stat change --- Change of statistics of user tez. Wins: 3, draws: 0, losses: 7, points: -25
+23.01.2022, 20:13:07 --- INFO: Stat change --- Change of statistics of user abc. Wins: 14, draws: 2, losses: 15, points: 375
+23.01.2022, 20:16:23 --- INFO: Disconnect --- Client of id ATOvz7dPiti3DTnOAAAC leaves the server.
+23.01.2022, 20:23:15 --- INFO: Disconnect --- Client of id wOsZqg9MUvTG06zJAAAB leaves the server.
+23.01.2022, 20:23:16 --- INFO: Connect --- Client of id 2j_M94gevN186UbGAAAD pops in to the server!
+23.01.2022, 20:23:36 --- INFO: Disconnect --- Client of id 2j_M94gevN186UbGAAAD leaves the server.
+23.01.2022, 20:23:36 --- INFO: Connect --- Client of id A0lBuVBgsYYVl-DKAAAE pops in to the server!
+23.01.2022, 20:23:43 --- INFO: Connect --- Client of id WBuCCg6vZ6BURrAYAAAF pops in to the server!
+23.01.2022, 20:23:48 --- INFO: Disconnect --- Client of id A0lBuVBgsYYVl-DKAAAE leaves the server.
+23.01.2022, 20:23:49 --- INFO: Disconnect --- Client of id WBuCCg6vZ6BURrAYAAAF leaves the server.
+23.01.2022, 20:23:49 --- INFO: Connect --- Client of id sHaMqpwSpMFvZg1RAAAG pops in to the server!
+23.01.2022, 20:23:50 --- INFO: Connect --- Client of id 0_iySv9EacRJkUYyAAAH pops in to the server!
+23.01.2022, 20:35:34 --- INFO: Disconnect --- Client of id sHaMqpwSpMFvZg1RAAAG leaves the server.
+23.01.2022, 20:35:35 --- INFO: Disconnect --- Client of id 0_iySv9EacRJkUYyAAAH leaves the server.
+23.01.2022, 20:35:40 --- INFO: Connect --- Client of id qNOuTaHSHW3TxMtZAAAI pops in to the server!
+23.01.2022, 20:35:50 --- INFO: Disconnect --- Client of id qNOuTaHSHW3TxMtZAAAI leaves the server.
+23.01.2022, 20:35:54 --- INFO: Connect --- Client of id PwG0n-yCnyt7Uk-fAAAJ pops in to the server!
+23.01.2022, 20:36:29 --- INFO: Disconnect --- Client of id PwG0n-yCnyt7Uk-fAAAJ leaves the server.
+23.01.2022, 20:36:32 --- INFO: Connect --- Client of id tP5XHKcRshGrIfPPAAAK pops in to the server!
+23.01.2022, 20:36:34 --- INFO: Connect --- Client of id fPXHlhSp3y40HdvqAAAL pops in to the server!
+23.01.2022, 20:37:05 --- INFO: Disconnect --- Client of id tP5XHKcRshGrIfPPAAAK leaves the server.
+23.01.2022, 20:37:07 --- INFO: Connect --- Client of id VLmxaTq_SJhBAJZhAAAM pops in to the server!
+23.01.2022, 20:37:17 --- INFO: Connect --- Client of id D734xcfh9M61UkneAAAN pops in to the server!
+23.01.2022, 20:37:18 --- INFO: Disconnect --- Client of id fPXHlhSp3y40HdvqAAAL leaves the server.
+23.01.2022, 21:26:38 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 21:26:38 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 21:26:38 --- INFO: Connect --- Client of id BA_3cbJlcMDEuIo9AAAA pops in to the server!
+23.01.2022, 21:26:38 --- INFO: Connect --- Client of id 5cT_o3ucnlExpLJHAAAB pops in to the server!
+23.01.2022, 21:26:51 --- INFO: Disconnect --- Client of id BA_3cbJlcMDEuIo9AAAA leaves the server.
+23.01.2022, 21:26:53 --- INFO: Connect --- Client of id wnmp8v9ZkH7w-OYgAAAC pops in to the server!
+23.01.2022, 21:26:56 --- INFO: Disconnect --- Client of id 5cT_o3ucnlExpLJHAAAB leaves the server.
+23.01.2022, 21:26:59 --- INFO: Connect --- Client of id y_BqmpzR7TOYfFzsAAAD pops in to the server!
+23.01.2022, 21:30:41 --- INFO: Disconnect --- Client of id y_BqmpzR7TOYfFzsAAAD leaves the server.
+23.01.2022, 21:30:42 --- INFO: Disconnect --- Client of id wnmp8v9ZkH7w-OYgAAAC leaves the server.
+23.01.2022, 21:30:42 --- INFO: Connect --- Client of id 2hWapEW92MVZhqaTAAAE pops in to the server!
+23.01.2022, 21:30:44 --- INFO: Connect --- Client of id feaigu-w5rUR6sBwAAAF pops in to the server!
+23.01.2022, 21:33:28 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 21:33:28 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 21:33:28 --- INFO: Connect --- Client of id qKCaMcOorxFRobEfAAAA pops in to the server!
+23.01.2022, 21:33:28 --- INFO: Connect --- Client of id nsJdthNPDhCKAHh1AAAB pops in to the server!
+23.01.2022, 21:33:30 --- INFO: Disconnect --- Client of id nsJdthNPDhCKAHh1AAAB leaves the server.
+23.01.2022, 21:33:30 --- INFO: Disconnect --- Client of id qKCaMcOorxFRobEfAAAA leaves the server.
+23.01.2022, 21:33:31 --- INFO: Connect --- Client of id bDjNOEA1g2Yu4RQLAAAC pops in to the server!
+23.01.2022, 21:33:32 --- INFO: Connect --- Client of id s6BCKLJPzv5rW1zgAAAD pops in to the server!
+23.01.2022, 21:58:28 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 21:58:28 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 21:58:38 --- INFO: Connect --- Client of id -J4LB6oXpzgDeSJYAAAA pops in to the server!
+23.01.2022, 21:58:42 --- INFO: Connect --- Client of id EJiv6dsymX39xhxEAAAB pops in to the server!
+23.01.2022, 21:58:43 --- INFO: Connect --- Client of id ig9Sdel6XGxGrKnbAAAC pops in to the server!
+23.01.2022, 21:58:51 --- INFO: Disconnect --- Client of id EJiv6dsymX39xhxEAAAB leaves the server.
+23.01.2022, 21:58:53 --- INFO: Connect --- Client of id YNKHPSVGd73dVnn3AAAD pops in to the server!
+23.01.2022, 21:59:00 --- INFO: Disconnect --- Client of id ig9Sdel6XGxGrKnbAAAC leaves the server.
+23.01.2022, 21:59:00 --- INFO: Connect --- Client of id 14gXWNodhAsKFTx3AAAE pops in to the server!
+23.01.2022, 22:00:03 --- INFO: Disconnect --- Client of id -J4LB6oXpzgDeSJYAAAA leaves the server.
+23.01.2022, 22:02:17 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 22:02:17 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 22:02:17 --- INFO: Connect --- Client of id Bz6zTZkMopIM63vjAAAA pops in to the server!
+23.01.2022, 22:02:17 --- INFO: Connect --- Client of id 7Doze0gw_er4A2DEAAAB pops in to the server!
+23.01.2022, 22:02:18 --- INFO: Disconnect --- Client of id 7Doze0gw_er4A2DEAAAB leaves the server.
+23.01.2022, 22:02:19 --- INFO: Connect --- Client of id KSqaoM6bL2vZAzqxAAAC pops in to the server!
+23.01.2022, 22:02:19 --- INFO: Disconnect --- Client of id Bz6zTZkMopIM63vjAAAA leaves the server.
+23.01.2022, 22:02:20 --- INFO: Connect --- Client of id AxQ8Xbx01NvWVanqAAAD pops in to the server!
+23.01.2022, 22:06:56 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 22:06:56 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 22:06:56 --- INFO: Connect --- Client of id DfWVljxQi67meBeBAAAA pops in to the server!
+23.01.2022, 22:06:56 --- INFO: Connect --- Client of id wtkRzilTOs7plQaEAAAB pops in to the server!
+23.01.2022, 22:06:58 --- INFO: Connect --- Client of id _JGP6yLihyDy80S1AAAC pops in to the server!
+23.01.2022, 22:07:01 --- INFO: Disconnect --- Client of id DfWVljxQi67meBeBAAAA leaves the server.
+23.01.2022, 22:07:02 --- INFO: Connect --- Client of id peMDzsqwzm3jkEPcAAAD pops in to the server!
+23.01.2022, 22:08:21 --- INFO: Disconnect --- Client of id wtkRzilTOs7plQaEAAAB leaves the server.
+23.01.2022, 22:10:48 --- INFO: Disconnect --- Client of id _JGP6yLihyDy80S1AAAC leaves the server.
+23.01.2022, 22:10:49 --- INFO: Disconnect --- Client of id peMDzsqwzm3jkEPcAAAD leaves the server.
+23.01.2022, 22:10:50 --- INFO: Connect --- Client of id Ek4gaJE0eQUtVn2nAAAE pops in to the server!
+23.01.2022, 22:10:51 --- INFO: Connect --- Client of id 8CEXc7k7VmUVYWdCAAAF pops in to the server!
+23.01.2022, 22:12:40 --- INFO: Disconnect --- Client of id Ek4gaJE0eQUtVn2nAAAE leaves the server.
+23.01.2022, 22:12:41 --- INFO: Connect --- Client of id ZwxY1KofhOuR2v-IAAAG pops in to the server!
+23.01.2022, 22:12:43 --- INFO: Disconnect --- Client of id 8CEXc7k7VmUVYWdCAAAF leaves the server.
+23.01.2022, 22:12:43 --- INFO: Connect --- Client of id JxxObewKXNHzt_uPAAAH pops in to the server!
+23.01.2022, 22:18:03 --- INFO: Disconnect --- Client of id ZwxY1KofhOuR2v-IAAAG leaves the server.
+23.01.2022, 22:18:04 --- INFO: Disconnect --- Client of id JxxObewKXNHzt_uPAAAH leaves the server.
+23.01.2022, 22:18:04 --- INFO: Connect --- Client of id tVi-vLdPjDMa2yahAAAI pops in to the server!
+23.01.2022, 22:18:06 --- INFO: Connect --- Client of id uSsoJ-I13rNEq0CmAAAJ pops in to the server!
+23.01.2022, 22:19:32 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 22:19:32 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 22:19:37 --- INFO: Connect --- Client of id FQ-DnUAkFz57I9i6AAAA pops in to the server!
+23.01.2022, 22:19:43 --- INFO: Connect --- Client of id w2ZnfJK9KQsYo-UEAAAB pops in to the server!
+23.01.2022, 22:20:59 --- INFO: Disconnect --- Client of id w2ZnfJK9KQsYo-UEAAAB leaves the server.
+23.01.2022, 22:21:00 --- INFO: Connect --- Client of id cQsiETx9iWcaucdzAAAC pops in to the server!
+23.01.2022, 22:21:02 --- INFO: Disconnect --- Client of id FQ-DnUAkFz57I9i6AAAA leaves the server.
+23.01.2022, 22:21:03 --- INFO: Connect --- Client of id QIbPFNRgTrS6JAV3AAAD pops in to the server!
+23.01.2022, 22:21:31 --- INFO: Connect --- Client of id x3zfdZmBThXI7ADnAAAE pops in to the server!
+23.01.2022, 22:22:13 --- INFO: Disconnect --- Client of id QIbPFNRgTrS6JAV3AAAD leaves the server.
+23.01.2022, 22:22:15 --- INFO: Disconnect --- Client of id cQsiETx9iWcaucdzAAAC leaves the server.
+23.01.2022, 22:22:15 --- INFO: Connect --- Client of id -fydx1W0L6f68lSBAAAF pops in to the server!
+23.01.2022, 22:33:13 --- INFO: Stat change --- Change of statistics of user tez. Wins: 4, draws: 0, losses: 7, points: 25
+23.01.2022, 22:33:14 --- INFO: Stat change --- Change of statistics of user olsik. Wins: 1, draws: 0, losses: 1, points: 25
+23.01.2022, 22:33:27 --- INFO: Disconnect --- Client of id -fydx1W0L6f68lSBAAAF leaves the server.
+23.01.2022, 22:33:28 --- INFO: Connect --- Client of id bFXvgGYQqadny7mrAAAG pops in to the server!
+23.01.2022, 22:34:00 --- INFO: Disconnect --- Client of id x3zfdZmBThXI7ADnAAAE leaves the server.
+23.01.2022, 22:34:00 --- INFO: Connect --- Client of id Kqe8AvdsU_viope_AAAH pops in to the server!
+23.01.2022, 22:34:35 --- INFO: Stat change --- Change of statistics of user tez. Wins: 4, draws: 1, losses: 7, points: 50
+23.01.2022, 22:34:37 --- INFO: Stat change --- Change of statistics of user olsik. Wins: 1, draws: 1, losses: 1, points: 50
+23.01.2022, 22:34:37 --- CRIT_ERR: Critical Error --- TypeError: Cannot read properties of undefined (reading 'historyOfMoves')
+    at file:///D:/PracaInzynierska/Chess/Server/Sockets/sendStalematePreposition.js:36:73
+    at file:///D:/PracaInzynierska/Chess/Server/Database/Operations.js:152:17
+    at D:\PracaInzynierska\Chess\node_modules\mongoose\lib\model.js:5074:18
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+23.01.2022, 22:47:44 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 22:47:44 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 22:47:44 --- INFO: Connect --- Client of id sANGtjUdUBUFRwpkAAAA pops in to the server!
+23.01.2022, 22:47:44 --- INFO: Connect --- Client of id O7VXQwG0nZR_PfR8AAAB pops in to the server!
+23.01.2022, 22:47:53 --- INFO: Disconnect --- Client of id sANGtjUdUBUFRwpkAAAA leaves the server.
+23.01.2022, 22:47:54 --- INFO: Connect --- Client of id MJI1mBQv1-wZi5ruAAAC pops in to the server!
+23.01.2022, 22:48:14 --- INFO: Disconnect --- Client of id O7VXQwG0nZR_PfR8AAAB leaves the server.
+23.01.2022, 22:48:14 --- INFO: Connect --- Client of id SRdhbr1iRDJrnX8uAAAD pops in to the server!
+23.01.2022, 22:48:42 --- INFO: Stat change --- Change of statistics of user olsik. Wins: 1, draws: 2, losses: 1, points: 75
+23.01.2022, 22:49:17 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 22:49:17 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 22:49:17 --- INFO: Connect --- Client of id SRLVL6V9RIvNWd3HAAAA pops in to the server!
+23.01.2022, 22:49:17 --- INFO: Connect --- Client of id c2L8P0_jnykx9elvAAAB pops in to the server!
+23.01.2022, 22:49:18 --- INFO: Disconnect --- Client of id c2L8P0_jnykx9elvAAAB leaves the server.
+23.01.2022, 22:49:19 --- INFO: Connect --- Client of id s20dfQTHwhqQVyRlAAAC pops in to the server!
+23.01.2022, 22:49:24 --- INFO: Disconnect --- Client of id SRLVL6V9RIvNWd3HAAAA leaves the server.
+23.01.2022, 22:49:24 --- INFO: Connect --- Client of id Jhem6xpeqY8iPZilAAAD pops in to the server!
+23.01.2022, 22:50:08 --- INFO: Stat change --- Change of statistics of user abc. Wins: 14, draws: 3, losses: 15, points: 400
+23.01.2022, 22:50:08 --- INFO: Stat change --- Change of statistics of user olsik. Wins: 1, draws: 3, losses: 1, points: 100
+23.01.2022, 22:50:19 --- INFO: Disconnect --- Client of id Jhem6xpeqY8iPZilAAAD leaves the server.
+23.01.2022, 22:50:20 --- INFO: Connect --- Client of id WGfdjM3QByIlI4XoAAAE pops in to the server!
+23.01.2022, 22:50:40 --- INFO: Disconnect --- Client of id s20dfQTHwhqQVyRlAAAC leaves the server.
+23.01.2022, 22:50:41 --- INFO: Connect --- Client of id -dOACloWZNLtaSz1AAAF pops in to the server!
+23.01.2022, 22:54:51 --- INFO: Stat change --- Change of statistics of user olsik. Wins: 1, draws: 3, losses: 2, points: 75
+23.01.2022, 22:55:02 --- INFO: Disconnect --- Client of id WGfdjM3QByIlI4XoAAAE leaves the server.
+23.01.2022, 22:59:02 --- INFO: Disconnect --- Client of id -dOACloWZNLtaSz1AAAF leaves the server.
+23.01.2022, 22:59:03 --- INFO: Connect --- Client of id mvGCGu_x7MYOrOSHAAAG pops in to the server!
+23.01.2022, 22:59:31 --- INFO: Disconnect --- Client of id mvGCGu_x7MYOrOSHAAAG leaves the server.
+23.01.2022, 22:59:32 --- INFO: Connect --- Client of id nCzwQiPnA_edQbepAAAH pops in to the server!
+23.01.2022, 23:00:06 --- INFO: Disconnect --- Client of id nCzwQiPnA_edQbepAAAH leaves the server.
+23.01.2022, 23:00:07 --- INFO: Connect --- Client of id 6OGCF0DZCpG0E2-cAAAI pops in to the server!
+23.01.2022, 23:00:40 --- INFO: Disconnect --- Client of id 6OGCF0DZCpG0E2-cAAAI leaves the server.
+23.01.2022, 23:00:41 --- INFO: Connect --- Client of id NksMrl1d3kHAi6r2AAAJ pops in to the server!
+23.01.2022, 23:02:35 --- INFO: Disconnect --- Client of id NksMrl1d3kHAi6r2AAAJ leaves the server.
+23.01.2022, 23:02:36 --- INFO: Connect --- Client of id 1Rbxj1zdMgAhxekGAAAK pops in to the server!
+23.01.2022, 23:02:46 --- INFO: Disconnect --- Client of id 1Rbxj1zdMgAhxekGAAAK leaves the server.
+23.01.2022, 23:02:46 --- INFO: Connect --- Client of id a3FqnFtQ4_h58QlRAAAL pops in to the server!
+23.01.2022, 23:02:50 --- INFO: Disconnect --- Client of id a3FqnFtQ4_h58QlRAAAL leaves the server.
+23.01.2022, 23:02:50 --- INFO: Connect --- Client of id kuO3VcQLDBOHWG_xAAAM pops in to the server!
+23.01.2022, 23:03:03 --- INFO: Disconnect --- Client of id kuO3VcQLDBOHWG_xAAAM leaves the server.
+23.01.2022, 23:03:03 --- INFO: Connect --- Client of id TH1IglizYk6JOvTkAAAN pops in to the server!
+23.01.2022, 23:20:31 --- INFO: Init --- App initialization: Classic Chess starts!
+23.01.2022, 23:20:31 --- INFO: Connect --- Client of id VNwMN8n0Bz3-0-85AAAA pops in to the server!
+23.01.2022, 23:20:31 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+23.01.2022, 23:20:35 --- INFO: Disconnect --- Client of id VNwMN8n0Bz3-0-85AAAA leaves the server.
+23.01.2022, 23:20:35 --- INFO: Connect --- Client of id EwKDQZ6kAyjpPzeMAAAB pops in to the server!
+23.01.2022, 23:21:52 --- INFO: Disconnect --- Client of id EwKDQZ6kAyjpPzeMAAAB leaves the server.
+23.01.2022, 23:21:53 --- INFO: Connect --- Client of id _2BnvmbkEs3rMMhfAAAC pops in to the server!
+23.01.2022, 23:22:12 --- INFO: Disconnect --- Client of id _2BnvmbkEs3rMMhfAAAC leaves the server.
+23.01.2022, 23:22:12 --- INFO: Connect --- Client of id u8Z4Wk_7lNyPhLhrAAAD pops in to the server!
+23.01.2022, 23:22:36 --- INFO: Disconnect --- Client of id u8Z4Wk_7lNyPhLhrAAAD leaves the server.
+23.01.2022, 23:22:37 --- INFO: Connect --- Client of id Gj4uFlq2h4maCSSfAAAE pops in to the server!
+23.01.2022, 23:28:35 --- INFO: Disconnect --- Client of id Gj4uFlq2h4maCSSfAAAE leaves the server.
+23.01.2022, 23:28:36 --- INFO: Connect --- Client of id TlPk-xMWNk-kr4GHAAAF pops in to the server!
+23.01.2022, 23:30:12 --- INFO: Disconnect --- Client of id TlPk-xMWNk-kr4GHAAAF leaves the server.
+23.01.2022, 23:30:13 --- INFO: Connect --- Client of id iErVfi0wenHNMtnuAAAG pops in to the server!
+23.01.2022, 23:35:35 --- INFO: Disconnect --- Client of id iErVfi0wenHNMtnuAAAG leaves the server.
+23.01.2022, 23:35:36 --- INFO: Connect --- Client of id OZM4a7tgBD6cUhrdAAAH pops in to the server!
+23.01.2022, 23:35:49 --- INFO: Connect --- Client of id zOLaes66E5Y7wtIiAAAI pops in to the server!
+23.01.2022, 23:37:03 --- INFO: Disconnect --- Client of id OZM4a7tgBD6cUhrdAAAH leaves the server.
+23.01.2022, 23:39:04 --- INFO: Disconnect --- Client of id zOLaes66E5Y7wtIiAAAI leaves the server.
+23.01.2022, 23:39:05 --- INFO: Connect --- Client of id lFCA_6xIy_pdfSZQAAAJ pops in to the server!
+23.01.2022, 23:39:19 --- INFO: Disconnect --- Client of id lFCA_6xIy_pdfSZQAAAJ leaves the server.
+23.01.2022, 23:39:19 --- INFO: Connect --- Client of id VQTJf6sTmU37BeuRAAAK pops in to the server!
+23.01.2022, 23:40:22 --- INFO: Disconnect --- Client of id VQTJf6sTmU37BeuRAAAK leaves the server.
+23.01.2022, 23:40:23 --- INFO: Connect --- Client of id lotfaKzCfPRmgNIcAAAL pops in to the server!
+23.01.2022, 23:40:54 --- INFO: Disconnect --- Client of id lotfaKzCfPRmgNIcAAAL leaves the server.
+23.01.2022, 23:40:55 --- INFO: Connect --- Client of id SKp19_xZ6twPfYxvAAAM pops in to the server!
+23.01.2022, 23:41:18 --- INFO: Disconnect --- Client of id SKp19_xZ6twPfYxvAAAM leaves the server.
+23.01.2022, 23:41:18 --- INFO: Connect --- Client of id zFtNQIpSAQCczNjOAAAN pops in to the server!
+23.01.2022, 23:41:40 --- INFO: Disconnect --- Client of id zFtNQIpSAQCczNjOAAAN leaves the server.
+23.01.2022, 23:41:40 --- INFO: Connect --- Client of id 6xeT1OeD-uH9tSa5AAAO pops in to the server!
+23.01.2022, 23:42:00 --- INFO: Disconnect --- Client of id 6xeT1OeD-uH9tSa5AAAO leaves the server.
+23.01.2022, 23:42:01 --- INFO: Connect --- Client of id i0OH4wRDGD5y8XUOAAAP pops in to the server!
+23.01.2022, 23:42:56 --- INFO: Disconnect --- Client of id i0OH4wRDGD5y8XUOAAAP leaves the server.
+23.01.2022, 23:42:57 --- INFO: Connect --- Client of id dLnY_JfvYdUwfTSwAAAQ pops in to the server!
+23.01.2022, 23:43:58 --- INFO: Disconnect --- Client of id dLnY_JfvYdUwfTSwAAAQ leaves the server.
+23.01.2022, 23:43:59 --- INFO: Connect --- Client of id qwVwMmJJ8V6zg9ntAAAR pops in to the server!
+23.01.2022, 23:47:53 --- INFO: Disconnect --- Client of id qwVwMmJJ8V6zg9ntAAAR leaves the server.
+23.01.2022, 23:47:53 --- INFO: Connect --- Client of id _3kVgob7VTidqJr0AAAS pops in to the server!
+23.01.2022, 23:48:05 --- INFO: Disconnect --- Client of id _3kVgob7VTidqJr0AAAS leaves the server.
+23.01.2022, 23:48:05 --- INFO: Connect --- Client of id bAaYsGbjr2g4EcvxAAAT pops in to the server!
+23.01.2022, 23:48:39 --- INFO: Disconnect --- Client of id bAaYsGbjr2g4EcvxAAAT leaves the server.
+23.01.2022, 23:48:40 --- INFO: Connect --- Client of id pWd3oSpsKBeHRFZtAAAU pops in to the server!
+23.01.2022, 23:50:02 --- INFO: Disconnect --- Client of id pWd3oSpsKBeHRFZtAAAU leaves the server.
+23.01.2022, 23:50:03 --- INFO: Connect --- Client of id r1a2i8-0ztcWfi4BAAAV pops in to the server!
+23.01.2022, 23:50:50 --- INFO: Disconnect --- Client of id r1a2i8-0ztcWfi4BAAAV leaves the server.
+23.01.2022, 23:50:51 --- INFO: Connect --- Client of id 4Qsu7ZkNweButxcrAAAW pops in to the server!
+23.01.2022, 23:55:26 --- INFO: Disconnect --- Client of id 4Qsu7ZkNweButxcrAAAW leaves the server.
+23.01.2022, 23:55:27 --- INFO: Connect --- Client of id S7hwh8BPe_FLJFHEAAAX pops in to the server!
+23.01.2022, 23:55:38 --- INFO: Disconnect --- Client of id S7hwh8BPe_FLJFHEAAAX leaves the server.
+23.01.2022, 23:55:38 --- INFO: Connect --- Client of id zRsE4i-wDhdx8MR5AAAY pops in to the server!
+23.01.2022, 23:55:59 --- INFO: Disconnect --- Client of id zRsE4i-wDhdx8MR5AAAY leaves the server.
+23.01.2022, 23:56:00 --- INFO: Connect --- Client of id f31GQzWCZJM1q6F4AAAZ pops in to the server!
+23.01.2022, 23:57:37 --- INFO: Disconnect --- Client of id f31GQzWCZJM1q6F4AAAZ leaves the server.
+23.01.2022, 23:57:37 --- INFO: Connect --- Client of id T-8j5UPWZE8MHav9AAAa pops in to the server!
+23.01.2022, 23:58:29 --- INFO: Disconnect --- Client of id T-8j5UPWZE8MHav9AAAa leaves the server.
+23.01.2022, 23:58:29 --- INFO: Connect --- Client of id NyHSSbalGSMa1zbPAAAb pops in to the server!
+23.01.2022, 23:58:50 --- INFO: Connect --- Client of id rrDHhmWi8Y4M13k_AAAc pops in to the server!
+23.01.2022, 23:59:38 --- INFO: Disconnect --- Client of id NyHSSbalGSMa1zbPAAAb leaves the server.
+23.01.2022, 23:59:38 --- INFO: Connect --- Client of id _1Ue1FTRAhZ9r8ToAAAd pops in to the server!
+23.01.2022, 23:59:52 --- INFO: Disconnect --- Client of id rrDHhmWi8Y4M13k_AAAc leaves the server.

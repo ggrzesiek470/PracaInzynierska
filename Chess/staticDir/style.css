@@ -146,6 +146,65 @@ input:focus {
     height:10vh;
     display:none;
 }
+.chess-notation-container {
+    transition-duration: 0.6s;
+    position:absolute;
+    bottom:8%;
+    right:-20%;
+    background-color:rgba(50, 50, 50, 0.6);
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    z-index:1200;
+}
+.chess-notation-container table {
+    width: 100%;
+    background-color: rgba(244, 81, 30, 0.9);
+    border-radius:15px;
+    font-variant: small-caps;
+    color:white;
+    text-shadow:1px 1px 4px black;
+    text-align:center;
+    height:85%;
+    display:block;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.chess-notation-container table tr td {
+    width:35%;
+    padding:2%;
+    display:inline-block;
+}
+.chess-notation-container table tr:nth-child(2n) td {
+    background-color: rgba(226, 97, 58, 0.9);
+}
+.chess-notation-container table tr {
+    position:relative;
+    width:100%;
+    top:6vh;
+    display:block;
+}
+.chess-notation-container table tr:nth-child(1) {
+    position:absolute;
+    width:89%;
+    height:6vh;
+    top:0;
+    background-color: rgba(229, 71, 30, 1);
+    z-index:1800;
+    border-radius:15px;
+    left:2.5%
+}
+.chess-notation-container table tr td:nth-child(2) {
+    width:10%;
+    padding:2%;
+}
+.chess-notation-button {
+    position:absolute;
+    bottom:60px;
+    right:5px;
+    cursor:pointer;
+    height:50px;
+    transition-duration:0.8s;
+}
 .ranking-component {
     transition-duration: 0.6s;
     position:absolute;
@@ -154,9 +213,9 @@ input:focus {
     background-color:rgba(50, 50, 50, 0.6);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    z-index:1200;
+    z-index:1100;
 }
-.ranking-component:hover {
+.ranking-component:hover, .chess-notation-container:hover {
     transition-duration: 0.8s;
 }
 .ranking-component table {
@@ -169,7 +228,7 @@ input:focus {
     border:1px solid beige;
     border-radius:5px;
     text-align:center;
-    font-size:11px;
+    font-size:17px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -210,7 +269,7 @@ input:focus {
     width:60vw;
     padding-top:80px;
     padding-bottom:80px;
-    background-color: rgba(230, 216, 25, 0.504);
+    background-color: rgba(202, 190, 22, 0.504);
     left:50%;
     top:50%;
     transform:translate(-50%, -50%);
@@ -381,7 +440,7 @@ input:focus {
     width:40vw;
     height:50vh;
     background-color:rgba(40, 40, 40, 0.86);
-    z-index:1100;
+    z-index:1207;
     transition-duration:0.5s;
     transition-timing-function: ease-out;
 }
@@ -398,6 +457,8 @@ input:focus {
     left:50%;
     position:relative;
     transform:translateX(-50%);
+    font-size:14px;
+    text-align:left;
 }
 .chat-button-sender {
     position:absolute;
@@ -410,9 +471,9 @@ input:focus {
     cursor:pointer;
     transition-duration:0.5s;
     position:absolute;
-    width:20px;
+    width:50px;
     right:calc(40vw + 2px);
-    bottom:0;
+    bottom:2px;
     z-index:1102;
     transition-timing-function: ease-out;
 }
@@ -424,7 +485,7 @@ input:focus {
     background-color:rgba(30, 30, 30, 0.95);
     color: white;
     text-shadow: 1px 1px 3px rgba(128,128,128,0.5);
-    font-size:8px;
+    font-size:14px;
     padding:5px;
     border-radius:25px;
 
@@ -433,7 +494,7 @@ input:focus {
     background-color:rgba(230, 230, 230, 0.95);
     color: black;
     text-shadow: 1px 1px 3px rgba(8,8,8,0.3);
-    font-size:8px;
+    font-size:14px;
     padding:5px;
     border-radius:25px;
 }
@@ -560,4 +621,156 @@ input:focus {
 }
 .timerDiv > .digitHighlighted {
     filter: brightness(3) contrast(3);
+}
+.surrender-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    position: absolute;
+    right: 5px;
+    bottom: 115px;
+    padding: 5px;
+    background-color: rgb(79,93, 115);
+    cursor: pointer;
+    transition-duration:0.6s;
+}
+.surrender-button:hover {
+    background-color: rgb(64, 9, 9);
+    transition-duration:0.6s;
+}
+.stalemate-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    position: absolute;
+    right: 5px;
+    bottom: 170px;
+    padding: 5px;
+    background-color: rgb(79,93, 115);
+    cursor: pointer;
+    transition-duration:0.6s;
+}
+.stalemate-button:hover {
+    background-color: rgb(64, 9, 9);
+    transition-duration:0.6s;
+}
+.surrender-modal, .stalemate-preposition {
+    width:100vw;
+    height:100vh;
+    background-color:rgba(40, 40, 40, 0.8);
+    position:absolute;
+    z-index:1500;
+    display: none;
+    transition-duration:0.8s;
+}
+.surrender-modal .internal-container, .stalemate-preposition .internal-container {
+    border-radius: 25px;
+    background-color: rgba(255, 216, 0, 0.7);
+    width: 60vw;
+    height: 50vh;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translateX(-50%) translateY(-50%);
+    display:grid;
+    grid-template-columns: 15% 30% auto 30% 15%;
+    grid-template-rows: 30% 20% auto 20% 30%;
+    justify-items: center;
+    align-items: center;
+}
+.surrender-modal .internal-container .surrender-yes,
+.stalemate-preposition .internal-container .stalemate-yes {
+    background-color:rgba(244, 81, 30, 0.9);
+    padding: 30px;
+    transform: translateY(-50%);
+    border-radius:20px;
+    cursor:pointer;
+    color: white;
+    font-size: 16px;
+    text-shadow:2px 2px 4px black;
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 1;
+    transition-duration:0.5s;
+}
+.surrender-modal .internal-container .surrender-yes:hover {
+    background-color:rgb(255, 241, 241);
+    transition-duration:0.5s;
+}
+.stalemate-preposition .internal-container .stalemate-yes:hover {
+    background-color:rgba(240, 0, 240, 0.5);
+    transition-duration:0.5s;
+}
+.surrender-modal .internal-container .surrender-no,
+.stalemate-preposition .internal-container .stalemate-no {
+    background-color:rgba(244, 81, 30, 0.9);
+    padding: 35px;
+    transform: translateY(-50%);
+    border-radius:20px;
+    cursor:pointer;
+    color: white;
+    font-size: 16px;
+    text-shadow:2px 2px 4px black;
+    grid-row: 3 / span 1;
+    grid-column: 4 / span 1;
+    transition-duration:0.5s;
+}
+.surrender-modal .internal-container .surrender-no:hover,
+.stalemate-preposition .internal-container .stalemate-no:hover {
+    background-color:rgba(41, 221, 56, 0.9);
+    transition-duration:0.5s;
+}
+.stalemate-preposition .internal-container .stalemate-yes.gotPreposition:hover {
+    background-color:rgba(41, 221, 56, 0.9);
+    transition-duration:0.5s;
+}
+.stalemate-preposition .internal-container .stalemate-no.gotPreposition:hover {
+    background-color:rgba(240, 0, 0, 0.7);
+    transition-duration:0.5s;
+}
+.surrender-modal .internal-container .header,
+.stalemate-preposition .internal-container .header {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 3;
+    text-align: center;
+}
+.ranking-button::after {
+    width:100px;
+    height:100px;
+    display:block;
+    position:absolute;
+    left:0;
+    top:0;
+    background-color:white;
+    z-index:10000;
+    content: '';
+}
+.small-tooltip {
+    display: none;
+    background-color: #f4511e;
+    position: absolute;
+    top: 0px;
+    z-index: 1500;
+    border-radius: 15px;
+    padding: 4px;
+    color: white;
+    text-shadow: 2px 2px 3px black;
+    font-variant:small-caps;
+}
+.small-tooltip::after {
+    width: 13px;
+    height: 13px;
+    z-index: -5;
+    background-color: #f4511e;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    display: block;
+    content: '';
+    transform: translateX(-80%) translateY(-50%) rotate(45deg);
+}
+.password-change {
+    left:0;
+    top:0;
+    width:100%;
+    border-radius:0;
 }
