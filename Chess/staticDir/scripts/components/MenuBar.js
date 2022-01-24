@@ -1,6 +1,6 @@
 class MenuBar {
     static width = 60; // "px"
-    static height = 80; // "%"
+    static height = 50; // "%"
     numberOfElements = 0;
 
     constructor () {
@@ -19,20 +19,20 @@ class MenuBar {
         this.menuBar.appendChild(option.button);
         this.numberOfElements++;
         option.button.style.marginTop = "5px";
-        option.button.style.top = (this.numberOfElements*10) + "%";
+        option.button.style.top = (this.numberOfElements*20) + "%";
     }
 
     show () {
         this.menuBar.style.right = "0";
         this.button.setAttribute("src", "/gfx/icons/hamburger_no_colours.png");
-        this.button.style.right = "5px";
+        this.button.style.right = "9px";
         this.button.style.zIndex = "1201";
     }
 
     hide () {
         this.menuBar.style.right = "-" + MenuBar.width + "px";
         this.button.setAttribute("src", "/gfx/icons/hamburger.png");
-        this.button.style.right = "calc(100% + 5px)";
+        this.button.style.right = "calc(100% + 9px)";
         this.button.style.zIndex = "1199";
     }
 

@@ -189,6 +189,8 @@
             ranking.getComponent().style.borderBottomRightRadius = "0";
             ranking.getComponent().style.borderTopLeftRadius = "15px";
             ranking.getComponent().style.borderTopRightRadius = "15px";
+
+            ranking.getComponent().querySelector(".ranking-button").style.display = "none";
         })
     }
 

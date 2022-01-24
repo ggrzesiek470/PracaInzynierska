@@ -3,7 +3,7 @@ class Ranking {
     static height = 70;
     table;
 
-    constructor (data) {
+    constructor (data, no_icon_show) {
         this.ranking = this.createComponent();
 
         this.table = document.createElement("table");

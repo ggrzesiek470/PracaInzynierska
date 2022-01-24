@@ -17,7 +17,7 @@ body {
 button {
     position:absolute;
     width:20vw;
-    height:4vh;
+    height:3vw;
     font-size:2vw;
     cursor:pointer;
     color:white;
@@ -36,12 +36,13 @@ button:hover {
 input {
     position:absolute;
     width:19.7vw;
-    height:3vh;
+    height:2vw;
     border-radius:2vmin;
     border:0;
     text-align:center;
     background-color:white;
     transition-duration:0.2s;
+    font-size: 1.5vw;
 }
 input:focus {
     background-color:#fff4a5;
@@ -49,31 +50,31 @@ input:focus {
 }
 #user_reg {
     left:1vw;
-    top:1vh;
+    top:0.5vw;
     z-index:10;
 }
 #pass_reg {
     left:1vw;
-    top:5vh;
+    top:3vw;
     z-index:10;
 }
 #rejestruj {
     left:1vw;
-    top:9vh;
+    top:5.5vw;
 }
 #user_log {
     right:1vw;
-    top:1vh;
+    top:0.5vw;
     z-index:10;
 }
 #pass_log {
     right:1vw;
-    top:5vh;
+    top:3vw;
     z-index:10;
 }
 #loguj {
     right:1vw;
-    top:9vh;
+    top:5.5vw;
 }
 #bariera {
     background-color:rgba(128, 128, 128, 0.5);
@@ -116,7 +117,7 @@ input:focus {
     position:relative;
     top:3.25vh;
     color:white;
-    font-size:2.5vw;
+    font-size:3.5vh;
 }
 #szukajGracza {
     position:absolute;
@@ -244,7 +245,7 @@ input:focus {
     right:5px;
     top:5px;
     cursor:pointer;
-    height:7.5%;
+    width: 80%;
     transition-duration:0.8s;
 }
 .menuBar-component {
@@ -258,10 +259,10 @@ input:focus {
 }
 .menuBar-button {
     position:absolute;
-    right:5px;
-    top:5px;
+    right:9px;
+    top:10px;
     cursor:pointer;
-    height:7%;
+    width: 70%;
     transition-duration:0.8s;
 }
 .choose_game_mode {
@@ -772,5 +773,7 @@ input:focus {
     left:0;
     top:0;
     width:100%;
-    border-radius:0;
+    height:100%;
+    border-radius:20px;
+
 }

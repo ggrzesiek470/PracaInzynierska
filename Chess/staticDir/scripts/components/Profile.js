@@ -63,7 +63,7 @@ class Profile {
         input.setAttribute("type", "password");
         input.classList.add("password-change");
         td1.appendChild(input);
-        td1.style.backgroundColor = "rgba(244, 81, 30, 0.7)";
+        td1.style.backgroundColor = "white";
         td1.style.fontSize = "32px";
         td1.style.padding = "10px";
         td1.style.position = "relative";
