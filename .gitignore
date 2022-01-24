@@ -1,5 +1,6 @@
 # ignore node_modules
 Chess/node_modules/
+Chess/Logs/
 
 Server/HELP.md
 Server/target/
