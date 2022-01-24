@@ -216,3 +216,11 @@
 24.01.2022, 01:42:49 --- INFO: Connect --- Client of id zULbIpVwmmzgMlGXAAAb pops in to the server!
 24.01.2022, 01:46:09 --- INFO: Stat change --- Change of statistics of user zaq1. Wins: 1, draws: 0, losses: 0, points: 50
 24.01.2022, 01:47:05 --- INFO: Disconnect --- Client of id zULbIpVwmmzgMlGXAAAb leaves the server.
+24.01.2022, 01:49:53 --- INFO: Init --- App initialization: Classic Chess starts!
+24.01.2022, 01:49:53 --- INFO: Init --- App initialization: MongoDB has been connected and it's working!
+24.01.2022, 01:49:56 --- INFO: Connect --- Client of id kYHkP2wHXGs5LUbJAAAA pops in to the server!
+24.01.2022, 01:55:15 --- INFO: Stat change --- Change of statistics of user tez. Wins: 4, draws: 1, losses: 8, points: 25
+24.01.2022, 01:55:25 --- INFO: Disconnect --- Client of id kYHkP2wHXGs5LUbJAAAA leaves the server.
+24.01.2022, 01:55:25 --- INFO: Connect --- Client of id vecVxFClc-8TaugkAAAB pops in to the server!
+24.01.2022, 01:55:58 --- INFO: Stat change --- Change of statistics of user tez. Wins: 4, draws: 1, losses: 9, points: 0
+24.01.2022, 01:56:32 --- INFO: Disconnect --- Client of id vecVxFClc-8TaugkAAAB leaves the server.

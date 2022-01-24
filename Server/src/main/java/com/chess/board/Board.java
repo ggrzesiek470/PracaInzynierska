@@ -211,7 +211,7 @@ public class Board {
             String pieceType = (String) piece.get("type");
             String pieceAlliance = (String) piece.get("color");
             Alliance alliance = parseAlliance(pieceAlliance);
-            boolean firstMove = (boolean) piece.get("firstMove");
+            boolean firstMove = !(boolean) piece.get("firstMove");
             JSONObject position = (JSONObject) piece.get("position");
             Long x = (Long) position.get("x");
             Long y = (Long) position.get("y");

@@ -2,6 +2,8 @@ package com.server;
 
 import com.chess.board.Board;
 import com.chess.board.Move;
+import com.chess.board.MoveTransition;
+import com.chess.pieces.Piece;
 import com.chess.player.ai.AlphaBetaWithMoveOrdering;
 import com.chess.player.ai.StockAlphaBeta;
 import com.google.gson.Gson;
@@ -13,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 
@@ -54,6 +58,47 @@ public class AIController {
         System.out.println(bestMoveString);
 
         return bestMoveString.toString();
+    }
+
+    @RequestMapping(
+            value = "/get_notation",
+            method = RequestMethod.POST,
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public @ResponseBody String returnNotation(@RequestBody Map<String, Object> game) throws ParseException {
+        ArrayList<ArrayList<JSONObject>> boardArrayList = (ArrayList<ArrayList<JSONObject>>) game.get("board");
+        String player = (String) game.get("player");
+
+        Integer fromX = (Integer) game.get("fromX");
+        Integer fromY = ((8 - (Integer) game.get("fromY")) - 1) * 8;
+        Integer posFrom = (fromX + fromY);
+        Integer toX = (Integer) game.get("toX");
+        Integer toY = ((8 - (Integer) game.get("toY")) - 1) * 8;
+        Integer posTo = (toX + toY);
+
+        System.out.println("Liczę pole skąd: " + posFrom);
+        System.out.println("Liczę pole dokąd: " + posTo);
+        System.out.println(player);
+
+        String json = new Gson().toJson(boardArrayList);
+        JSONParser jsonParser = new JSONParser();
+        Object object = jsonParser.parse(json);
+        JSONArray arrayObj = (JSONArray) object;
+
+        Board.Builder builder = new Board.Builder();
+        Board board = builder.buildFromJson(arrayObj, player);
+
+        Collection<Move> legalMoves = board.currentPlayer().getLegalMoves();
+
+        for (Move move : legalMoves) {
+            if (move.getCurrentCoordinate() == posFrom
+                    && move.getDestinationCoordinate() == posTo) {
+                System.out.println(move.toString());
+                return move.toString();
+            }
+        }
+
+        return null;
     }
 
     // bug fixed, Pawn class code changed
